@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1"
+   x="0"
+   y="0"
+   width="525px"
+   height="512.5px"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="Public_key_encryption.svg">
+  <metadata
+     id="metadata55">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:window-height="1699"
+     inkscape:window-width="2736"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:zoom="1.5063415"
+     inkscape:cx="262.5"
+     inkscape:cy="256.25"
+     inkscape:window-x="-13"
+     inkscape:window-y="-13"
+     inkscape:current-layer="svg2"
+     showgrid="false"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs4">
+    <marker
+       refX="0.00000000"
+       refY="0.00000000"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow2Lend">
+      <path
+         d="M 8.7 4 L -2.2 0 L 8.7 -4 C 7 -1.6 7 1.6 8.7 4 z"
+         transform="matrix(-1.1,0,0,-1.1,5.5,0)"
+         style="fill-rule: evenodd; font-size: 12px; stroke-linejoin: round; stroke-width: 0.6"
+         id="path7487" />
+    </marker>
+    <marker
+       id="marker1456"
+       style="overflow:visible"
+       orient="auto"
+       refY="0.00000000"
+       refX="0.00000000">
+      <path
+         id="path1458"
+         style="fill-rule: evenodd; font-size: 12px; stroke-linejoin: round; stroke-width: 0.6"
+         transform="matrix(-1.1,0,0,-1.1,5.5,0)"
+         d="M 8.7 4 L -2.2 0 L 8.7 -4 C 7 -1.6 7 1.6 8.7 4 z" />
+    </marker>
+  </defs>
+  <path
+     d="M 349.9 397 L 311.5 413.1"
+     style="fill: none; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 3; fill-opacity: 0.75000000; marker-end: none; marker-start: none; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path2937" />
+  <path
+     d="M 323.9 56.1 L 291.2 81.1"
+     style="fill: none; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 3; fill-opacity: 0.75000000; marker-end: none; marker-start: none; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path2935" />
+  <path
+     d="M 236.1 272.7 L 237.4 394.4"
+     style="fill: none; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 3; fill-opacity: 0.75000000; marker-end: none; marker-start: none; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path2917" />
+  <path
+     d="M 236.1 125.6 L 237.4 191.5"
+     style="fill: none; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 3; fill-opacity: 0.75000000; marker-end: none; marker-start: none; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path12787" />
+  <path
+     d="M 91.8 115 L 160.9 115.4"
+     style="fill: none; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 3; fill-opacity: 0.75000000; marker-end: none; marker-start: none; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path12783" />
+  <rect
+     width="99.4"
+     height="79.5"
+     x="29.5"
+     y="75.5"
+     style="fill: #00fbfe; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-dashoffset: 10; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 1; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="rect9051" />
+  <text
+     x="53.9"
+     y="100.1"
+     transform="matrix(0.9,0,0,1.1,0,0)"
+     style="fill: #000000; font-family: [object Object]; font-size: 24px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text6642"
+     xml:space="preserve">
+     <tspan
+       x="53.870625"
+       y="110.10528"
+       id="tspan11289">!مرحباََ</tspan>
+       <tspan
+         x="53.870625"
+         y="130.10544"
+         id="tspan2167">
+      </tspan>
+   </text>
+  <path
+     d="M 362.3 356.3 C 351 356.3 341.8 368.9 341.8 384.4 C 341.8 399.9 351 412.5 362.3 412.5 C 371.7 412.5 379.6 403.8 382 391.9 L 444.2 391.9 L 444.2 402.7 L 454.7 402.7 L 454.7 411 L 463.5 411 L 463.5 402.7 L 473.3 402.7 L 473.3 391.9 L 485.7 391.9 L 485.7 378.3 L 382.3 378.3 C 380.2 365.7 372.1 356.3 362.3 356.3 z M 357.2 374 C 360.9 374 363.9 378.3 363.9 383.7 C 363.9 389 360.9 393.3 357.2 393.3 C 353.5 393.3 350.5 389 350.5 383.7 C 350.5 378.3 353.5 374 357.2 374 z"
+     style="fill: #ff0000; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-dashoffset: 10; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 2; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path1306" />
+  <text
+     x="386.3"
+     y="498.3"
+     transform="scale(1,1)"
+     style="fill: #000000; font-family: [object Object]; font-size: 24px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text8995"
+     xml:space="preserve"><tspan
+       x="333.31406"
+       y="474.3338"
+       id="tspan8997">Using Jody's</tspan><tspan
+       x="333.31406"
+       y="504.33386"
+       id="tspan9043">private key</tspan></text>
+  <rect
+     width="112.1"
+     height="60.9"
+     x="180.7"
+     y="83.7"
+     style="fill: #ffff91; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-dashoffset: 10; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 1; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="rect10547" />
+  <text font-size="1" textLength="140"
+     x="268.9"
+     y="137.5"
+     transform="matrix(0.9,0,0,1.1,0,0)"
+     style="fill: #000000; font-family: [object Object]; font-size: 24px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text11291"
+     xml:space="preserve"><tspan
+       x="209.95047"
+       y="112.48004"
+       id="tspan11295">Encrypt</tspan></text>
+  <rect
+     width="137"
+     height="79.5"
+     x="161.2"
+     y="194.2"
+     style="fill: #20dddd; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-dashoffset: 10; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 1; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="rect2159" />
+  <text
+     x="204.3"
+     y="211.1"
+     transform="matrix(0.9,0,0,1.1,0,0)"
+     style="fill: #000000; font-family: [object Object]; font-size: 24px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text2161"
+     xml:space="preserve"><tspan
+       x="195.39571"
+       y="208.4174"
+       id="tspan2163">6EB69570</tspan><tspan
+       x="195.39571"
+       y="238.41776"
+       id="tspan2165">08E03CE4</tspan></text>
+  <path
+     d="M 222.4 423.3 L 121.5 420.9"
+     style="fill: none; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 3; fill-opacity: 0.75000000; marker-end: none; marker-start: none; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path2919" />
+  <rect
+     width="84.8"
+     height="79.5"
+     x="39.9"
+     y="375.4"
+     style="fill: #00fbfe; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-dashoffset: 10; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 1; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="rect2921" />
+  <text
+     x="68.3"
+     y="388.5"
+     transform="matrix(0.9,0,0,1.1,0,0)"
+     style="fill: #000000; font-family: [object Object]; font-size: 24px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text2923"
+     xml:space="preserve"><tspan
+       x="60"
+       y="382.10736"
+       id="tspan2925">!مرحباََ</tspan></text>
+  <rect
+     width="112.1"
+     height="60.9"
+     x="175.7"
+     y="393.6"
+     style="fill: #ffff91; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-dashoffset: 10; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 1; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="rect2929" />
+  <text
+     x="208.8"
+     y="394.5"
+     transform="scale(0.9,1.1)"
+     style="fill: #000000; font-family: [object Object]; font-size: 24px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text2931"
+     xml:space="preserve"><tspan
+       x="208.80138"
+       y="394.4823"
+       id="tspan2933">Decrypt</tspan></text>
+  <path
+     d="M 334.3 8.5 C 323 8.5 313.8 21.1 313.8 36.6 C 313.8 52.1 323 64.7 334.3 64.7 C 343.7 64.7 351.6 56 354 44.1 L 416.2 44.1 L 416.2 63 L 426.7 63 L 426.7 55.2 L 435.5 55.2 L 435.5 63 L 445.3 63 L 445.3 44.1 L 457.7 44.1 L 457.7 30.5 L 354.3 30.5 C 352.2 17.9 344.1 8.5 334.3 8.5 z M 329.2 26.2 C 332.9 26.2 335.9 30.6 335.9 35.9 C 335.9 41.2 332.9 45.5 329.2 45.5 C 325.5 45.5 322.5 41.2 322.5 35.9 C 322.5 30.6 325.5 26.2 329.2 26.2 z"
+     style="fill: #00ff00; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-dashoffset: 10; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 2; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path5914" />
+  <text font-size="2" textLength="0"
+     x="372.3"
+     y="197.7"
+     transform="scale(1,1)"
+     style="fill: #000000; font-family: [object Object]; font-size: 24px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text9045"
+     xml:space="preserve"><tspan
+       x="333.31406"
+       y="100.18408"
+       id="tspan9047">Using Jody's</tspan><tspan
+       x="333.31406"
+       y="130.18416"
+       id="tspan9049">public key</tspan></text>
+  <path
+     d="M 23.7 306.4 L 498.7 306.4"
+     style="fill: none; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 2; fill-opacity: 0.75000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path1378" />
+  <text
+     x="33.9"
+     y="321.9"
+     transform="matrix(0.9,0,0,1.1,0,0)"
+     style="fill: #000000; font-family: [object Object]; font-size: 32px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text2135"
+     xml:space="preserve"><tspan
+       x="33.939548"
+       y="321.85117"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32.00062943px;line-height:124.99998808%;font-family:Tahoma;text-align:start;writing-mode:lr-tb;text-anchor:start"
+       id="tspan2137">Jody</tspan></text>
+  <path
+     sodipodi:type="star"
+     style="fill: #000000; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 7.3; display: inline; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path13515"
+     sodipodi:sides="3"
+     sodipodi:cx="58.031090"
+     sodipodi:cy="313.98965"
+     sodipodi:r1="24.870466"
+     sodipodi:r2="12.435234"
+     sodipodi:arg1="0.00000000"
+     sodipodi:arg2="1.0471976"
+     inkscape:flatsided="false"
+     inkscape:rounded="0.00000000"
+     inkscape:randomized="0.00000000"
+     d="M 82.9 314 L 64.2 324.8 L 45.6 335.5 L 45.6 314 L 45.6 292.5 L 64.2 303.2 L 82.9 314 z"
+     transform="matrix(-3,0.5,-0.3,-1.6,336,341.7)" />
+  <path
+     sodipodi:type="star"
+     style="fill: #000000; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 7.3; display: inline; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path5890"
+     sodipodi:sides="3"
+     sodipodi:cx="58.031090"
+     sodipodi:cy="313.98965"
+     sodipodi:r1="24.870466"
+     sodipodi:r2="12.435234"
+     sodipodi:arg1="0.00000000"
+     sodipodi:arg2="1.0471976"
+     inkscape:flatsided="false"
+     inkscape:rounded="0.00000000"
+     inkscape:randomized="0.00000000"
+     d="M 82.9 314 L 64.2 324.8 L 45.6 335.5 L 45.6 314 L 45.6 292.5 L 64.2 303.2 L 82.9 314 z"
+     transform="matrix(-0.5,0.2,-0.1,-0.3,376.1,493)" />
+  <path
+     sodipodi:type="star"
+     style="fill: #000000; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 7.3; display: inline; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path5892"
+     sodipodi:sides="3"
+     sodipodi:cx="58.031090"
+     sodipodi:cy="313.98965"
+     sodipodi:r1="24.870466"
+     sodipodi:r2="12.435234"
+     sodipodi:arg1="0.00000000"
+     sodipodi:arg2="1.0471976"
+     inkscape:flatsided="false"
+     inkscape:rounded="0.00000000"
+     inkscape:randomized="0.00000000"
+     d="M 82.9 314 L 64.2 324.8 L 45.6 335.5 L 45.6 314 L 45.6 292.5 L 64.2 303.2 L 82.9 314 z"
+     transform="matrix(0.5,-2.8,1.7,0.3,131,16.2)" />
+  <path
+     sodipodi:type="star"
+     style="fill: #000000; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 7.3; display: inline; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path3014"
+     sodipodi:sides="3"
+     sodipodi:cx="58.031090"
+     sodipodi:cy="313.98965"
+     sodipodi:r1="24.870466"
+     sodipodi:r2="12.435234"
+     sodipodi:arg1="0.00000000"
+     sodipodi:arg2="1.0471976"
+     inkscape:flatsided="false"
+     inkscape:rounded="0.00000000"
+     inkscape:randomized="0.00000000"
+     d="M 82.9 314 L 64.2 324.8 L 45.6 335.5 L 45.6 314 L 45.6 292.5 L 64.2 303.2 L 82.9 314 z"
+     transform="matrix(-0.5,-2.8,-1.7,0.3,177,322.1)" />
+  <path
+     sodipodi:type="star"
+     style="fill: #000000; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 7.3; display: inline; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path3016"
+     sodipodi:sides="3"
+     sodipodi:cx="58.031090"
+     sodipodi:cy="313.98965"
+     sodipodi:r1="24.870466"
+     sodipodi:r2="12.435234"
+     sodipodi:arg1="0.00000000"
+     sodipodi:arg2="1.0471976"
+     inkscape:flatsided="false"
+     inkscape:rounded="0.00000000"
+     inkscape:randomized="0.00000000"
+     d="M 82.9 314 L 64.2 324.8 L 45.6 335.5 L 45.6 314 L 45.6 292.5 L 64.2 303.2 L 82.9 314 z"
+     transform="matrix(-3,0.5,-0.3,-1.6,336,144.1)" />
+  <path
+     sodipodi:type="star"
+     style="fill: #000000; fill-rule: evenodd; stroke: #000000; stroke-dasharray: none; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 7.3; display: inline; fill-opacity: 1.0000000; opacity: 1.0000000; stroke-miterlimit: 4.0000000; stroke-opacity: 1.0000000"
+     id="path3018"
+     sodipodi:sides="3"
+     sodipodi:cx="58.031090"
+     sodipodi:cy="313.98965"
+     sodipodi:r1="24.870466"
+     sodipodi:r2="12.435234"
+     sodipodi:arg1="0.00000000"
+     sodipodi:arg2="1.0471976"
+     inkscape:flatsided="false"
+     inkscape:rounded="0.00000000"
+     inkscape:randomized="0.00000000"
+     d="M 82.9 314 L 64.2 324.8 L 45.6 335.5 L 45.6 314 L 45.6 292.5 L 64.2 303.2 L 82.9 314 z"
+     transform="matrix(-0.5,0.1,-7.2,-0.3,363.4,200.6)" />
+  <text
+     x="32.4"
+     y="43.1"
+     transform="matrix(0.9,0,0,1.1,0,0)"
+     style="fill: #000000; font-family: [object Object]; font-size: 32px; font-style: normal; font-weight: bold; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-width: 1px; fill-opacity: 1; font-stretch: normal; font-variant: normal; line-height: 0%; stroke-opacity: 1; text-align: start; text-anchor: start; writing-mode: lr-tb"
+     id="text1354"
+     xml:space="preserve"><tspan
+       x="32.403893"
+       y="43.090385"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:32.00050354px;line-height:124.99998808%;font-family:Tahoma;text-align:start;writing-mode:lr-tb;text-anchor:start"
+       id="tspan1356">Mahmoud</tspan></text>
+</svg>
