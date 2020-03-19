@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Web", "src\Web\EGID.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Core", "src\Core\EGID.Core.csproj", "{7E0B6633-DD3C-4A9D-B96E-6629A247122C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Infra", "src\Infra\EGID.Infra.csproj", "{7397CF93-E424-47D5-BB8C-1A8FFB6C2E70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Data", "src\Data\EGID.Data.csproj", "{863774D9-4DF8-4181-858A-8884E0FBC65B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7E0B6633-DD3C-4A9D-B96E-6629A247122C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E0B6633-DD3C-4A9D-B96E-6629A247122C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E0B6633-DD3C-4A9D-B96E-6629A247122C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7397CF93-E424-47D5-BB8C-1A8FFB6C2E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7397CF93-E424-47D5-BB8C-1A8FFB6C2E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7397CF93-E424-47D5-BB8C-1A8FFB6C2E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7397CF93-E424-47D5-BB8C-1A8FFB6C2E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863774D9-4DF8-4181-858A-8884E0FBC65B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{863774D9-4DF8-4181-858A-8884E0FBC65B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{863774D9-4DF8-4181-858A-8884E0FBC65B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863774D9-4DF8-4181-858A-8884E0FBC65B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

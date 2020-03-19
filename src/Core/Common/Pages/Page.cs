@@ -1,8 +1,6 @@
-﻿using EGID.Core.Common.Result;
-
-namespace EGID.Core.Common.Pages
+﻿namespace EGID.Core.Common.Pages
 {
-    public class Page<T> : IDataResult<T>
+    public class Page<T>
     {
         public Page(T data, PagingInfo pagingInfo)
         {

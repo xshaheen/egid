@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\EGID.Core.csproj"/>
+  </ItemGroup>
 </Project>
