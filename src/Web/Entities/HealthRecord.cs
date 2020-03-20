@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EGID.Data.Entities
+namespace EGID.Web.Entities
 {
-    public class HealthRecords
+    public class HealthRecord
     {
         public Guid Id { get; set; }
 

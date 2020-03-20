@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EGID.Data.Entities
+namespace EGID.Web.Entities
 {
     public class Card
     {

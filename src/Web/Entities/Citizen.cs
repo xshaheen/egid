@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using EGID.Core.Enums;
 using EGID.Core.ValueObjects;
 
-namespace EGID.Data.Entities
+namespace EGID.Web.Entities
 {
     public class Citizen
     {
@@ -34,8 +33,6 @@ namespace EGID.Data.Entities
         public string Email { get; set; }
 
         public bool TwoFactorEnabled { get; set; }
-
-        public List<string> Roles { get; set; }
 
         public override string ToString() => FullName.ToString();
     }
