@@ -9,10 +9,12 @@ import { AdminModule } from "./views/admin/admin.module";
 import { CivilAffairsModule } from "./views/civil-affairs/civil-affairs.module";
 import { RecordsModule } from "./views/health/records/records.module";
 import { AddModule } from "./views/health/add/add.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     MainModule,
     AdminModule,
