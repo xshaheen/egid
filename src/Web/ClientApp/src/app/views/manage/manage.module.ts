@@ -7,6 +7,7 @@ import { ChangePinComponent } from "./change-pin/change-pin.component";
 import { UpdateInfoComponent } from "./update-info/update-info.component";
 import { SignDocComponent } from "./sign-doc/sign-doc.component";
 import { VerifySignatureComponent } from "./verify-signature/verify-signature.component";
+import { UpdateHealthInfoComponent } from "./update-health-info/update-health-info.component";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { VerifySignatureComponent } from "./verify-signature/verify-signature.co
     ChangePinComponent,
     UpdateInfoComponent,
     SignDocComponent,
-    VerifySignatureComponent
+    VerifySignatureComponent,
+    UpdateHealthInfoComponent
   ],
   imports: [CommonModule, ManageRoutingModule]
 })

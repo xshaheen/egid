@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace EGID.Web.Infra.KeysGenerator
+namespace EGID.Web.Infra.KeysGeneratorService
 {
     public interface IKeyGenerator
     {
