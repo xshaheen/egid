@@ -1,0 +1,357 @@
+/* Global style */
+@import url('https://fonts.googleapis.com/css?family=Scheherazade&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+    font-family: 'Scheherazade', serif;
+    direction: rtl;
+}
+/* My framework */
+.main-font-color{
+    color: #252525;
+}
+.second-color{
+    color: #136d91;
+}
+.float-right{
+    float: right;
+}
+.float-left{
+    float: left;
+}
+.text-center{
+    text-align: center;
+}
+.clear-fix{
+    clear: both;
+}
+.resposive-img{
+    width: 100%;
+}
+.img-circle{
+    border-radius: 50%
+}
+.img-thumbnail{
+    padding: 20px;
+    background-color: #4A235A;
+    border: 1px solid #4A235A;
+}
+/* .container{
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+} */
+/* Body */
+/* Start Navbar */
+nav .container {
+    direction: ltr;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0px 32px;
+    position: relative;
+}
+img{
+    width: 240px;
+    height: 190px;
+}
+.items{
+    display: flex;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    list-style:none;
+    float:right;
+    }
+nav li a{
+    display: block;
+    background-color: transparent;
+    padding: 20px 20px;
+    margin-top: 60px;
+    font-size: 25px;
+    text-decoration: none;
+    color: #252525;
+    font-weight: 800;
+}
+nav li a:hover{
+    color: #136d91
+}
+/*  End NAvbar  */
+
+/* Start Header */
+header{
+    height: 400px;
+    width: 100%;
+}
+header .container{
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.image{
+    width: 50%;
+    float: left;
+}
+.image img{
+    width: 480px;
+    height: 300px;
+}
+/* End Header */
+
+/* Start Services */
+.services-table{
+    background-color: #F2F3F4;
+    padding: 40px 0;
+    height: 300px;
+}
+.services-table h2{
+    color: black;
+    font-size: 50px;
+}
+.services-table .features{
+    /* width: 33.33%; */
+    background-color: #fff;
+    padding:20px 0;
+}
+
+/* End Services */
+
+/* Start Footer */
+footer{
+    padding: 7.9rem 0;
+    background-color: #121212;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+}
+.back-to-top{
+    width: 7rem;
+    height: 7rem;
+    background-color: #121212;
+    position: absolute;
+    top: -3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+}
+.back-to-top i{
+    display: block;
+    color: #ffffff;
+    font-size: 2rem;
+    padding: 2rem;
+}
+.footer-content h4{
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: 3px;
+    margin-bottom: 3rem;
+}
+.social-icons{
+    list-style: none;
+    margin-bottom: 5.4rem;
+    display: flex;
+    justify-content: center;
+}
+.social-icons i{
+    font-size: 2rem;
+    color: #ffffff;
+    padding: .8rem 2rem;
+    opacity: .5;
+    transition: color .5s;
+}
+.social-icons i:hover,
+.social-icons i:focus{
+    color: var(--secondary-font-color);
+}
+.newsletter-form{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.newsletter-input{
+    width: 100%;
+    max-width: 25rem;
+    padding: 1rem;
+    border-radius: .4rem;
+}
+.newsletter-btn{
+    background-color: transparent;
+    border: none;
+    color: var(--main-font-color-dark);
+    cursor: pointer;
+    font-size: 1.6rem;
+    padding: 1px .6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10.5rem;
+}
+.copyright{
+    color: #fff;
+    padding: 20px;
+    font-size: 20px;
+}
+/* End Footer */
+
+/* Media Query */
+@media (max-width:767px){
+    header .title{
+        width: 50%;
+    }
+    header .title .h2{
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+    header .title p{
+        float: right;
+        font-size: 15px;
+    }
+    header .btn{
+        border-radius: 10px;
+        background-color:rgb(0, 255, 255);
+        border: none;
+        text-align: center;
+        font-size: 25px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+    }
+    header .btn a{
+        text-decoration: none;
+        color: #fff;
+    }
+    .services-table .features{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+}
+@media (min-width:768px){
+    .container{
+        width: 780px;
+    }
+    .image{
+        width: 50%;
+        float: left;
+    }
+    .image img{
+        width:250px;
+        height: 18 0px;
+    }
+    header .title{
+        width: 50%;
+    }
+    header .title .h2{
+        font-size: 30px;
+        text-transform: uppercase;
+    }
+    header .title p{
+        float: right;
+        font-size: 20px;
+    }
+    header .btn{
+        border-radius: 10px;
+        background-color:rgb(0, 255, 255);
+        border: none;
+        text-align: center;
+        font-size: 25px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+    }
+    header .btn a{
+        text-decoration: none;
+        color: #fff;
+    }
+    .services-table .features{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+@media (min-width:992px){
+    .container{
+        width: 962px;
+    }
+    .image{
+        width: 50%;
+        float: left;
+    }
+    .image img{
+        width: 380px;
+        height: 200px;
+    }
+    header .title .h2{
+        font-size: 40px;
+        text-transform: uppercase;
+    }
+    header .title p{
+        float: right;
+        font-size: 30px;
+    }
+    header .btn{
+        border-radius: 10px;
+        background-color:rgb(0, 255, 255);
+        border: none;
+        text-align: center;
+        font-size: 28px;
+        padding: 20px;
+        width: 200px;
+        cursor: pointer;
+    }
+    header .btn a{
+        text-decoration: none;
+        color: #fff;
+    }
+    .services-table .features:not(:first-of-type){
+        margin-right: 1%;
+    }
+    .services-table .features{
+        width: 32.666%;
+        margin-bottom: 20px;
+    }
+}
+@media (min-width:1200px){
+    .container{
+        width: 1170px;
+        margin: auto;
+    }
+    .image{
+        width: 50%;
+        float: left;
+    }
+    .image img{
+        width: 480px;
+        height: 300px;
+    }
+}
+header .title{
+    width: 50%;
+}
+header .title .h2{
+    font-size: 50px;
+    text-transform: uppercase;
+}
+header .title p{
+    float: right;
+    font-size: 35px;
+}
+header .btn{
+    border-radius: 10px;
+    background-color:rgb(0, 255, 255);
+    border: none;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    cursor: pointer;
+}
+header .btn a{
+    text-decoration: none;
+    color: #fff;
+}
