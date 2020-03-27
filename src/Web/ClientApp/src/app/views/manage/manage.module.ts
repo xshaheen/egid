@@ -8,6 +8,7 @@ import { UpdateInfoComponent } from "./update-info/update-info.component";
 import { SignDocComponent } from "./sign-doc/sign-doc.component";
 import { VerifySignatureComponent } from "./verify-signature/verify-signature.component";
 import { UpdateHealthInfoComponent } from "./update-health-info/update-health-info.component";
+import { FileModule } from "src/app/components/file/file.module";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { UpdateHealthInfoComponent } from "./update-health-info/update-health-in
     VerifySignatureComponent,
     UpdateHealthInfoComponent
   ],
-  imports: [CommonModule, ManageRoutingModule]
+  imports: [CommonModule, ManageRoutingModule, FileModule]
 })
 export class ManageModule {}

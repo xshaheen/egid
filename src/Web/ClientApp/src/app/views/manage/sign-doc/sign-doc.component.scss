@@ -1,0 +1,51 @@
+.rows {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.files-list {
+  margin-top: 1.5rem;
+
+  .single-file {
+    width: 450px;
+    display: flex;
+    padding: 2rem;
+    justify-content: space-between;
+    align-items: center;
+    border: dashed 1px #979797;
+    margin-bottom: 1rem;
+
+    .save {
+      display: flex;
+      margin-left: 0.5rem;
+      align-self: flex-end;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    display: flex;
+    flex-grow: 1;
+
+    .name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #353f4a;
+      margin: 0;
+    }
+
+    .size {
+      font-size: 12px;
+      font-weight: 500;
+      color: #a4a4a4;
+      margin: 0;
+      margin-bottom: 0.25rem;
+    }
+
+    .info {
+      width: 100%;
+    }
+  }
+}

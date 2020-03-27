@@ -10,6 +10,7 @@ import { CivilAffairsModule } from "./views/civil-affairs/civil-affairs.module";
 import { RecordsModule } from "./views/health/records/records.module";
 import { AddModule } from "./views/health/add/add.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthModule } from "./views/auth/auth.module";
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     AdminModule,
     CivilAffairsModule,
     RecordsModule,
-    AddModule
+    AddModule,
+    AuthModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]

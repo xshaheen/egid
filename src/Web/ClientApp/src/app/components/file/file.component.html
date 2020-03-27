@@ -1,0 +1,22 @@
+<div
+  [egDropZone]="disabled"
+  (hovered)="onHovering($event)"
+  (filesDropped)="onDrop($event)"
+  [class.hover]="isHovering"
+  [class.disabled]="disabled"
+  class="drop-zone"
+>
+  <input
+    type="file"
+    #fileDropRef
+    multiple
+    [disabled]="disabled"
+    [required]="required"
+    [id]="formControlName"
+    [name]="formControlName"
+    (change)="onDrop($event.target.files)"
+  />
+  <h3>Drag and drop file here</h3>
+  <h3>or</h3>
+  <label [for]="formControlName">Browse for file</label>
+</div>
