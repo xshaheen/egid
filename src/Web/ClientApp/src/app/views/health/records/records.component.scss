@@ -1,0 +1,103 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
+body{
+  padding:10px ;
+  direction: rtl;
+  background-image: linear-gradient(#B01432,#FFA900);
+}
+.wrapper{
+  max-width: 600px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 1px 1px 2px rgba(0,0, 0, 0.125);
+  /* opacity: 50%; */
+}
+.wrapper .title{
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #fec107;
+}
+.wrapper .form{
+  width: 100%;
+}
+.wrapper .form .input-feild{
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+.wrapper .form .input-feild label{
+  width: 200px;
+  margin-right: 10px;
+  color: #3b3a3a;
+  font-size: 18px;
+  font-weight: 600;
+}
+.wrapper .form .input-feild .input,
+.wrapper .form .input-feild .textarea{
+  width: 100%;
+  padding: 8px 10px;
+  outline: none;
+  border: 1px solid #757575;
+  transition: all .3s ease;
+  font-size: 15px;
+  border-radius: 3px;
+}
+.wrapper .form .input-feild .textarea{
+  resize: none;
+  height: 120px;
+}
+.wrapper .form .input-feild .input:focus,
+.wrapper .form .input-feild .textarea:focus,
+.wrapper .form .input-feild select:focus{
+  border: 1px solid #fec107;
+}
+
+.wrapper .form .input-feild .custom-select{
+  position: relative;
+  width: 100%;
+  height: 40px;
+}
+.wrapper .form .input-feild .custom-select select{
+  border: 1px solid #757575;
+  border-radius: 3px;
+  width: 100%;
+  height: 100%;
+  padding:8px 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+.wrapper .form .input-feild .btn{
+  position: relative;
+  margin: 10px auto;
+  background-color: #fec107;
+  padding: 20px ;
+  outline: none;
+  border: 1px solid #fec107;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.wrapper .form .input-feild .btn:hover{
+  background-color: #ffd658;
+}
+@media(max-width:500px){
+  .wrapper .form .input-feild{
+      flex-direction: column;
+      align-items: flex-start;
+  }
+  .wrapper .form .input-feild label{
+      margin-bottom: 5px;
+  }
+}
