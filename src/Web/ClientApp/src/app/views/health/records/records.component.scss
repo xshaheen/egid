@@ -1,0 +1,99 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
+body{
+  padding:10px ;
+  background-color: #555555;
+}
+.design{
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 1px 1px 2px rgba(0,0, 0, 0.125);
+  display: flex;
+}
+
+.design .design-left{
+  direction: rtl;
+  width: 280px;
+  background: #0bb5f4;
+}
+.design .design-left .profile{
+  width: 100%;
+  height:280px ;
+}
+.design .design-left .profile img{
+  width: 100%;
+  height: 100%;
+}
+.design .design-left .content{
+  padding: 0 25px;
+}
+.design .design-left .content .content-info{
+  border-bottom: 2px solid #fff;
+  margin-bottom: 90px;
+}
+.design .design-left .content .content-info .title{
+  margin: 20px 0;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 500;
+}
+.design .design-left .content .content-info .title .name{
+  margin-bottom:10px ;
+}
+
+.design .design-left ul li{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.design .design-left ul li .icon{
+  width: 35px;
+  height: 35px;
+  background-color: #fff;
+  color: #0bb5f4;
+  border-radius: 50%;
+  margin-left: 15px;
+  font-size: 16px;
+  position: relative;
+}
+.design .design-left ul li .icon i{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+/* Right */
+.design-right{
+  width: 520px;
+  background: #fff;
+  padding: 25px;
+  color: #000000;
+  direction: rtl;
+}
+.content-info-about .title{
+  font-size: 30px;
+  font-weight: 600;
+  color: #0bb5f4;
+  margin-bottom: 20px;
+}
+.content-info-about ul{
+  padding-left: 20px;
+}
+.content-info-about ul li .data{
+  color: #0bb5f4;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+.content-info-about ul li .info{
+  font-size: 18px;
+}
