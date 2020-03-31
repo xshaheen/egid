@@ -1,12 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace EGID.Web.Entities
 {
-    public class Card
+    public class Card : IdentityUser
     {
-        public Guid Id { get; set; }
+        [ForeignKey(nameof(Card))]
+        [InverseProperty(nameof(Citizen.Card))]
+        public Guid OwnerId { get; set; }
 
-        public string PublicId { get; set; }
+        public string PrivateKeyXml { get; set; }
+
+        public string PublicKeyXml { get; set; }
 
         public string Pin1 { get; set; }
 
@@ -19,5 +25,10 @@ namespace EGID.Web.Entities
         public DateTime IssueDate { get; set; }
 
         public DateTime TerminationDate { get; set; }
+
+        public bool Active { get; set; }
+
+        public void Activate() => Active = true;
+        public void Inactivate() => Active = false;
     }
 }
