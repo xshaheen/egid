@@ -5,15 +5,21 @@ namespace EGID.Core.Common.Result
 {
     public class Result
     {
+        internal Result() {}
+
         /// <summary>
         ///     Flag indicating whether if the operation succeeded or not.
         /// </summary>
         /// <value>True if the operation succeeded, otherwise false.</value>
         public bool Succeeded { get; protected set; }
 
-        public string[] Errors { get; protected set; }
+        /// <summary>
+        ///     Flag indicating whether if the operation failed or not.
+        /// </summary>
+        /// <value>True if the operation failed, otherwise true.</value>
+        public bool Failed => !Succeeded;
 
-        internal Result() {}
+        public string[] Errors { get; protected set; }
 
         #region Helpers
 
