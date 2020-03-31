@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-
-namespace EGID.Web.Infra.KeysGeneratorService
+﻿namespace EGID.Web.Infra.KeysGeneratorService
 {
     public interface IKeyGenerator
     {
-        Task<(byte[] PublicKey, byte[] PrivateKey)> Generate();
+        public string PrivateKeyXml { get; }
+
+        public string PublicKeyXml { get; }
     }
 }
