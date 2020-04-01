@@ -12,6 +12,7 @@ const routes: Routes = [
     path: "",
     component: ManageComponent,
     children: [
+      { path: "", redirectTo: "sign" },
       { path: "sign", component: SignDocComponent },
       { path: "verify", component: VerifySignatureComponent },
       { path: "update", component: UpdateInfoComponent },
