@@ -1,12 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using EGID.Web.Data.Repository.Cards;
+using EGID.Web.Data.Repository.Cards.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class AuthController : ControllerBase
     {
-        // sign in | should send card private key and password
-        // send back a jwt token to use for a 30min
+        private readonly ICardRepo _repo;
+
+        public AuthController(ICardRepo repo) => _repo = repo;
+
+        [HttpPost]
+        public async Task<ActionResult> SignIn([FromBody] SignInDto signInDto)
+        {
+            if (ModelState.IsValid)
+                return UnprocessableEntity(ModelState.Values);
+
+            var result = await _repo.SignInAsync(signInDto);
+            if (result.Failed)
+                return BadRequest(result.Errors);
+
+            return Ok(result.Data);
+        }
     }
 }

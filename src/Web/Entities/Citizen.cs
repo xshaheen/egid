@@ -1,14 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using EGID.Core.Common;
 using EGID.Core.Enums;
 using EGID.Core.ValueObjects;
 
 namespace EGID.Web.Entities
 {
-    public class Citizen
+    public class Citizen : AuditableEntity
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
-        public string PublicKey { get; set; }
+        [InverseProperty(nameof(Entities.Card.OwnerId))]
+        public Card Card { get; set; }
+
+        public string PrivateKey { get; set; }
 
         public FullName FullName { get; set; }
 
@@ -21,18 +26,14 @@ namespace EGID.Web.Entities
         public Gender Gender { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-
+ 
         public DateTime? DateOfDeath { get; set; }
-
-        public DateTime DateTime { get; set; }
 
         public string PhotoUrl { get; set; }
 
         public string PhoneNumber { get; set; }
 
         public string Email { get; set; }
-
-        public bool TwoFactorEnabled { get; set; }
 
         public override string ToString() => FullName.ToString();
     }
