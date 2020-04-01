@@ -1,10 +1,10 @@
 <div
   [egDropZone]="disabled"
   (hovered)="onHovering($event)"
-  (filesDropped)="onDrop($event)"
+  (filesDropped)="addFile($event)"
   [class.hover]="isHovering"
   [class.disabled]="disabled"
-  class="drop-zone"
+  class="drop-zone cloud-img"
 >
   <input
     type="file"
@@ -14,9 +14,13 @@
     [required]="required"
     [id]="formControlName"
     [name]="formControlName"
-    (change)="onDrop($event.target.files)"
+    (change)="addFile($event.target.files)"
   />
-  <h3>Drag and drop file here</h3>
-  <h3>or</h3>
-  <label [for]="formControlName">Browse for file</label>
+  <h3>
+    Upload files by clicking here, or drag & drop
+  </h3>
+  <h3>files from your computer.</h3>
+  <label class="btn" [for]="formControlName">
+    <i class="fas fa-cloud-upload-alt"></i> Or Choose for file
+  </label>
 </div>

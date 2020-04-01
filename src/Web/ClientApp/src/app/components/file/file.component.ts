@@ -23,7 +23,7 @@ export class FileComponent {
     this.isHovering = event;
   }
 
-  onDrop(files: FileList | null) {
+  addFile(files: FileList | null) {
     if (!files) {
       return;
     }

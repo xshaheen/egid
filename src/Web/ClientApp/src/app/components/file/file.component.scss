@@ -1,14 +1,15 @@
 .drop-zone {
-  width: 450px;
-  height: 180px;
-  padding: 2rem;
+  min-width: 675px;
+  min-height: 300px;
+  padding: 1rem;
   text-align: center;
-  border: dashed 1px #131633;
+  border: 5px dashed #e6e6e6;
+  border-radius: 5px;
   position: relative;
   margin: 0 auto;
 
   &.hover {
-    border: dashed 2px #131633;
+    border: 5px dashed #bababa;
   }
 
   &.disabled {
@@ -29,12 +30,14 @@
     left: 0;
   }
 
-  label {
+  .btn {
     color: white;
     width: 183px;
     height: 48px;
     line-height: 48px;
+    padding: 8px 16px;
     border-radius: 6px;
+    box-shadow: 00px 1px 3px 0px rgba(26, 129, 213, 0.7);
     background: rgb(26, 130, 213);
     background: linear-gradient(
       40deg,
@@ -42,11 +45,10 @@
       rgba(0, 155, 255, 1) 59%,
       rgba(0, 212, 255, 1) 85%
     );
-    padding: 8px 16px;
   }
 
   h3 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 500;
     color: #3e464e;
   }
