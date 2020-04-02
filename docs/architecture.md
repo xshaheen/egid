@@ -61,3 +61,4 @@ Now we have a digital seals and signatures that are equivalent to handwritten si
 ---
 
 One important issue is confidence/proof that a particular public key is authentic, i.e. that it is correct and belongs to the person or entity claimed, and has not been tampered with or replaced by a malicious third party. Now it is the PKI turn.
+One important issue is confidence/proof that a particular public key is authentic, i.e. that it is correct and belongs to the person or entity claimed, and has not been tampered with or replaced by a malicious third party.
