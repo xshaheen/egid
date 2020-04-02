@@ -1,15 +1,18 @@
-# EGID Project -- This project still under prototyping
+# EGID Project
 
-We all know the benefit of technology, the power of it, and we in very fast world and every millisecond make a difference. Our goal is to change the national ID to an electronic ID-card, design a database, design a digital signature system, give the appropriate authorization to each governmental entity and built an efficient and secure ecosystem that saves time and money. Then just scan the electronic ID-card through the computer in the appropriate form. All data will be automatically filled out. Lets get things done faster, easier and cheaper!
+We all know the benefit of technology, the power of it, and we in very fast world and every millisecond make a difference. Our goal is to help take the first step toward electronic government by building an a digital identity and signature system that provide confidentiality, authentication, integrity, and non-repudiation.
 
-## How?
+## How
 
-- EID-card will provide electronic identity operates on the basis of a public key infrastructure (PKI). All operations (authentication, signing, and decryption) are PIN-protected (using PIN1, PIN2, PUK model).
-- Digital Signature.
+- Change the national Id card with a new smart Id-card "EGID".
 
-You can find more information about the project architecture and how it work [here](docs/architecture.md)
+- EID-card will provide electronic identity operates on the basis of a public key infrastructure (PKI). All operations (authentication, signing, and decryption) will be PIN-protected (using PIN1, PIN2, PUK model).
 
-We can imagine more.
+- On top of this we can build an an efficient and secure electronic ecosystem that saves time and money. Lets get things done faster, easier and cheaper!
+
+-- _You can find more information about the project architecture and how it work [here](docs/architecture.md)._
+
+We can imagine more to build on top of this for example.
 
 - national health insurance
 - citizen medical records
@@ -21,13 +24,12 @@ We can imagine more.
 - Back-End
   - C# 8
   - .NET Core 3.1
-  - ASP.NET Core 3.1
-  - EF Core
+  - ASP.NET Core 3.1 / RESTFUL API
+  - Entity Framework Core
   - SQL Server
 - Front-End
   - HTML
-  - CSS
-  - Sass
-  - Bootstrap
+  - CSS/Sass
   - TypeScript
   - Angular 9
+  - Material UI
