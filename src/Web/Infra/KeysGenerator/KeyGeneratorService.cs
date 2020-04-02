@@ -1,13 +1,13 @@
 ﻿using System.Security.Cryptography;
 
-namespace EGID.Web.Infra.KeysGeneratorService
+namespace EGID.Web.Infra.KeysGenerator
 {
     /// <summary>
     ///     Generate RSA Keys as XML string.
     /// </summary>
-    public class KeyGenerator : IKeyGenerator
+    public class KeyGeneratorService : IKeyGeneratorService
     {
-        public KeyGenerator()
+        public KeyGeneratorService()
         {
             using var rsa = new RSACryptoServiceProvider(4096) { PersistKeyInCsp = false };
 

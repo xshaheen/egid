@@ -1,6 +1,6 @@
-﻿namespace EGID.Web.Infra.KeysGeneratorService
+﻿namespace EGID.Web.Infra.KeysGenerator
 {
-    public interface IKeyGenerator
+    public interface IKeyGeneratorService
     {
         public string PrivateKeyXml { get; }
 
