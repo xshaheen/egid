@@ -8,10 +8,15 @@ import { QrWriterModule } from "src/app/components/qr-writer/qr-writer.module";
 import { AdminComponent } from "./admin.component";
 import { MainComponent } from "./main/main.component";
 import { RegisterEmployeeComponent } from "./register-employee/register-employee.component";
-import { EmployeesComponent } from './employees/employees.component';
+import { EmployeesComponent } from "./employees/employees.component";
 
 @NgModule({
-  declarations: [AdminComponent, MainComponent, RegisterEmployeeComponent, EmployeesComponent],
+  declarations: [
+    AdminComponent,
+    MainComponent,
+    RegisterEmployeeComponent,
+    EmployeesComponent,
+  ],
   imports: [CommonModule, MaterialModule, AdminRoutingModule, QrWriterModule],
 })
 export class AdminModule {}
