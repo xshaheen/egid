@@ -1,11 +1,16 @@
 import { Component, OnInit } from "@angular/core";
+import { BreakpointsService } from "src/app/services/breakpoints.service";
 
 @Component({
-  selector: "eg-admin",
-  templateUrl: "./admin.component.html"
+  templateUrl: "./admin.component.html",
+  styleUrls: ["./admin.component.scss"],
 })
 export class AdminComponent implements OnInit {
-  constructor() {}
+  isHandset: boolean;
 
-  ngOnInit(): void {}
+  constructor(private handset: BreakpointsService) {}
+
+  ngOnInit(): void {
+    this.handset.isHandset().subscribe((result) => (this.isHandset = result));
+  }
 }
