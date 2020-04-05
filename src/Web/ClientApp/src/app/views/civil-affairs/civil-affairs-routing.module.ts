@@ -3,22 +3,24 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { CivilAffairsComponent } from "./civil-affairs.component";
 import { RegisterCardComponent } from "./register-card/register-card.component";
-import { ReviewUpdateRequestsComponent } from "./review-update-requests/review-update-requests.component";
+import { MainComponent } from "./main/main.component";
+import { RegisterCitizenComponent } from "./register-citizen/register-citizen.component";
 
 const civilAffairsRoutes: Routes = [
   {
     path: "",
     component: CivilAffairsComponent,
     children: [
-      { path: "register", component: RegisterCardComponent },
-      { path: "requests", component: ReviewUpdateRequestsComponent }
-    ]
+      { path: "", component: MainComponent, pathMatch: "full" },
+      { path: "register", component: RegisterCitizenComponent },
+      { path: "card", component: RegisterCardComponent },
+    ],
   },
-  { path: "**", redirectTo: "" }
+  { path: "**", redirectTo: "", pathMatch: "full" },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(civilAffairsRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class CivilAffairsRoutingModule {}
