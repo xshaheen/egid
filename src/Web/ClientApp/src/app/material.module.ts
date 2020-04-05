@@ -14,6 +14,11 @@ import { LayoutModule } from "@angular/cdk/layout";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTreeModule } from "@angular/material/tree";
+import { MatBadgeModule } from "@angular/material/badge";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatInputModule } from "@angular/material/input";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   imports: [
@@ -30,7 +35,12 @@ import { MatTreeModule } from "@angular/material/tree";
     LayoutModule,
     MatDividerModule,
     MatSelectModule,
-    MatTreeModule
+    MatTreeModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatInputModule,
+    MatTableModule,
   ],
   exports: [
     MatSidenavModule,
@@ -46,7 +56,12 @@ import { MatTreeModule } from "@angular/material/tree";
     LayoutModule,
     MatDividerModule,
     MatSelectModule,
-    MatTreeModule
-  ]
+    MatTreeModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatInputModule,
+    MatTableModule,
+  ],
 })
 export class MaterialModule {}
