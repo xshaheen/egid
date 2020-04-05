@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using EGID.Web.Data.Repository.Cards;
-using EGID.Web.Data.Repository.Cards.Dto;
+using EGID.Data.Cards;
+using EGID.Data.Cards.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
@@ -9,9 +9,9 @@ namespace EGID.Web.Controllers
     [Route("[controller]/[action]")]
     public class AuthController : ControllerBase
     {
-        private readonly ICardRepo _repo;
+        private readonly ICardService _service;
 
-        public AuthController(ICardRepo repo) => _repo = repo;
+        public AuthController(ICardService service) => _service = service;
 
         [HttpPost]
         public async Task<ActionResult> SignIn([FromBody] SignInDto signInDto)
@@ -19,7 +19,7 @@ namespace EGID.Web.Controllers
             if (ModelState.IsValid)
                 return UnprocessableEntity(ModelState.Values);
 
-            var result = await _repo.SignInAsync(signInDto);
+            var result = await _service.SignInAsync(signInDto);
             if (result.Failed)
                 return BadRequest(result.Errors);
 

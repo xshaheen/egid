@@ -1,10 +1,11 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using EGID.Web.Data;
-using EGID.Web.Data.Repository.Cards;
-using EGID.Web.Entities;
-using EGID.Web.Infra.KeysGeneratorService;
+using EGID.Data;
+using EGID.Data.Cards;
+using EGID.Infrastructure.Crypto;
+using EGID.Infrastructure.DigitalSignature;
+using EGID.Infrastructure.KeysGenerator;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,8 +75,12 @@ namespace EGID.Web
                 options.AppendTrailingSlash = false;
             });
 
-            services.AddTransient<ICardRepo, CardRepo>();
-            services.AddTransient<IKeyGenerator, KeyGenerator>();
+            services.AddTransient<ICardService, CardService>();
+
+            // add app services
+            services.AddTransient<IKeyGeneratorService, KeyGeneratorService>();
+            services.AddTransient<IAesCryptoService, AesCryptoService>();
+            services.AddTransient<IDigitalSignatureService, DigitalSignatureService>();
 
             services.AddControllers().AddJsonOptions(options =>
             {
