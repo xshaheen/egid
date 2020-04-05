@@ -1,13 +1,19 @@
 <!--Navbar-->
 <mat-toolbar class="header" color="primary" aria-label="Top Toolbar">
   <i class="fas fa-stream"></i>
-  <span>EGID</span>
+  <span class="logo">EGID</span>
 
   <span class="spacer"></span>
 
   <span>
     <button mat-icon-button>
-      <i class="fas fa-bell icon"></i>
+      <i
+        class="fas fa-bell icon"
+        matBadge="2"
+        matBadgePosition="before"
+        matBadgeColor="primary"
+        matBadgeSize="small"
+      ></i>
     </button>
 
     <button mat-icon-button>
@@ -15,7 +21,7 @@
     </button>
 
     <button
-      *ngIf="isHandset$ | async"
+      *ngIf="isHandset"
       mat-icon-button
       type="button"
       (click)="sidenav.toggle()"
@@ -34,9 +40,9 @@
     #sidenav
     class="sidenav"
     position="end"
-    [opened]="(isHandset$ | async) === false"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [opened]="!isHandset"
+    [mode]="isHandset ? 'over' : 'side'"
+    [attr.role]="isHandset ? 'dialog' : 'navigation'"
   >
     <mat-toolbar>
       <img
@@ -64,7 +70,7 @@
         <i class="fas fa-user-cog sidenav-icon"></i> تغير بيانات
       </a>
       <a mat-list-item routerLink="/manage/change-pin">
-        <i class="fas fa-lock sidenav-icon"></i> تغير PIN
+        <i class="fas fa-lock sidenav-icon"></i> اعدادات البطاقة
       </a>
       <a mat-list-item>
         <i class="fas fa-sign-out-alt sidenav-icon"></i> تسجيل خروج
