@@ -4,13 +4,8 @@
 - Card Issuer
 - Issue Date
 - Termination Date
-- Health Insurance Id
-- Citizen Full Name
-- Date of Birth
-- Gender
-- Social Security Number
-- Address
-- Photo
+
+- Citizen Id
 
 On the card chip, there are two private keys with corresponding public
 keys on the [X.509-format](https://en.wikipedia.org/wiki/X.509) certificates. The certificates are stored both on the chip:

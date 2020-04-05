@@ -60,5 +60,18 @@ Now we have a digital seals and signatures that are equivalent to handwritten si
 
 ---
 
-One important issue is confidence/proof that a particular public key is authentic, i.e. that it is correct and belongs to the person or entity claimed, and has not been tampered with or replaced by a malicious third party. Now it is the PKI turn.
 One important issue is confidence/proof that a particular public key is authentic, i.e. that it is correct and belongs to the person or entity claimed, and has not been tampered with or replaced by a malicious third party.
+
+The public key infrastructure concept has evolved to help address this problem and others. A public key infrastructure (PKI) consists of software and hardware elements that a trusted third party can use to establish the integrity and ownership of a public key.
+
+The trusted party, called a _certification authority_ (CA), typically accomplishes this by issuing signed (encrypted) binary certificates that affirm the identity of the certificate subject and bind that identity to the public key contained in the certificate. The CA signs the certificate by using its private key. It issues the corresponding public key to all interested parties in a self-signed CA certificate.
+
+When a CA is used, the preceding example of sending a message can be modified in the following manner:
+
+1. Assume that the CA has issued a signed digital certificate that contains its public key. The CA self-signs this certificate by using the private key that corresponds to the public key in the certificate.
+2. Mahmoud and Jody agree to use the CA to verify their identities.
+3. Mahmoud requests a public key certificate from the CA.
+4. The CA verifies her identity, computes a hash of the content that will make up her certificate, signs the hash by using the private key that corresponds to the public key in the published CA certificate, creates a new certificate by concatenating the certificate content and the signed hash, and makes the new certificate publicly available.
+5. Jody retrieves the certificate, decrypts the signed hash by using the public key of the CA, computes a new hash of the certificate content, and compares the two hashes. If the hashes match, the signature is verified and Jody can assume that the public key in the certificate does indeed belong to Mahmoud.
+6. Jody uses Mahmoud's verified public key to encrypt a message to her.
+7. Mahmoud uses her private key to decrypt the message from Jody.
