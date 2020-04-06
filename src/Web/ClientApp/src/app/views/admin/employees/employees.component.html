@@ -1,3 +1,42 @@
-<div *ngFor="let employee of getEmployees()">
-  <div>{{ employee.fullName }}</div>
-</div>
+<table
+  mat-table
+  matSort
+  [dataSource]="getEmployees()"
+  stickyEnd="true"
+  class="mat-elevation-z8"
+>
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef>Address</th>
+    <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef>Photo</th>
+    <td mat-cell *matCellDef="let element">
+      <img [src]="element.photUrl" alt="photo" />
+    </td>
+  </ng-container>
+
+  <tr
+    mat-header-row
+    *matHeaderRowDef="['position', 'name', 'weight', 'symbol']"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['position', 'name', 'weight', 'symbol']"
+  ></tr>
+</table>
