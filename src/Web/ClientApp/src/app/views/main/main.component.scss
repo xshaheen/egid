@@ -3,12 +3,6 @@
   margin: 0;
   box-sizing: border-box;
 }
-html{
-  scroll-behavior: smooth;
-}
-body{
-  Font-size: 16px;
-}
 /* navbar */
 nav{
   width: 100%;
@@ -25,7 +19,10 @@ nav .container{
 }
 nav .logo{
   width:50% ;
-  padding: 20px;font-size: 30px;
+  padding: 20px;
+  font-size: 30px;
+  font-family: serif;
+  font-weight: 500;
 }
 nav .nav-items{
   width: 100%;
@@ -69,10 +66,12 @@ header span {
 header h2{
   margin: 90px 66px 0 157px;
   font-size: 70px;
+  font-family: serif;
 }
 header p{
   margin-left: 157px;
   margin-right: 66px;
+  font-family: serif;
 }
 header .btn{
   /* width: 30px; */
@@ -84,6 +83,7 @@ header .btn{
   border:2px solid #ffffff;
   cursor: pointer;
   outline: none;
+  font-family: serif;
 }
 header .btn:hover{
   background-color: #c0baba;
@@ -108,19 +108,21 @@ header .right{
   font-size: 40px;
   color: rgb(26, 21, 19);
   /* float: right; */
-  direction: rtl;
 }
 .intro{
   display: flex;
-  /* float: right; */
-  direction: rtl;
+  text-align: right;
+
 }
 .intro .info{
   flex-direction: row;
   width: 33.3%;
-
+  float:right;
 }
-.intro .info:not(:last-child){
+.head{
+  text-align: right;
+}
+.intro .info:not(:first-child){
   margin-left: 84px;
 }
 .intro h3{
@@ -149,6 +151,7 @@ header .right{
 }
 .about p{
   font-size: 50px;
+  font-family: serif;
 }
 .about .pull{
   width: 50%;
@@ -163,16 +166,13 @@ header .right{
   cursor: pointer;
   outline: none;
   float: right;
-}
-.about button:hover {
-  color: #0d0d22;
-  background-color: white;
+  font-family: serif;
 }
 /* details */
 .details{
   width: 100%;
   display: flex;
-  direction: rtl;
+  margin-bottom: 60px;
 }
 .details .right{
   width: 50%;
@@ -183,13 +183,21 @@ header .right{
   font-size: 30px;
   padding-bottom: 20px;
 }
+.details .right p{
+  font-size: 20px;
+}
 .details .left{
   width: 50%;
   text-align: center;
 }
-.details .right h3{
-  font-size: 30px;
-  padding-bottom: 20px;
+.details .left img{
+  width: 50%;
+}
+// why
+.why-description{
+  padding: 10px;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 /* Start Footer */
