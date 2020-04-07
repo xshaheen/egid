@@ -1,0 +1,20 @@
+// width
+::-webkit-scrollbar {
+  height: 6px;
+  width: 7px;
+}
+
+// Track
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.3);
+}
+
+// Handle button
+::-webkit-scrollbar-thumb {
+  background-color: #6e6e6e;
+  outline: 1px solid #444;
+
+  &:hover {
+    background: #555;
+  }
+}
