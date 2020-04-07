@@ -1,6 +1,7 @@
 /// Layout breakpoints ///
 
-$xs: 0;
+$start: 0;
+$xs: 375;
 $sm: 576px; // Larger than mobile
 $md: 768px; // Larger than tablet
 $lg: 992px; // Larger than desktop

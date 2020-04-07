@@ -1,10 +1,5 @@
 <!--Navbar-->
 <mat-toolbar class="header" color="primary" aria-label="Top Toolbar">
-  <i class="fas fa-stream"></i>
-  <span class="logo">EGID</span>
-
-  <span class="spacer"></span>
-
   <span>
     <button
       *ngIf="isHandset"
@@ -14,6 +9,13 @@
     >
       <i class="fas fa-bars icon" aria-label="Side nav toggle icon"></i>
     </button>
+  </span>
+
+  <span class="spacer"></span>
+
+  <span>
+    <a class="logo" [routerLink]="['']">EGID</a>
+    <i class="fas fa-stream"></i>
   </span>
 </mat-toolbar>
 <!--#Navbar-->
@@ -63,7 +65,7 @@
   <!--#SideNav-->
 
   <!--#Content-->
-  <mat-sidenav-content>
+  <mat-sidenav-content class="content-container">
     <!--Toolbox-->
     <mat-toolbar>
       <button mat-flat-button>
