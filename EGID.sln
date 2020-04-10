@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Web", "src\Web\EGID.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Core", "src\Core\EGID.Core.csproj", "{7E0B6633-DD3C-4A9D-B96E-6629A247122C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Domain", "src\EGID.Domain\EGID.Domain.csproj", "{B1C534AD-8018-45DA-8E2B-33DE87515DE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Domain", "src\Domain\EGID.Domain.csproj", "{B1C534AD-8018-45DA-8E2B-33DE87515DE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Data", "EGID.Data\EGID.Data.csproj", "{E20A5397-1765-46BB-A64C-2BEED2647518}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Data", "src\Data\EGID.Data.csproj", "{E20A5397-1765-46BB-A64C-2BEED2647518}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Infrastructure", "EGID.Infrastructure\EGID.Infrastructure.csproj", "{688054A3-494E-4DE4-B138-ADAE6A787345}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Infrastructure", "src\Infrastructure\EGID.Infrastructure.csproj", "{688054A3-494E-4DE4-B138-ADAE6A787345}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
