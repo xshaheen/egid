@@ -1,5 +1,10 @@
 <div class="rows">
-  <eg-file (fileDropped)="onDrop($event)"></eg-file>
+  <!--File Field-->
+  <eg-file (fileDropped)="onAddFile($event)"></eg-file>
+  <!--#File Field-->
+  <li>
+    <button mat-raised-button (click)="openDialog()">Pick one</button>
+  </li>
 
   <div class="files-list">
     <div class="single-file" *ngFor="let item of files; let i = index">

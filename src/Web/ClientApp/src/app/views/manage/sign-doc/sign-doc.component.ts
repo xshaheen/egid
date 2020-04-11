@@ -1,15 +1,35 @@
 import { Component } from "@angular/core";
 import { FileModel } from "src/app/components/file/file.component";
+import { MatDialog } from "@angular/material/dialog";
+import { PasswordDialogComponent } from "src/app/components/password-dialog/password-dialog.component";
 
 @Component({
   selector: "eg-sign-doc",
   templateUrl: "./sign-doc.component.html",
-  styleUrls: ["./sign-doc.component.scss"]
+  styleUrls: ["./sign-doc.component.scss"],
 })
 export class SignDocComponent {
   files: FileModel[] = [];
+  password: string;
 
-  onDrop(file: FileModel) {
+  constructor(public dialog: MatDialog) {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PasswordDialogComponent, {
+      width: "450px",
+      direction: "rtl",
+      disableClose: true,
+      closeOnNavigation: true,
+      data: { passwordType: "PIN2" },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.password = result;
+      console.log(result);
+    });
+  }
+
+  onAddFile(file: FileModel) {
     this.files.push(file);
     this.uploadToSign(this.files.length - 1);
   }

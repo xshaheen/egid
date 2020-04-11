@@ -1,1 +1,101 @@
-<p>qr-reader works!</p>
+<mat-card [hidden]="!hasDevices" class="box">
+  <!--QR Reader-->
+  <zxing-scanner
+    [enable]="scannerEnabled"
+    mat-card-image
+    class="scan-box"
+    [torch]="torchEnabled"
+    [(device)]="currentDevice"
+    (scanSuccess)="onCodeResult($event)"
+    (permissionResponse)="onHasPermission($event)"
+    (camerasFound)="onCamerasFound($event)"
+    (torchCompatible)="onTorchCompatible($event)"
+  ></zxing-scanner>
+  <!--#QR Reader-->
+
+  <!--Actions-->
+  <mat-card-actions>
+    <!--Choose a camera-->
+    <mat-form-field>
+      <label>
+        {{
+          !hasPermission
+            ? "استخدام الكاميرا مرفوض"
+            : currentDevice
+            ? "اختر الكاميرا"
+            : "لا يوجد كاميرا متصلة"
+        }}
+      </label>
+      <mat-select
+        [attr.disabled]="!currentDevice"
+        [value]="currentDeviceId"
+        (selectionChange)="onDeviceSelectChange($event)"
+      >
+        <mat-option
+          *ngFor="let device of availableDevices"
+          [value]="device.deviceId"
+        >
+          {{ device.label }}
+        </mat-option>
+        <mat-hint dir="rtl">
+          يمكن الاختيار بين الكاميرا الامامية والخلفية.
+        </mat-hint>
+      </mat-select>
+    </mat-form-field>
+    <!--#Choose a camera-->
+
+    <!--Play/Stop-->
+    <button class="icon" mat-icon-button (click)="onPlayStopClicked()">
+      <i class="fas fa-stop-circle"></i>
+    </button>
+    <!--#Play/Stop-->
+
+    <!--Status Info-->
+    <button class="icon" mat-icon-button (click)="openInfoDialog()">
+      <i class="fas fa-question-circle"></i>
+    </button>
+    <!--#Status Info-->
+
+    <!--Flash-->
+    <button
+      class="icon"
+      checkboxPosition="start"
+      (click)="toggleTorch()"
+      *ngIf="torchAvailable$ | async"
+    >
+      <i class="fas fa-lightbulb"></i>
+    </button>
+    <!--#Flash-->
+  </mat-card-actions>
+  <!--#Actions-->
+</mat-card>
+
+<!-- <ng-container *ngIf="hasPermission === undefined">
+    <h2>Waiting for permissions.</h2>
+
+    <blockquote>
+      If your device does not has cameras, no permissions will be asked.
+    </blockquote>
+  </ng-container>
+
+  <ng-container *ngIf="hasPermission === false">
+    <h2>
+      You denied the camera permission, we can't scan anything without it. 😪
+    </h2>
+  </ng-container>
+
+  <ng-container *ngIf="hasDevices === undefined">
+    <h2>Couldn't check for devices.</h2>
+
+    <blockquote>
+      This may be caused by some security error.
+    </blockquote>
+  </ng-container>
+
+  <ng-container *ngIf="hasDevices === false">
+    <h2>No devices were found.</h2>
+
+    <blockquote>
+      I believe your device has no media devices attached to.
+    </blockquote>
+  </ng-container> -->

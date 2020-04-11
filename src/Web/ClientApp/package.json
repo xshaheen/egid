@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@zxing/ngx-scanner": "^3.0.0",
     "angularx-qrcode": "^2.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

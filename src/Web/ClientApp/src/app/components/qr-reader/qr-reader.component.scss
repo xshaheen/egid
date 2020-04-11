@@ -1,0 +1,61 @@
+@import "~src/styles/_var";
+
+:host zxing-scanner::ng-deep {
+  object-fit: contain;
+}
+
+.box {
+  width: 500px;
+
+  .scan-box {
+    width: 500px;
+  }
+}
+
+.mat-card-actions {
+  display: flex;
+  flex: auto auto 4 4;
+  align-items: center;
+
+  mat-form-field {
+    flex: 4;
+  }
+
+  button {
+    margin-left: 8px;
+  }
+}
+
+// header {
+//   position: sticky;
+//   top: 0;
+//   padding: 10px;
+//   display: flex;
+
+//
+
+//   mat-form-field {
+//     width: 50%;
+//     font-weight: bold;
+
+//     ::ng-deep {
+//       .mat-form-field-wrapper {
+//         padding: 0;
+
+//         .mat-form-field-flex {
+//           padding-top: 0;
+//         }
+//       }
+//       .mat-form-field-underline {
+//         bottom: 0;
+//       }
+//     }
+
+//     option {
+//       padding: 10px;
+//       line-height: 2;
+//       background: #474747;
+//       color: #fff;
+//     }
+//   }
+// }
