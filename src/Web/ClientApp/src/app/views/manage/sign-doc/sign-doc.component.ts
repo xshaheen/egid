@@ -1,7 +1,10 @@
 import { Component } from "@angular/core";
 import { FileModel } from "src/app/components/file/file.component";
+
 import { MatDialog } from "@angular/material/dialog";
+
 import { PasswordDialogComponent } from "src/app/components/password-dialog/password-dialog.component";
+import { ConfirmDialogComponent } from "src/app/components/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: "eg-sign-doc",
@@ -11,10 +14,12 @@ import { PasswordDialogComponent } from "src/app/components/password-dialog/pass
 export class SignDocComponent {
   files: FileModel[] = [];
   password: string;
+  confirm: boolean;
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
+  openPinDialog(): void {
+    // open a dialog and get a reference to it
     const dialogRef = this.dialog.open(PasswordDialogComponent, {
       width: "450px",
       direction: "rtl",
@@ -23,9 +28,33 @@ export class SignDocComponent {
       data: { passwordType: "PIN2" },
     });
 
+    // subscribe to close event to get the result
     dialogRef.afterClosed().subscribe((result) => {
-      this.password = result;
-      console.log(result);
+      if (result) {
+        this.password = result;
+      } else {
+        this.password = null;
+      }
+    });
+  }
+
+  openConfirmDialog(): void {
+    // open a dialog and get a reference to it
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: "450px",
+      direction: "rtl",
+      disableClose: true,
+      closeOnNavigation: true,
+      data: "هل انت متاكد من انك تريد حذف هذا الموظف؟",
+    });
+
+    // subscribe to close event to get the result
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.confirm = result;
+      } else {
+        this.confirm = false;
+      }
     });
   }
 
