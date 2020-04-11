@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EGID.Infrastructure\EGID.Infrastructure.csproj" />
-    <ProjectReference Include="..\src\EGID.Domain\EGID.Domain.csproj" />
+    <ProjectReference Include="..\Core\EGID.Core.csproj" />
+    <ProjectReference Include="..\Domain\EGID.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\EGID.Infrastructure.csproj" />
   </ItemGroup>
+
 </Project>

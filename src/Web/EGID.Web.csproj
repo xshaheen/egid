@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EGID.Data\EGID.Data.csproj" />
+    <ProjectReference Include="..\Core\EGID.Core.csproj"/>
+    <ProjectReference Include="..\Data\EGID.Data.csproj"/>
   </ItemGroup>
+
 </Project>
