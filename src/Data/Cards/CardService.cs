@@ -1,13 +1,16 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using EGID.Core.Common.Result;
-using EGID.Core.Exceptions;
+using EGID.Common.Exceptions;
+using EGID.Common.Models.Result;
 using EGID.Data.Cards.Dto;
+using EGID.Infrastructure.Auth;
+using EGID.Infrastructure.Common;
 using EGID.Infrastructure.KeysGenerator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -127,7 +130,7 @@ namespace EGID.Data.Cards
 
         #region Register
 
-        public async Task<DataResult<string>> RegisterAsync(CreateCardDto model)
+        public async Task<(Result result, string cardId)> RegisterAsync(CreateCardDto model)
         {
             // TODO: hash Pin1 & Pin2 first
             // TODO: encrypt private keys
@@ -136,8 +139,6 @@ namespace EGID.Data.Cards
                 PublicKeyXml = _keyGenerator.PublicKeyXml,
                 PrivateKeyXml = _keyGenerator.PrivateKeyXml,
                 OwnerId = model.OwnerId,
-                Email = model.Email,
-                PhoneNumber = model.Phone,
                 Pin1 = model.Pin1,
                 Pin2 = model.Pin2,
                 Active = true,
@@ -147,9 +148,7 @@ namespace EGID.Data.Cards
 
             var result = await _userManager.CreateAsync(card, model.Puk);
 
-            return result.Succeeded
-                ? DataResult<string>.Success(card.Id)
-                : DataResult<string>.Failure(result.Errors.Select(e => e.Description));
+            return (result.ToResult(), card.Id);
         }
 
         #endregion Register
@@ -352,3 +351,4 @@ namespace EGID.Data.Cards
         #endregion Helper Methods
     }
 }
+*/

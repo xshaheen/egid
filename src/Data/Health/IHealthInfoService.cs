@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EGID.Core.Exceptions;
 using EGID.Data.Health.Dto;
 using EGID.Domain.Entities;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EGID.Core.Exceptions;
+using EGID.Common.Exceptions;
 using EGID.Data.Health.Dto;
 using EGID.Domain.Entities;
 
@@ -42,7 +42,7 @@ namespace EGID.Data.Health
         {
             var healthInfo = await _context.HealthInformation.FindAsync(id);
 
-            if (healthInfo == null) throw new EntityNotFoundException();
+            if (healthInfo == null) throw new EntityNotFoundException(nameof(HealthInfo), id.ToString());
 
             var isRecordsLoaded = _context.Entry(healthInfo)
                 .Collection(h => h.HealthRecords)

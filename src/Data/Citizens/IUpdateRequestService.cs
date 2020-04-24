@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Threading.Tasks;
 using EGID.Core.Common.Pages;
 using EGID.Domain.Entities;
@@ -22,3 +23,4 @@ namespace EGID.Data.Citizens
         #endregion Query
     }
 }
+*/

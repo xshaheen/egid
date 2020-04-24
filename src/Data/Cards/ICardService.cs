@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EGID.Core.Common.Result;
-using EGID.Core.Exceptions;
+using EGID.Common.Exceptions;
+using EGID.Common.Models.Result;
 using EGID.Data.Cards.Dto;
+using EGID.Infrastructure.Auth;
 
 namespace EGID.Data.Cards
 {
@@ -46,13 +47,13 @@ namespace EGID.Data.Cards
         /// <exception cref="EntityNotFoundException">
         ///     Can not find card.
         /// </exception>
-        Task<DataResult<string>> SignInAsync(SignInDto model);
+        Task<(Result result, string cardId)> SignInAsync(SignInDto model);
 
         /// <summary>
         ///     Register card and return success result with card id
         ///     or return failed result with Errors messages.
         /// </summary>
-        Task<DataResult<string>> RegisterAsync(CreateCardDto model);
+        Task<(Result result, string cardId)> RegisterAsync(CreateCardDto model);
 
         /// <summary>
         ///     Change Pin1 and returns success result or a failed
