@@ -8,6 +8,8 @@
         public string PostalCode { get; set; }
         public string Country { get; }
 
+        public Address() { }
+
         public Address(string street, string city, string state, string country, string postalCode)
         {
             Street = street;

@@ -10,7 +10,6 @@ namespace EGID.Domain.Entities
         public CitizenDetails Citizen { get; set; }
 
         public string CauseOfDeath { get; set; }
-
-        public DateTime Date { get; set; }
+        public DateTime DateOfDeath { get; set; }
     }
 }

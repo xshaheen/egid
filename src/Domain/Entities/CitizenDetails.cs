@@ -1,5 +1,4 @@
 ﻿using System;
-using EGID.Core.Common;
 using EGID.Domain.Enums;
 using EGID.Domain.ValueObjects;
 
@@ -27,12 +26,10 @@ namespace EGID.Domain.Entities
 
         public DateTime DateOfBirth { get; set; }
 
-        public DateTime? DateOfDeath { get; set; }
-
         public string PhotoUrl { get; set; }
 
-        public string HealthInfoId { get; set; }
         public HealthInfo HealthInfo { get; set; }
+        public DeathCertificate DeathCertificate { get; set; }
 
         public override string ToString() => FullName.ToString();
     }

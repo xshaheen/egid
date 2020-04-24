@@ -7,6 +7,8 @@
         public string ThirdName { get; }
         public string LastName { get; }
 
+        public FullName() { }
+
         public FullName(string first, string second, string third, string last)
         {
             FirstName = first;
