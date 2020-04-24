@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EGID.Core.Common.Pages
+namespace EGID.Common.Models.Pages
 {
     public class PagingInfo
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EGID.Core.Exceptions
+namespace EGID.Common.Exceptions
 {
     /// <summary>
     ///     An exception that is thrown if entity is not valid for the

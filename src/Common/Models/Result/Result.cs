@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace EGID.Core.Common.Result
+namespace EGID.Common.Models.Result
 {
     public class Result
     {
-        internal Result() {}
+        private Result() {}
 
         /// <summary>
         ///     Flag indicating whether if the operation succeeded or not.
@@ -19,13 +19,16 @@ namespace EGID.Core.Common.Result
         /// <value>True if the operation failed, otherwise true.</value>
         public bool Failed => !Succeeded;
 
+        /// <summary>
+        ///     Collection of errors messages when fails. Will be null if operation succeeded.
+        /// </summary>
         public string[] Errors { get; protected set; }
 
         #region Helpers
 
         public static Result Success() => new Result { Succeeded = true };
 
-        public static Result Failure() => new Result { Succeeded = false };
+        public static Result Failure() => new Result { Succeeded = false, Errors = new string[]{}};
 
         public static Result Failure(IEnumerable<string> errors) => new Result
         {

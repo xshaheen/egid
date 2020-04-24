@@ -5,13 +5,19 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Web", "src\Web\EGID.Web.csproj", "{06C079C2-2FAA-4A4F-9A74-3480017BAA68}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Core", "src\Core\EGID.Core.csproj", "{7E0B6633-DD3C-4A9D-B96E-6629A247122C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Common", "src\Common\EGID.Common.csproj", "{7E0B6633-DD3C-4A9D-B96E-6629A247122C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Domain", "src\Domain\EGID.Domain.csproj", "{B1C534AD-8018-45DA-8E2B-33DE87515DE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Domain", "src\Domain\EGID.Domain.csproj", "{B1C534AD-8018-45DA-8E2B-33DE87515DE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Data", "src\Data\EGID.Data.csproj", "{E20A5397-1765-46BB-A64C-2BEED2647518}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Data", "src\Data\EGID.Data.csproj", "{E20A5397-1765-46BB-A64C-2BEED2647518}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Infrastructure", "src\Infrastructure\EGID.Infrastructure.csproj", "{688054A3-494E-4DE4-B138-ADAE6A787345}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Infrastructure", "src\Infrastructure\EGID.Infrastructure.csproj", "{688054A3-494E-4DE4-B138-ADAE6A787345}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Cross Cutting", "0. Cross Cutting", "{9361E7EB-EF8A-43DE-9958-1F62458E3878}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Domain Layer", "1. Domain Layer", "{F6D12BF0-F835-46B6-9448-627B5136AFC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Infrastructure Layer", "2. Infrastructure Layer", "{93E8D63A-2EFA-44D1-A91E-B6CC497EB471}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +48,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7E0B6633-DD3C-4A9D-B96E-6629A247122C} = {9361E7EB-EF8A-43DE-9958-1F62458E3878}
+		{B1C534AD-8018-45DA-8E2B-33DE87515DE2} = {F6D12BF0-F835-46B6-9448-627B5136AFC5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E24CFE8D-4B5D-4914-A6B0-ED49EC717953}

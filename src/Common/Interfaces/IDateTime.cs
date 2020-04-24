@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EGID.Core.Common
+namespace EGID.Common.Interfaces
 {
     public interface IDateTime
     {
