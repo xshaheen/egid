@@ -5,15 +5,15 @@ using EGID.Domain.ValueObjects;
 
 namespace EGID.Domain.Entities
 {
-    public class Citizen : AuditableEntity
+    public class CitizenDetails : AuditableEntity
     {
         public string Id { get; set; }
+        public string AccountId { get; set; }
+        public string PrivateKey { get; set; }
 
         public string FatherId { get; set; }
 
         public string MotherId { get; set; }
-
-        public string PrivateKey { get; set; }
 
         public FullName FullName { get; set; }
 
@@ -31,9 +31,8 @@ namespace EGID.Domain.Entities
 
         public string PhotoUrl { get; set; }
 
-        public string PhoneNumber { get; set; }
-
-        public string Email { get; set; }
+        public string HealthInfoId { get; set; }
+        public HealthInfo HealthInfo { get; set; }
 
         public override string ToString() => FullName.ToString();
     }

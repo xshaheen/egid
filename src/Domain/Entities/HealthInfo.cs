@@ -1,25 +1,27 @@
 ﻿using System.Collections.Generic;
-using EGID.Core.Common;
 using EGID.Domain.Enums;
 
 namespace EGID.Domain.Entities
 {
-    public class HealthInfo : AuditableEntity
+    public class HealthInfo
     {
-        public string Id { get; set; }
+        public HealthInfo()
+        {
+            HealthRecords = new HashSet<HealthRecord>();
+            ExitHospitalRecords = new List<ExitHospitalRecord>();
+        }
 
-        public string CitizenId { get; set; }
+        public string Id { get; set; }
 
         public BloodType BloodType { get; set; }
 
         public string Phone1 { get; set; }
-
         public string Phone2 { get; set; }
-
         public string Phone3 { get; set; }
 
-        public ICollection<HealthRecord> HealthRecords { get; set; }
+        public CitizenDetails Citizen { get; set; }
 
-        public ICollection<string> ExitHospitalRecords { get; set; }
+        public virtual ICollection<HealthRecord> HealthRecords { get; }
+        public virtual ICollection<ExitHospitalRecord> ExitHospitalRecords { get; }
     }
 }

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace EGID.Domain.Entities
 {
-    public class HealthRecord
+    public class HealthRecord : AuditableEntity
     {
         public string Id { get; set; }
 
         public string CitizenId { get; set; }
-
-        public string DoctorId { get; set; }
 
         public DateTime Date { get; set; }
 
