@@ -1,11 +1,13 @@
-﻿namespace EGID.Domain.ValueObjects
+﻿using System.Collections.Generic;
+
+namespace EGID.Domain.ValueObjects
 {
-    public sealed class FullName
+    public class FullName : ValueObject
     {
-        public string FirstName { get; }
-        public string SecondName { get; }
-        public string ThirdName { get; }
-        public string LastName { get; }
+        public string FirstName { get; private set; }
+        public string SecondName { get; private set; }
+        public string ThirdName { get; private set; }
+        public string LastName { get; private set; }
 
         public FullName() { }
 
@@ -17,24 +19,12 @@
             LastName = last;
         }
 
-        public override string ToString() => $"{FirstName} {SecondName} {ThirdName} {LastName}";
-
-        public override int GetHashCode() => ToString().GetHashCode();
-
-        public override bool Equals(object obj)
+        protected override IEnumerable<object> GetAtomicValues()
         {
-            if (obj == null) return false;
-
-            return this == (FullName)obj;
+            yield return FirstName;
+            yield return SecondName;
+            yield return ThirdName;
+            yield return LastName;
         }
-
-        public static bool operator ==(FullName x, FullName y)
-        {
-            if (x == null && y == null) return true;
-
-            return x != null && y != null && x.ToString() == y.ToString();
-        }
-
-        public static bool operator !=(FullName x, FullName y) => !(x == y);
     }
 }

@@ -1,12 +1,14 @@
-﻿namespace EGID.Domain.ValueObjects
+﻿using System.Collections.Generic;
+
+namespace EGID.Domain.ValueObjects
 {
-    public class Address
+    public class Address : ValueObject
     {
-        public string Street { get; }
-        public string City { get; }
-        public string State { get; }
-        public string PostalCode { get; set; }
-        public string Country { get; }
+        public string Street { get; private set; }
+        public string City { get; private set; }
+        public string State { get; private set; }
+        public string PostalCode { get; private set; }
+        public string Country { get; private set; }
 
         public Address() { }
 
@@ -17,6 +19,20 @@
             State = state;
             Country = country;
             PostalCode = postalCode;
+        }
+
+        public override string ToString()
+        {
+            return $"{Street}, {City}, {State} {PostalCode}";
+        }
+
+        protected override IEnumerable<object> GetAtomicValues()
+        {
+            yield return Street;
+            yield return City;
+            yield return State;
+            yield return Country;
+            yield return PostalCode;
         }
     }
 }
