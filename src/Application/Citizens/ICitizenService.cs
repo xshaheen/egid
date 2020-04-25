@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EGID.Domain.Entities;
 
-namespace EGID.Data.Citizens
+namespace EGID.Application.Citizens
 {
     public interface ICitizenService
     {
@@ -23,9 +23,9 @@ namespace EGID.Data.Citizens
     class CitizenService : ICitizenService
     {
 
-        private readonly EgidDbContext _context;
+        private readonly IEgidDbContext _context;
 
-        public CitizenService(EgidDbContext context)
+        public CitizenService(IEgidDbContext context)
         {
             _context = context;
         }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿/*
+using System;
 using System.Threading.Tasks;
 using EGID.Common.Exceptions;
 using EGID.Data.Health.Dto;
 using EGID.Domain.Entities;
 
-namespace EGID.Data.Health
+namespace EGID.Application.Health
 {
     // get health information records
 
@@ -17,9 +18,9 @@ namespace EGID.Data.Health
 
     public class HealthInfoService : IHealthInfoService
     {
-        private readonly EgidDbContext _context;
+        private readonly IEgidDbContext _context;
 
-        public HealthInfoService(EgidDbContext context) => _context = context;
+        public HealthInfoService(IEgidDbContext context) => _context = context;
 
         #region Commands
 
@@ -59,3 +60,4 @@ namespace EGID.Data.Health
         #endregion Query
     }
 }
+*/

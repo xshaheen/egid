@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using EGID.Data.Health.Dto;
+using EGID.Application.Health.Dto;
 using EGID.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EGID.Data.Health
+namespace EGID.Application.Health
 {
     public interface IHealthInfoService
     {

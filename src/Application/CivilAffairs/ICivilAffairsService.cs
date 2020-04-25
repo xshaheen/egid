@@ -1,4 +1,4 @@
-﻿namespace EGID.Data.CivilAffairs
+﻿namespace EGID.Application.CivilAffairs
 {
     public interface ICivilAffairsService
     {

@@ -1,6 +1,6 @@
-﻿using System.Reflection;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using EGID.Application;
 using EGID.Common.Interfaces;
 using EGID.Domain;
 using EGID.Domain.Entities;
@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EGID.Data
 {
-    public class EgidDbContext : DbContext
+    public class EgidDbContext : DbContext, IEgidDbContext
     {
         private readonly ICurrentUserService _currentUser;
         private readonly IDateTime _dateTime;

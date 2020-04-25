@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿/*
+using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EGID.Data
+namespace EGID.Application
 {
     public class DataSeed
     {
@@ -30,3 +29,4 @@ namespace EGID.Data
         }
     }
 }
+*/

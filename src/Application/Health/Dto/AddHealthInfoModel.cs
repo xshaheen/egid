@@ -1,7 +1,7 @@
 ﻿using System;
 using EGID.Domain.Enums;
 
-namespace EGID.Data.Health.Dto
+namespace EGID.Application.Health.Dto
 {
     public class AddHealthInfoModel
     {
