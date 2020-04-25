@@ -5,6 +5,6 @@
         public string Id { get; set; }
 
         public string HealthRecordId { get; set; }
-        public HealthRecord HealthRecord { get; set; }
+        public virtual HealthRecord HealthRecord { get; set; }
     }
 }

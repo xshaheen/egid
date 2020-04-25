@@ -5,6 +5,6 @@
         public string Id { get; set; }
 
         public string ExitHospitalRecordId { get; set; }
-        public ExitHospitalRecord ExitHospitalRecord { get; set; }
+        public virtual ExitHospitalRecord ExitHospitalRecord { get; set; }
     }
 }

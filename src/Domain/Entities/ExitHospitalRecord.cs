@@ -8,7 +8,7 @@ namespace EGID.Domain.Entities
         public string Id { get; set; }
 
         public string HealthInfoId { get; set; }
-        public HealthInfo HealthInfo { get; set; }
+        public virtual HealthInfo HealthInfo { get; set; }
 
         public DateTime EnterDate { get; set; }
         public DateTime ExitDate { get; set; }
@@ -17,6 +17,6 @@ namespace EGID.Domain.Entities
 
         public string Diagnosis { get; set; }
 
-        public ICollection<ExitHospitalRecordAttachment> Attachments { get; set; }
+        public virtual ICollection<ExitHospitalRecordAttachment> Attachments { get; set; }
     }
 }

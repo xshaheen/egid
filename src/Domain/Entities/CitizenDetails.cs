@@ -28,8 +28,8 @@ namespace EGID.Domain.Entities
 
         public string PhotoUrl { get; set; }
 
-        public HealthInfo HealthInfo { get; set; }
-        public DeathCertificate DeathCertificate { get; set; }
+        public virtual HealthInfo HealthInfo { get; set; }
+        public virtual DeathCertificate DeathCertificate { get; set; }
 
         public override string ToString() => FullName.ToString();
     }
