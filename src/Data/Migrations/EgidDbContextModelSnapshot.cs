@@ -284,7 +284,19 @@ namespace EGID.Data.Migrations
                             b1.Property<string>("CitizenDetailsId")
                                 .HasColumnType("nvarchar(128)");
 
+                            b1.Property<string>("City")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("nvarchar(max)");
+
                             b1.Property<string>("PostalCode")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("State")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Street")
                                 .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("CitizenDetailsId");
@@ -299,6 +311,18 @@ namespace EGID.Data.Migrations
                         {
                             b1.Property<string>("CitizenDetailsId")
                                 .HasColumnType("nvarchar(128)");
+
+                            b1.Property<string>("FirstName")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("LastName")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("SecondName")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("ThirdName")
+                                .HasColumnType("nvarchar(max)");
 
                             b1.HasKey("CitizenDetailsId");
 
