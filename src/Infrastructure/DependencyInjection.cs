@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using EGID.Common.Interfaces;
 using EGID.Infrastructure.Auth;
+using EGID.Infrastructure.Auth.Services;
 using EGID.Infrastructure.Crypto;
 using EGID.Infrastructure.DigitalSignature;
 using EGID.Infrastructure.KeysGenerator;
@@ -28,9 +29,9 @@ namespace EGID.Infrastructure
 
             services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddIdentity<CitizenAccount, IdentityRole>(options =>
+            services.AddIdentity<Card, IdentityRole>(options =>
                 {
-                    options.Password.RequiredLength = 8;
+                    options.Password.RequiredLength = 6;
                     options.Password.RequireLowercase = true;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireDigit = true;
@@ -65,6 +66,7 @@ namespace EGID.Infrastructure
                     };
                 });
 
+            services.AddScoped<PrivateKeyOptions>();
             services.AddTransient<IDateTime, UtcDateTime>();
 
             return services;
