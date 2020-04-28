@@ -4,6 +4,7 @@ using EGID.Application;
 using EGID.Common.Interfaces;
 using EGID.Domain;
 using EGID.Domain.Entities;
+using EGID.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace EGID.Data
