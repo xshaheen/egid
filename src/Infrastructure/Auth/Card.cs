@@ -1,13 +1,11 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace EGID.Infrastructure.Auth
 {
-    public class Card
+    public class Card : IdentityUser
     {
-        public string Id { get; set; }
-
-        public string OwnerId { get; set; }
-        public virtual CitizenAccount Owner { get; set; }
+        public string CitizenId { get; set; }
 
         public string PrivateKeyXml { get; set; }
         public string PublicKeyXml { get; set; }

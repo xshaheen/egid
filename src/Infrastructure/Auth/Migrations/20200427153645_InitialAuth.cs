@@ -40,7 +40,16 @@ namespace EGID.Infrastructure.Auth.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    CitizenId = table.Column<string>(maxLength: 128, nullable: false)
+                    CitizenId = table.Column<string>(maxLength: 128, nullable: false),
+                    PrivateKeyXml = table.Column<string>(nullable: false),
+                    PublicKeyXml = table.Column<string>(nullable: false),
+                    Pin1 = table.Column<string>(maxLength: 128, nullable: false),
+                    Pin2 = table.Column<string>(maxLength: 128, nullable: false),
+                    Puk = table.Column<string>(maxLength: 128, nullable: false),
+                    CardIssuer = table.Column<string>(maxLength: 128, nullable: false),
+                    IssueDate = table.Column<DateTime>(nullable: false),
+                    TerminationDate = table.Column<DateTime>(nullable: false),
+                    Active = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,33 +162,6 @@ namespace EGID.Infrastructure.Auth.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Card",
-                columns: table => new
-                {
-                    Id = table.Column<string>(maxLength: 128, nullable: false),
-                    OwnerId = table.Column<string>(maxLength: 128, nullable: false),
-                    PrivateKeyXml = table.Column<string>(nullable: true),
-                    PublicKeyXml = table.Column<string>(nullable: true),
-                    Pin1 = table.Column<string>(maxLength: 128, nullable: false),
-                    Pin2 = table.Column<string>(maxLength: 128, nullable: false),
-                    Puk = table.Column<string>(maxLength: 128, nullable: false),
-                    CardIssuer = table.Column<string>(maxLength: 128, nullable: false),
-                    IssueDate = table.Column<DateTime>(nullable: false),
-                    TerminationDate = table.Column<DateTime>(nullable: false),
-                    Active = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Card", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cards_Owner_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -218,11 +200,6 @@ namespace EGID.Infrastructure.Auth.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Card_OwnerId",
-                table: "Card",
-                column: "OwnerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -241,9 +218,6 @@ namespace EGID.Infrastructure.Auth.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Card");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

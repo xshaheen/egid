@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EGID.Infrastructure.Auth.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20200425150857_InitialAuth")]
+    [Migration("20200427153645_InitialAuth")]
     partial class InitialAuth
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace EGID.Infrastructure.Auth.Migrations
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
@@ -34,54 +37,6 @@ namespace EGID.Infrastructure.Auth.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
-
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Pin1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Pin2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("PrivateKeyXml")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PublicKeyXml")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Puk")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<DateTime>("TerminationDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("Card");
-                });
-
-            modelBuilder.Entity("EGID.Infrastructure.Auth.CitizenAccount", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
 
                     b.Property<string>("CitizenId")
                         .IsRequired()
@@ -98,6 +53,9 @@ namespace EGID.Infrastructure.Auth.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("IssueDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -123,8 +81,34 @@ namespace EGID.Infrastructure.Auth.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Pin1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("Pin2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<string>("PrivateKeyXml")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PublicKeyXml")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Puk")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(128)")
+                        .HasMaxLength(128);
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TerminationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -277,16 +261,6 @@ namespace EGID.Infrastructure.Auth.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("EGID.Infrastructure.Auth.Card", b =>
-                {
-                    b.HasOne("EGID.Infrastructure.Auth.CitizenAccount", "Owner")
-                        .WithMany("Cards")
-                        .HasForeignKey("OwnerId")
-                        .HasConstraintName("FK_Cards_Owner_OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -298,7 +272,7 @@ namespace EGID.Infrastructure.Auth.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("EGID.Infrastructure.Auth.CitizenAccount", null)
+                    b.HasOne("EGID.Infrastructure.Auth.Card", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -307,7 +281,7 @@ namespace EGID.Infrastructure.Auth.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("EGID.Infrastructure.Auth.CitizenAccount", null)
+                    b.HasOne("EGID.Infrastructure.Auth.Card", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -322,7 +296,7 @@ namespace EGID.Infrastructure.Auth.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EGID.Infrastructure.Auth.CitizenAccount", null)
+                    b.HasOne("EGID.Infrastructure.Auth.Card", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -331,7 +305,7 @@ namespace EGID.Infrastructure.Auth.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("EGID.Infrastructure.Auth.CitizenAccount", null)
+                    b.HasOne("EGID.Infrastructure.Auth.Card", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

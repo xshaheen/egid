@@ -4,13 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EGID.Infrastructure.Auth
 {
-    public class AuthDbContext : IdentityDbContext<CitizenAccount>
+    public class AuthDbContext : IdentityDbContext<Card>
     {
         public AuthDbContext() { }
 
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options) { }
-
-        public virtual DbSet<Card> Cards { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +24,14 @@ namespace EGID.Infrastructure.Auth
             base.OnModelCreating(builder);
 
             builder.ApplyConfigurationsFromAssembly(typeof(AuthDbContext).Assembly);
+
+            builder.Entity<Card>().ToTable("EGCards");
+            builder.Entity<IdentityRole>().ToTable("EGRoles");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("EGRoleClaim");
+            builder.Entity<IdentityUserRole<string>>().ToTable("EGUserRoles");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("EGUserClaims");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("EGUserLogins");
+            builder.Entity<IdentityUserToken<string>>().ToTable("EGUserToken");
         }
     }
 }
