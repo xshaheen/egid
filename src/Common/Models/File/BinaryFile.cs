@@ -63,12 +63,39 @@ namespace EGID.Common.Models.File
         /// <param name="directory">The directory to save the file to.</param>
         public async Task SaveAsync(string directory)
         {
-            if (string.IsNullOrWhiteSpace(directory) || string.IsNullOrWhiteSpace(Name) || Bytes == null ||
-                Bytes.LongLength == 0) return;
+            if (string.IsNullOrWhiteSpace(directory) ||
+                string.IsNullOrWhiteSpace(Name) ||
+                Bytes == null ||
+                Bytes.LongLength == 0
+            ) return;
 
             Directory.CreateDirectory(directory);
 
             var name = string.Concat(Id, Path.GetExtension(Name));
+
+            var path = Path.Combine(directory, name);
+
+            await System.IO.File.WriteAllBytesAsync(path, Bytes);
+
+            Bytes = null;
+        }
+
+        /// <summary>
+        ///     Save a the file to the <paramref name="directory" /> with name <paramref name="id"/>.
+        /// </summary>
+        /// <param name="directory">The directory to save the file to.</param>
+        /// <param name="id">The file name</param>
+        public async Task SaveAsync(string directory, Guid id)
+        {
+            if (string.IsNullOrWhiteSpace(directory) ||
+                string.IsNullOrWhiteSpace(Name) ||
+                Bytes == null ||
+                Bytes.LongLength == 0
+            ) return;
+
+            Directory.CreateDirectory(directory);
+
+            var name = string.Concat(id, Path.GetExtension(Name));
 
             var path = Path.Combine(directory, name);
 

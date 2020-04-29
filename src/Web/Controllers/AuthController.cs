@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using EGID.Data.Cards;
+using EGID.Application;
 using EGID.Infrastructure.Auth;
-using EGID.Infrastructure.KeysGenerator;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace EGID.Web.Controllers
 {
-    [ApiController]
-    [Route("[controller]/[action]")]
     public class AuthController : ControllerBase
     {
         private readonly IKeyGeneratorService _keyGenerator;
@@ -49,41 +39,25 @@ namespace EGID.Web.Controllers
             // if (result.Failed)
             //     return BadRequest(result.Errors);
 
-            return Ok(GenerateJwtToken(card.Id));
+            return Ok(/*GenerateJwtToken(card.Id)*/);
         }
 
-        private string GenerateJwtToken(string cardId)
+        [HttpPost]
+        public ActionResult ChangePuk()
         {
-            var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, cardId),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            // Credentials
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
-
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-
-            // Expires
-            var minutes = Convert.ToDouble(_configuration["JwtExpireMinutes"]);
-            var expires = DateTime.Now.AddMinutes(minutes);
-
-            var token = new JwtSecurityToken(
-                _configuration["JwtIssuer"],
-                _configuration["JwtIssuer"],
-                claims,
-                expires: expires,
-                signingCredentials: cred
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return Ok();
         }
 
-        [HttpGet]
-        [Authorize]
-        public string Secret()
+        [HttpPost]
+        public ActionResult ChangePin1()
         {
-            return "This is secret";
+            return Ok();
+        }
+
+        [HttpPost]
+        public ActionResult ChangePin2()
+        {
+            return Ok();
         }
     }
+}

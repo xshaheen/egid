@@ -1,4 +1,4 @@
-﻿namespace EGID.Infrastructure.KeysGenerator
+﻿namespace EGID.Application
 {
     public interface IKeyGeneratorService
     {

@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\EGID.Domain.csproj" />
+    <ProjectReference Include="..\Application\EGID.Application.csproj" />
   </ItemGroup>
 
 </Project>

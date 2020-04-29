@@ -16,7 +16,7 @@ namespace EGID.Data.Migrations
                     CreateBy = table.Column<string>(maxLength: 128, nullable: false),
                     LastModified = table.Column<DateTime>(type: "datetime", nullable: true),
                     LastModifiedBy = table.Column<string>(maxLength: 128, nullable: true),
-                    AccountId = table.Column<string>(maxLength: 128, nullable: true),
+                    CardId = table.Column<string>(maxLength: 128, nullable: true),
                     PrivateKey = table.Column<string>(nullable: false),
                     FatherId = table.Column<string>(maxLength: 128, nullable: true),
                     MotherId = table.Column<string>(maxLength: 128, nullable: true),

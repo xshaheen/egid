@@ -11,14 +11,12 @@ namespace EGID.Infrastructure.Crypto
         {
             using var aes = new AesManaged
             {
-                Key = key,
-                IV = iv,
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
 
             // create an encryptor to perform stream transformation
-            var encryptor = aes.CreateEncryptor();
+            var encryptor = aes.CreateEncryptor(key, iv);
 
             // create temporary MemoryStream to store the results
             await using var ms = new MemoryStream();
@@ -40,14 +38,12 @@ namespace EGID.Infrastructure.Crypto
         {
             using var aes = new AesManaged
             {
-                Key = key,
-                IV = iv,
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
 
             // create an encryptor to perform stream transformation
-            var encryptor = aes.CreateEncryptor();
+            var encryptor = aes.CreateEncryptor(key, iv);
 
             // create temporary MemoryStream to store the results
             await using var ms = new MemoryStream();
@@ -65,14 +61,12 @@ namespace EGID.Infrastructure.Crypto
         {
             using var aes = new AesManaged
             {
-                Key = key,
-                IV = iv,
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
 
             // create an decryptor to perform stream transformation
-            var decryptor = aes.CreateDecryptor();
+            var decryptor = aes.CreateDecryptor(key, iv);
 
             // create temporary MemoryStream to store the results
             await using var ms = new MemoryStream();
@@ -89,14 +83,12 @@ namespace EGID.Infrastructure.Crypto
         {
             using var aes = new AesManaged
             {
-                Key = key,
-                IV = iv,
                 Padding = PaddingMode.PKCS7,
                 Mode = CipherMode.CBC
             };
 
             // create an decryptor to perform stream transformation
-            var decryptor = aes.CreateDecryptor();
+            var decryptor = aes.CreateDecryptor(key, iv);
 
             // create temporary MemoryStream to store the results
             await using var ms = new MemoryStream();

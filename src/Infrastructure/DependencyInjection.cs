@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using EGID.Application;
 using EGID.Common.Interfaces;
 using EGID.Infrastructure.Auth;
 using EGID.Infrastructure.Auth.Services;
@@ -21,10 +22,6 @@ namespace EGID.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IKeyGeneratorService, KeyGeneratorService>();
-            services.AddTransient<IAesCryptoService, AesCryptoService>();
-            services.AddTransient<IDigitalSignatureService, DigitalSignatureService>();
-
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
@@ -66,6 +63,9 @@ namespace EGID.Infrastructure
                     };
                 });
 
+            services.AddTransient<IAesCryptoService, AesCryptoService>();
+            services.AddTransient<IKeyGeneratorService, KeyGeneratorService>();
+            services.AddTransient<IDigitalSignatureService, DigitalSignatureService>();
             services.AddScoped<PrivateKeyOptions>();
             services.AddTransient<IDateTime, UtcDateTime>();
             services.AddScoped<ICardManagerService, CardManagerService>();

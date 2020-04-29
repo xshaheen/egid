@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using EGID.Application;
 using EGID.Common.Exceptions;
 using EGID.Common.Interfaces;
 using EGID.Common.Models.Result;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using CreateCardModel = EGID.Infrastructure.Auth.Models.CreateCardModel;
 
 namespace EGID.Infrastructure.Auth.Services
 {
@@ -366,5 +368,7 @@ namespace EGID.Infrastructure.Auth.Services
         }
 
         #endregion Helper Methods
+
+        public Task<bool> AnyAsync { get; }
     }
 }

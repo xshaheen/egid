@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using EGID.Infrastructure;
+using EGID.Application;
 using Microsoft.AspNetCore.Http;
 
 namespace EGID.Web.Services

@@ -1,0 +1,32 @@
+﻿{
+  "x-generator": "NSwag v13.4.2.0 (NJsonSchema v10.1.11.0 (Newtonsoft.Json v12.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "EGID API",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/card": {
+      "get": {
+        "tags": [
+          "Card"
+        ],
+        "operationId": "Card_Get",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {}
+}

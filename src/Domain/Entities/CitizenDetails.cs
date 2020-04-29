@@ -4,10 +4,10 @@ using EGID.Domain.ValueObjects;
 
 namespace EGID.Domain.Entities
 {
-    public class CitizenDetails : AuditableEntity
+    public class CitizenDetail : AuditableEntity
     {
         public string Id { get; set; }
-        public string AccountId { get; set; }
+        public string CardId { get; set; }
         public string PrivateKey { get; set; }
 
         public string FatherId { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using EGID.Domain;
 using EGID.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace EGID.Application
 {
     public interface IEgidDbContext
     {
-        DbSet<CitizenDetails> CitizenDetails { get; set; }
+        DbSet<CitizenDetail> CitizenDetails { get; set; }
 
         DbSet<DeathCertificate> DeathCertificates { get; set; }
 
@@ -19,6 +20,11 @@ namespace EGID.Application
         DbSet<HealthRecord> HealthRecords { get; set; }
         DbSet<HealthRecordAttachment> HealthRecordAttachments { get; set; }
 
+        /// <summary>
+        ///     This method above of saving changes to database it delegate to
+        ///     it to handle properties of <see cref="AuditableEntity"/>
+        ///     properties for the derived types.
+        /// </summary>
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken());
     }
 }

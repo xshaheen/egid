@@ -1,4 +1,4 @@
-﻿namespace EGID.Infrastructure
+﻿namespace EGID.Application
 {
     public interface ICurrentUserService
     {

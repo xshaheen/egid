@@ -20,7 +20,7 @@ namespace EGID.Domain.Entities
         public string Phone3 { get; set; }
 
         public string CitizenId { get; set; }
-        public virtual CitizenDetails Citizen { get; set; }
+        public virtual CitizenDetail Citizen { get; set; }
 
         public virtual ICollection<HealthRecord> HealthRecords { get; }
         public virtual ICollection<ExitHospitalRecord> ExitHospitalRecords { get; }

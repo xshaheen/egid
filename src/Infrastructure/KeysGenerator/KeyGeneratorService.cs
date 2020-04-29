@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using EGID.Application;
 
 namespace EGID.Infrastructure.KeysGenerator
 {

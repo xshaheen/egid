@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EGID.Data.Configuration
 {
-    public class CitizenDetailsConfiguration : IEntityTypeConfiguration<CitizenDetails>
+    public class CitizenDetailsConfiguration : IEntityTypeConfiguration<CitizenDetail>
     {
-        public void Configure(EntityTypeBuilder<CitizenDetails> builder)
+        public void Configure(EntityTypeBuilder<CitizenDetail> builder)
         {
             builder.Property(e => e.Id).HasMaxLength(128);
 
@@ -14,7 +14,7 @@ namespace EGID.Data.Configuration
             builder.Property(e => e.LastModifiedBy).HasMaxLength(128);
             builder.Property(e => e.LastModified).HasColumnType("datetime");
 
-            builder.Property(e => e.AccountId).HasMaxLength(128);
+            builder.Property(e => e.CardId).HasMaxLength(128);
             builder.Property(e => e.MotherId).HasMaxLength(128);
             builder.Property(e => e.FatherId).HasMaxLength(128);
 

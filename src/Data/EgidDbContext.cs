@@ -4,7 +4,6 @@ using EGID.Application;
 using EGID.Common.Interfaces;
 using EGID.Domain;
 using EGID.Domain.Entities;
-using EGID.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace EGID.Data
@@ -28,7 +27,7 @@ namespace EGID.Data
             _currentUser = currentUser;
         }
 
-        public virtual DbSet<CitizenDetails> CitizenDetails { get; set; }
+        public virtual DbSet<CitizenDetail> CitizenDetails { get; set; }
 
         public virtual DbSet<DeathCertificate> DeathCertificates { get; set; }
 

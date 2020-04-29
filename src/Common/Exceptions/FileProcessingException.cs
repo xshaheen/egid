@@ -8,10 +8,7 @@ namespace EGID.Common.Exceptions
     [Serializable]
     public class FileProcessingException : Exception
     {
-        public FileProcessingException(string message)
-            : base(message) {}
-
-        public FileProcessingException(string message, Exception inner)
-            : base(message, inner) {}
+        public FileProcessingException(string fileName)
+            : base($"Can not upload {fileName}") {}
     }
 }

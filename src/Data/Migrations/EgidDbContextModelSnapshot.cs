@@ -19,13 +19,13 @@ namespace EGID.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EGID.Domain.Entities.CitizenDetails", b =>
+            modelBuilder.Entity("EGID.Domain.Entities.CitizenDetail", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
-                    b.Property<string>("AccountId")
+                    b.Property<string>("CardId")
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
@@ -277,11 +277,11 @@ namespace EGID.Data.Migrations
                     b.ToTable("HealthRecordAttachments");
                 });
 
-            modelBuilder.Entity("EGID.Domain.Entities.CitizenDetails", b =>
+            modelBuilder.Entity("EGID.Domain.Entities.CitizenDetail", b =>
                 {
                     b.OwnsOne("EGID.Domain.ValueObjects.Address", "Address", b1 =>
                         {
-                            b1.Property<string>("CitizenDetailsId")
+                            b1.Property<string>("CitizenDetailId")
                                 .HasColumnType("nvarchar(128)");
 
                             b1.Property<string>("City")
@@ -299,17 +299,17 @@ namespace EGID.Data.Migrations
                             b1.Property<string>("Street")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("CitizenDetailsId");
+                            b1.HasKey("CitizenDetailId");
 
                             b1.ToTable("CitizenDetails");
 
                             b1.WithOwner()
-                                .HasForeignKey("CitizenDetailsId");
+                                .HasForeignKey("CitizenDetailId");
                         });
 
                     b.OwnsOne("EGID.Domain.ValueObjects.FullName", "FullName", b1 =>
                         {
-                            b1.Property<string>("CitizenDetailsId")
+                            b1.Property<string>("CitizenDetailId")
                                 .HasColumnType("nvarchar(128)");
 
                             b1.Property<string>("FirstName")
@@ -324,18 +324,18 @@ namespace EGID.Data.Migrations
                             b1.Property<string>("ThirdName")
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("CitizenDetailsId");
+                            b1.HasKey("CitizenDetailId");
 
                             b1.ToTable("CitizenDetails");
 
                             b1.WithOwner()
-                                .HasForeignKey("CitizenDetailsId");
+                                .HasForeignKey("CitizenDetailId");
                         });
                 });
 
             modelBuilder.Entity("EGID.Domain.Entities.DeathCertificate", b =>
                 {
-                    b.HasOne("EGID.Domain.Entities.CitizenDetails", "Citizen")
+                    b.HasOne("EGID.Domain.Entities.CitizenDetail", "Citizen")
                         .WithOne("DeathCertificate")
                         .HasForeignKey("EGID.Domain.Entities.DeathCertificate", "CitizenId")
                         .HasConstraintName("FK_DeathCertificate_Citizen_CitizenId")
@@ -365,7 +365,7 @@ namespace EGID.Data.Migrations
 
             modelBuilder.Entity("EGID.Domain.Entities.HealthInfo", b =>
                 {
-                    b.HasOne("EGID.Domain.Entities.CitizenDetails", "Citizen")
+                    b.HasOne("EGID.Domain.Entities.CitizenDetail", "Citizen")
                         .WithOne("HealthInfo")
                         .HasForeignKey("EGID.Domain.Entities.HealthInfo", "CitizenId")
                         .HasConstraintName("FK_HealthInfo_Citizen_CitizenId")
