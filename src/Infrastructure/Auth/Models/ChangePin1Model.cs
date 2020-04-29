@@ -1,6 +1,6 @@
-﻿namespace EGID.Infrastructure.Auth.Services.Dto
+﻿namespace EGID.Infrastructure.Auth.Models
 {
-    public class ChangePin1Dto
+    public class ChangePin1Model
     {
         public string CardId { get; set; }
 

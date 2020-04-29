@@ -8,7 +8,6 @@ using EGID.Common.Exceptions;
 using EGID.Common.Interfaces;
 using EGID.Common.Models.Result;
 using EGID.Infrastructure.Auth.Models;
-using EGID.Infrastructure.Auth.Services.Dto;
 using EGID.Infrastructure.Common;
 using EGID.Infrastructure.Crypto;
 using EGID.Infrastructure.KeysGenerator;
@@ -19,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace EGID.Infrastructure.Auth.Services
 {
-    public class CardService : ICardManagerService
+    public class CardManagerService : ICardManagerService
     {
         private readonly IConfiguration _configuration;
         private readonly AuthDbContext _context;
@@ -33,7 +32,7 @@ namespace EGID.Infrastructure.Auth.Services
 
         #region Constructor
 
-        public CardService(
+        public CardManagerService(
             IConfiguration configuration,
             AuthDbContext context,
             UserManager<Card> userManager,
@@ -140,7 +139,7 @@ namespace EGID.Infrastructure.Auth.Services
 
         #region Register
 
-        public async Task<(Result result, string cardId)> RegisterAsync(CreateCardDto model)
+        public async Task<(Result result, string cardId)> RegisterAsync(CreateCardModel model)
         {
             // TODO: hash Pin1 & Pin2 first
             var card = new Card
@@ -170,7 +169,7 @@ namespace EGID.Infrastructure.Auth.Services
 
         #region Change Passwords
 
-        public async Task<Result> ChangePin1Async(ChangePin1Dto model)
+        public async Task<Result> ChangePin1Async(ChangePin1Model model)
         {
             var card = await GetAsync(model.CardId);
 
@@ -211,7 +210,7 @@ namespace EGID.Infrastructure.Auth.Services
             return Result.Success();
         }
 
-        public async Task<Result> ChangePin2Async(ChangePin2Dto model)
+        public async Task<Result> ChangePin2Async(ChangePin2Model model)
         {
             var card = await GetAsync(model.CardId);
 
@@ -252,7 +251,7 @@ namespace EGID.Infrastructure.Auth.Services
             return Result.Success();
         }
 
-        public async Task<Result> ChangePukAsync(ChangePukDto model)
+        public async Task<Result> ChangePukAsync(ChangePukModel model)
         {
             var card = await GetAsync(model.CardId);
 

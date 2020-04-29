@@ -2,7 +2,6 @@
 using EGID.Common.Exceptions;
 using EGID.Common.Models.Result;
 using EGID.Infrastructure.Auth.Models;
-using EGID.Infrastructure.Auth.Services.Dto;
 
 namespace EGID.Infrastructure.Auth.Services
 {
@@ -52,7 +51,7 @@ namespace EGID.Infrastructure.Auth.Services
         ///     Register card and return success result with card id
         ///     or return failed result with Errors messages.
         /// </summary>
-        Task<(Result result, string cardId)> RegisterAsync(CreateCardDto model);
+        Task<(Result result, string cardId)> RegisterAsync(CreateCardModel model);
 
         /// <summary>
         ///     Change Pin1 and returns success result or a failed
@@ -61,7 +60,7 @@ namespace EGID.Infrastructure.Auth.Services
         /// <exception cref="EntityNotFoundException">
         ///     Can not find card.
         /// </exception>
-        Task<Result> ChangePin1Async(ChangePin1Dto model);
+        Task<Result> ChangePin1Async(ChangePin1Model model);
 
         /// <summary>
         ///     Change Pin3 and returns success result or a failed
@@ -70,7 +69,7 @@ namespace EGID.Infrastructure.Auth.Services
         /// <exception cref="EntityNotFoundException">
         ///     Can not find card.
         /// </exception>
-        Task<Result> ChangePin2Async(ChangePin2Dto model);
+        Task<Result> ChangePin2Async(ChangePin2Model model);
 
         /// <summary>
         ///     Change Puk and returns success result or a failed
@@ -79,7 +78,7 @@ namespace EGID.Infrastructure.Auth.Services
         /// <exception cref="EntityNotFoundException">
         ///     Can not find card.
         /// </exception>
-        Task<Result> ChangePukAsync(ChangePukDto model);
+        Task<Result> ChangePukAsync(ChangePukModel model);
 
         /// <summary>
         ///     Inactive a card.

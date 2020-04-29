@@ -68,6 +68,7 @@ namespace EGID.Infrastructure
 
             services.AddScoped<PrivateKeyOptions>();
             services.AddTransient<IDateTime, UtcDateTime>();
+            services.AddScoped<ICardManagerService, CardManagerService>();
 
             return services;
         }
