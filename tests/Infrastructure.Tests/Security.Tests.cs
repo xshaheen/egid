@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using EGID.Application;
-using EGID.Infrastructure.KeysGenerator;
+using EGID.Infrastructure.Security;
 using EGID.Infrastructure.Security.Cryptography;
 using EGID.Infrastructure.Security.DigitalSignature;
 using EGID.Infrastructure.Security.Hash;
@@ -54,7 +54,7 @@ namespace EGID.Infrastructure.Tests
             // - base64
             var data64 = Convert.ToBase64String(sha512Hash);
             // - keys
-            var keyGenerator = new KeyGeneratorService();
+            var keyGenerator = new KeysGeneratorService();
 
             // act
             var signature = _digitalSignatureService.SignHash(data64, keyGenerator.PrivateKeyXml);

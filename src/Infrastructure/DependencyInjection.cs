@@ -5,9 +5,10 @@ using EGID.Application;
 using EGID.Common.Interfaces;
 using EGID.Infrastructure.Auth;
 using EGID.Infrastructure.Auth.Services;
-using EGID.Infrastructure.Crypto;
-using EGID.Infrastructure.DigitalSignature;
-using EGID.Infrastructure.KeysGenerator;
+using EGID.Infrastructure.Security;
+using EGID.Infrastructure.Security.Cryptography;
+using EGID.Infrastructure.Security.DigitalSignature;
+using EGID.Infrastructure.Security.Hash;
 using EGID.Infrastructure.Time;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -40,6 +41,8 @@ namespace EGID.Infrastructure
             // remove default claims
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
+            var jwtOpts = new JwtOptions(configuration);
+
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -48,13 +51,14 @@ namespace EGID.Infrastructure
                 })
                 .AddJwtBearer(config =>
                 {
-                    config.RequireHttpsMetadata = true;
+                    config.RequireHttpsMetadata = false;
                     config.SaveToken = true;
                     config.TokenValidationParameters = new TokenValidationParameters
                     {
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtKey"])),
-                        ValidIssuer = configuration["JwtIssuer"],
-                        ValidAudience = configuration["JwtIssuer"],
+                        // TODO: set expiration
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOpts.JwtKey)),
+                        ValidIssuer = jwtOpts.JwtIssuer,
+                        ValidAudience = jwtOpts.JwtIssuer,
                         ValidateIssuerSigningKey = true,
                         ValidateLifetime = true,
                         ValidateIssuer = true,
@@ -63,14 +67,29 @@ namespace EGID.Infrastructure
                     };
                 });
 
-            services.AddTransient<IAesCryptoService, AesCryptoService>();
-            services.AddTransient<IKeyGeneratorService, KeyGeneratorService>();
-            services.AddTransient<IDigitalSignatureService, DigitalSignatureService>();
-            services.AddScoped<PrivateKeyOptions>();
             services.AddTransient<IDateTime, UtcDateTime>();
+
+            services.AddTransient<IKeysGeneratorService, KeysGeneratorService>();
+            services.AddTransient<IDigitalSignatureService, DigitalSignatureService>();
+            services.AddSingleton<ISymmetricCryptographyService>(_ => new SymmetricCryptographyService(configuration["PrivateKey"]));
+            services.AddSingleton<IHashService>(_ => new HashService(10000, 128));
+
             services.AddScoped<ICardManagerService, CardManagerService>();
+            services.AddScoped<IRoleManagerService, RoleManagerService>();
 
             return services;
+        }
+
+        private class JwtOptions
+        {
+            public JwtOptions(IConfiguration config)
+            {
+                config.GetSection("JWT").Bind(this);
+            }
+
+            public string JwtKey { get; set; }
+            public string JwtIssuer { get; set; }
+            public string JwtExpireMinutes { get; set; }
         }
     }
 }

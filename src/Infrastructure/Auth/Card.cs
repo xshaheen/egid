@@ -10,9 +10,10 @@ namespace EGID.Infrastructure.Auth
         public string PrivateKeyXml { get; set; }
         public string PublicKeyXml { get; set; }
 
-        public string Pin1 { get; set; }
-        public string Pin2 { get; set; }
-        public string Puk { get; set; }
+        public string Pin1Hash { get; set; }
+        public string Pin1Salt { get; set; }
+        public string Pin2Hash { get; set; }
+        public string Pin2Salt { get; set; }
 
         public string CardIssuer { get; set; }
 

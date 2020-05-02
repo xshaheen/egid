@@ -5,32 +5,35 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using EGID.Application;
+using EGID.Application.Cards.Commands.AddCard;
 using EGID.Common.Exceptions;
 using EGID.Common.Interfaces;
 using EGID.Common.Models.Result;
 using EGID.Infrastructure.Auth.Models;
 using EGID.Infrastructure.Common;
-using EGID.Infrastructure.Crypto;
-using EGID.Infrastructure.KeysGenerator;
+using EGID.Infrastructure.Security.Cryptography;
+using EGID.Infrastructure.Security.Hash;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using CreateCardModel = EGID.Infrastructure.Auth.Models.CreateCardModel;
 
 namespace EGID.Infrastructure.Auth.Services
 {
     public class CardManagerService : ICardManagerService
     {
-        private readonly IConfiguration _configuration;
         private readonly AuthDbContext _context;
         private readonly UserManager<Card> _userManager;
         private readonly SignInManager<Card> _signInManager;
         private readonly IPasswordValidator<Card> _passwordValidator;
-        private readonly PrivateKeyOptions _privateKeyOptions;
+
+        private readonly IConfiguration _configuration;
         private readonly IDateTime _dateTime;
         private readonly ICurrentUserService _currentUser;
-        private readonly IKeyGeneratorService _keyGenerator;
+
+        private readonly IHashService _hashService;
+        private readonly IKeysGeneratorService _keysGenerator;
+        private readonly ISymmetricCryptographyService _cryptographyService;
 
         #region Constructor
 
@@ -40,25 +43,28 @@ namespace EGID.Infrastructure.Auth.Services
             UserManager<Card> userManager,
             SignInManager<Card> signInManager,
             IPasswordValidator<Card> passwordValidator,
-            IKeyGeneratorService keyGenerator,
-            PrivateKeyOptions privateKeyOptions,
+            IKeysGeneratorService keysGenerator,
             IDateTime dateTime,
-            ICurrentUserService currentUser)
+            ICurrentUserService currentUser, IHashService hashService,
+            ISymmetricCryptographyService cryptographyService)
         {
             _configuration = configuration;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _passwordValidator = passwordValidator;
-            _keyGenerator = keyGenerator;
-            _privateKeyOptions = privateKeyOptions;
+            _keysGenerator = keysGenerator;
             _dateTime = dateTime;
             _currentUser = currentUser;
+            _hashService = hashService;
+            _cryptographyService = cryptographyService;
         }
 
         #endregion Constructor
 
         #region Get
+
+        public Task<bool> AnyAsync => _userManager.Users.AnyAsync();
 
         public async Task<Card> GetAsync(string id)
         {
@@ -72,8 +78,7 @@ namespace EGID.Infrastructure.Auth.Services
 
         public async Task<Card> GetByPrivateKeyAsync(string privateKeyXml)
         {
-            var cypher = await privateKeyXml.ToAesCypher(_privateKeyOptions.PrivateKeyEncryptionKey,
-                _privateKeyOptions.PrivateKeyEncryptionIv);
+            var cypher = privateKeyXml;
 
             var card = await _userManager.Users
                 .FirstOrDefaultAsync(c => c.PrivateKeyXml == cypher);
@@ -106,7 +111,7 @@ namespace EGID.Infrastructure.Auth.Services
             // Is the card exist?
             try
             {
-                card = await GetAsync(model.PrivateKey);
+                card = await GetAsync(await _cryptographyService.EncryptAsync(model.PrivateKey));
             }
             catch (EntityNotFoundException)
             {
@@ -126,7 +131,7 @@ namespace EGID.Infrastructure.Auth.Services
                 return (Result.Failure("لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق."), null);
 
             // Is this a correct PIN?
-            var isCorrectPin = card.Pin1 == model.Pin1;
+            var isCorrectPin = card.Pin1Hash == _hashService.Create(model.Pin1, Guid.NewGuid().ToString());
 
             if (isCorrectPin) return (Result.Success(), GenerateJwtToken(card));
 
@@ -141,18 +146,21 @@ namespace EGID.Infrastructure.Auth.Services
 
         #region Register
 
-        public async Task<(Result result, string cardId)> RegisterAsync(CreateCardModel model)
+        public async Task<(Result result, string cardId)> RegisterAsync(AddCardCommand model)
         {
-            // TODO: hash Pin1 & Pin2 first
+            var salt1 = Guid.NewGuid().ToString();
+            var salt2 = Guid.NewGuid().ToString();
+
             var card = new Card
             {
                 Id = Guid.NewGuid().ToString(),
-                PublicKeyXml = _keyGenerator.PublicKeyXml,
-                PrivateKeyXml = await _keyGenerator.PrivateKeyXml
-                    .ToAesCypher(_privateKeyOptions.PrivateKeyEncryptionIv, _privateKeyOptions.PrivateKeyEncryptionKey),
+                PublicKeyXml = _keysGenerator.PublicKeyXml,
+                PrivateKeyXml = await _cryptographyService.EncryptAsync(_keysGenerator.PrivateKeyXml),
                 CitizenId = model.OwnerId,
-                Pin1 = model.Pin1,
-                Pin2 = model.Pin2,
+                Pin1Hash = _hashService.Create(model.Pin1, salt1),
+                Pin1Salt = salt1,
+                Pin2Hash = _hashService.Create(model.Pin2, salt2),
+                Pin2Salt = salt2,
                 Active = true,
                 IssueDate = DateTime.UtcNow.AddHours(-2),
                 TerminationDate = DateTime.UtcNow.AddYears(4),
@@ -163,6 +171,41 @@ namespace EGID.Infrastructure.Auth.Services
             };
 
             var result = await _userManager.CreateAsync(card, model.Puk);
+
+            return (result.ToResult(), card.Id);
+        }
+
+        public async Task<(Result result, string cardId)> RegisterAdminAsync(
+            string ownerId,
+            string puk,
+            string email,
+            string phone,
+            string publicKey,
+            string privateKey)
+        {
+            var salt1 = Guid.NewGuid().ToString();
+            var salt2 = Guid.NewGuid().ToString();
+
+            var card = new Card
+            {
+                Id = ownerId,
+                CardIssuer = ownerId,
+                UserName = ownerId,
+                CitizenId = ownerId,
+                PublicKeyXml = publicKey,
+                PrivateKeyXml = privateKey,
+                Pin1Hash = _hashService.Create(puk, salt1),
+                Pin1Salt = salt1,
+                Pin2Hash = _hashService.Create(puk, salt2),
+                Pin2Salt = salt2,
+                Active = true,
+                IssueDate = DateTime.UtcNow.AddHours(-2),
+                TerminationDate = DateTime.UtcNow.AddYears(400),
+                Email = email,
+                PhoneNumber = phone,
+            };
+
+            var result = await _userManager.CreateAsync(card, puk);
 
             return (result.ToResult(), card.Id);
         }
@@ -181,10 +224,10 @@ namespace EGID.Infrastructure.Auth.Services
 
             if (!signInResult.Succeeded)
             {
-                if (!signInResult.IsLockedOut)
-                    return Result.Failure("رمز Puk غير صحيح.");
-
-                return Result.Failure("لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق.");
+                return Result.Failure(!signInResult.IsLockedOut
+                    ? "رمز Puk غير صحيح."
+                    : "لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق."
+                );
             }
 
             // validate new pin1
@@ -196,8 +239,7 @@ namespace EGID.Infrastructure.Auth.Services
 
             // change
 
-            // TODO: hash first
-            card.Pin1 = model.NewPin1;
+            card.Pin1Hash = _hashService.Create(model.NewPin1, Guid.NewGuid().ToString());
 
             try
             {
@@ -221,12 +263,10 @@ namespace EGID.Infrastructure.Auth.Services
                 .CheckPasswordSignInAsync(card, model.Puk, true);
 
             if (!signInResult.Succeeded)
-            {
-                if (!signInResult.IsLockedOut)
-                    return Result.Failure("رمز Puk غير صحيح.");
-
-                return Result.Failure("لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق.");
-            }
+                return Result.Failure(!signInResult.IsLockedOut
+                    ? "رمز Puk غير صحيح."
+                    : "لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق."
+                );
 
             // validate new pin2
 
@@ -237,8 +277,7 @@ namespace EGID.Infrastructure.Auth.Services
 
             // change
 
-            // TODO: hash first
-            card.Pin2 = model.NewPin2;
+            card.Pin2Hash = _hashService.Create(model.NewPin2, Guid.NewGuid().ToString());
 
             try
             {
@@ -263,15 +302,12 @@ namespace EGID.Infrastructure.Auth.Services
                 .CheckPasswordSignInAsync(card, model.CurrentPuk, true);
 
             if (!checkPasswordResult.Succeeded)
-            {
-                if (!checkPasswordResult.IsLockedOut)
-                    return Result.Failure("رمز Puk غير صحيح.");
-
-                return Result.Failure("لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق.");
-            }
+                return Result.Failure(!checkPasswordResult.IsLockedOut
+                    ? "رمز Puk غير صحيح."
+                    : "لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق."
+                );
 
             // validate new PUK
-
             var validPass = await _passwordValidator
                 .ValidateAsync(_userManager, card, model.NewPuk);
 
@@ -279,7 +315,6 @@ namespace EGID.Infrastructure.Auth.Services
                 return validPass.ToResult();
 
             // change
-
             var result = await _userManager.ChangePasswordAsync(card, model.CurrentPuk, model.NewPuk);
 
             return result.ToResult();
@@ -331,6 +366,15 @@ namespace EGID.Infrastructure.Auth.Services
             return Result.Success();
         }
 
+        public async Task<Result> AddToRoleAsync(string cardId, string role)
+        {
+            var card = await GetAsync(cardId);
+
+            var result = await _userManager.AddToRoleAsync(card, role);
+
+            return result.ToResult();
+        }
+
         #endregion Change Active State
 
         #region Helper Methods
@@ -362,13 +406,6 @@ namespace EGID.Infrastructure.Auth.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public Task<bool> IsActiveAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion Helper Methods
-
-        public Task<bool> AnyAsync { get; }
     }
 }

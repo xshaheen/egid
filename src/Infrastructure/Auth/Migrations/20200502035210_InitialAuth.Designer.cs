@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EGID.Infrastructure.Auth.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20200429020542_InitialAuth")]
+    [Migration("20200502035210_InitialAuth")]
     partial class InitialAuth
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,15 +81,21 @@ namespace EGID.Infrastructure.Auth.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Pin1")
+                    b.Property<string>("Pin1Hash")
                         .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Pin2")
+                    b.Property<string>("Pin1Salt")
                         .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pin2Hash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pin2Salt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrivateKeyXml")
                         .IsRequired()
@@ -98,11 +104,6 @@ namespace EGID.Infrastructure.Auth.Migrations
                     b.Property<string>("PublicKeyXml")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Puk")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

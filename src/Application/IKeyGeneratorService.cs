@@ -1,6 +1,6 @@
 ﻿namespace EGID.Application
 {
-    public interface IKeyGeneratorService
+    public interface IKeysGeneratorService
     {
         public string PrivateKeyXml { get; }
 
