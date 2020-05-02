@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Application Layer", "2. 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EGID.Application", "src\Application\EGID.Application.csproj", "{D8C41C10-6F8A-4948-B761-FB45F579124D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F914A90C-2AEF-4BFA-B29A-97C8A93DB423}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EGID.Infrastructure.Tests", "tests\Infrastructure.Tests\EGID.Infrastructure.Tests.csproj", "{2ED895FB-0451-40D9-A137-8EC20132295D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,10 @@ Global
 		{D8C41C10-6F8A-4948-B761-FB45F579124D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8C41C10-6F8A-4948-B761-FB45F579124D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8C41C10-6F8A-4948-B761-FB45F579124D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ED895FB-0451-40D9-A137-8EC20132295D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED895FB-0451-40D9-A137-8EC20132295D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED895FB-0451-40D9-A137-8EC20132295D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED895FB-0451-40D9-A137-8EC20132295D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 		{E20A5397-1765-46BB-A64C-2BEED2647518} = {93E8D63A-2EFA-44D1-A91E-B6CC497EB471}
 		{688054A3-494E-4DE4-B138-ADAE6A787345} = {93E8D63A-2EFA-44D1-A91E-B6CC497EB471}
 		{D8C41C10-6F8A-4948-B761-FB45F579124D} = {81AE9CBA-EF01-43DD-9049-54C4B949D1EF}
+		{2ED895FB-0451-40D9-A137-8EC20132295D} = {F914A90C-2AEF-4BFA-B29A-97C8A93DB423}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E24CFE8D-4B5D-4914-A6B0-ED49EC717953}
