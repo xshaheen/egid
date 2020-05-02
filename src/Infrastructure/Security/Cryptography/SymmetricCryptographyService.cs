@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using EGID.Application;
 
 namespace EGID.Infrastructure.Security.Cryptography
 {

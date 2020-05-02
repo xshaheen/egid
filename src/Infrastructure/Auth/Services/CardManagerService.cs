@@ -2,21 +2,19 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using EGID.Application;
 using EGID.Application.Cards.Commands.AddCard;
+using EGID.Application.Cards.Models;
 using EGID.Common.Exceptions;
 using EGID.Common.Interfaces;
 using EGID.Common.Models.Result;
 using EGID.Infrastructure.Auth.Models;
 using EGID.Infrastructure.Common;
-using EGID.Infrastructure.Security.Cryptography;
 using EGID.Infrastructure.Security.Hash;
+using EGID.Infrastructure.Security.Jwt;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace EGID.Infrastructure.Auth.Services
 {
@@ -27,10 +25,9 @@ namespace EGID.Infrastructure.Auth.Services
         private readonly SignInManager<Card> _signInManager;
         private readonly IPasswordValidator<Card> _passwordValidator;
 
-        private readonly IConfiguration _configuration;
         private readonly IDateTime _dateTime;
         private readonly ICurrentUserService _currentUser;
-
+        private readonly IJwtTokenService _jwtTokenService;
         private readonly IHashService _hashService;
         private readonly IKeysGeneratorService _keysGenerator;
         private readonly ISymmetricCryptographyService _cryptographyService;
@@ -38,7 +35,6 @@ namespace EGID.Infrastructure.Auth.Services
         #region Constructor
 
         public CardManagerService(
-            IConfiguration configuration,
             AuthDbContext context,
             UserManager<Card> userManager,
             SignInManager<Card> signInManager,
@@ -46,9 +42,8 @@ namespace EGID.Infrastructure.Auth.Services
             IKeysGeneratorService keysGenerator,
             IDateTime dateTime,
             ICurrentUserService currentUser, IHashService hashService,
-            ISymmetricCryptographyService cryptographyService)
+            ISymmetricCryptographyService cryptographyService, IJwtTokenService jwtTokenService)
         {
-            _configuration = configuration;
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -58,6 +53,7 @@ namespace EGID.Infrastructure.Auth.Services
             _currentUser = currentUser;
             _hashService = hashService;
             _cryptographyService = cryptographyService;
+            _jwtTokenService = jwtTokenService;
         }
 
         #endregion Constructor
@@ -111,7 +107,7 @@ namespace EGID.Infrastructure.Auth.Services
             // Is the card exist?
             try
             {
-                card = await GetAsync(await _cryptographyService.EncryptAsync(model.PrivateKey));
+                card = await GetByPrivateKeyAsync(await _cryptographyService.EncryptAsync(model.PrivateKey));
             }
             catch (EntityNotFoundException)
             {
@@ -131,9 +127,18 @@ namespace EGID.Infrastructure.Auth.Services
                 return (Result.Failure("لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق."), null);
 
             // Is this a correct PIN?
-            var isCorrectPin = card.Pin1Hash == _hashService.Create(model.Pin1, Guid.NewGuid().ToString());
+            var isCorrectPin = card.Pin1Hash == _hashService.Create(model.Pin1, card.Pin1Salt);
 
-            if (isCorrectPin) return (Result.Success(), GenerateJwtToken(card));
+            if (isCorrectPin)
+            {
+                var token = _jwtTokenService.Generate(new List<Claim>
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, card.Id),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                });
+
+                return (Result.Success(), token);
+            }
 
             // try to signin with invalid password to increase lockout on failure counter
             // to enabled lockout account if failed to sign a lot of time
@@ -193,7 +198,7 @@ namespace EGID.Infrastructure.Auth.Services
                 UserName = ownerId,
                 CitizenId = ownerId,
                 PublicKeyXml = publicKey,
-                PrivateKeyXml = privateKey,
+                PrivateKeyXml = await _cryptographyService.EncryptAsync(privateKey),
                 Pin1Hash = _hashService.Create(puk, salt1),
                 Pin1Salt = salt1,
                 Pin2Hash = _hashService.Create(puk, salt2),
@@ -376,36 +381,5 @@ namespace EGID.Infrastructure.Auth.Services
         }
 
         #endregion Change Active State
-
-        #region Helper Methods
-
-        private string GenerateJwtToken(Card card)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, card.Id),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            // Credentials
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtKey"]));
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-
-            // Expires
-            var minutes = Convert.ToDouble(_configuration["JwtExpireMinutes"]);
-            var expires = DateTime.Now.AddMinutes(minutes);
-
-            var token = new JwtSecurityToken(
-                _configuration["JwtIssuer"],
-                _configuration["JwtIssuer"],
-                claims,
-                expires: expires,
-                signingCredentials: cred
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        #endregion Helper Methods
     }
 }

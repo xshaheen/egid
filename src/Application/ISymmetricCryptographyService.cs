@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
+ using System.Threading.Tasks;
 
-namespace EGID.Infrastructure.Security.Cryptography
+ namespace EGID.Application
 {
     public interface ISymmetricCryptographyService
     {
