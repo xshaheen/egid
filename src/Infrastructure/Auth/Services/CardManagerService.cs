@@ -378,6 +378,15 @@ namespace EGID.Infrastructure.Auth.Services
             return result.ToResult();
         }
 
+        public async Task<Result> DeleteAsync(string cardId)
+        {
+            var card = await GetAsync(cardId);
+
+            var result = await _userManager.DeleteAsync(card);
+
+            return result.ToResult();
+        }
+
         #endregion Change Active State
     }
 }

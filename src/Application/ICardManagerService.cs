@@ -120,5 +120,13 @@ namespace EGID.Application
         ///     Add a card to role.
         /// </summary>
         Task<Result> AddToRoleAsync(string cardId, string role);
+
+        /// <summary>
+        ///     Delete card async or throw exception if entity not founded.
+        /// </summary>
+        /// <exception cref="EntityNotFoundException">
+        ///     Can not find card.
+        /// </exception>
+        Task<Result> DeleteAsync(string cardId);
     }
 }
