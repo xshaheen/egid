@@ -4,12 +4,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using EGID.Application;
-using EGID.Application.Cards.Commands.AddCard;
-using EGID.Application.Cards.Models;
+using EGID.Application.Cards.Commands;
 using EGID.Common.Exceptions;
 using EGID.Common.Interfaces;
 using EGID.Common.Models.Result;
-using EGID.Infrastructure.Auth.Models;
 using EGID.Infrastructure.Common;
 using EGID.Infrastructure.Security.Hash;
 using EGID.Infrastructure.Security.Jwt;
@@ -100,14 +98,14 @@ namespace EGID.Infrastructure.Auth.Services
 
         #region SignIn
 
-        public async Task<(Result result, string token)> LoginAsync(LoginModel model)
+        public async Task<(Result result, string token)> LoginAsync(string privateKey, string pin1)
         {
             Card card;
 
             // Is the card exist?
             try
             {
-                card = await GetByPrivateKeyAsync(await _cryptographyService.EncryptAsync(model.PrivateKey));
+                card = await GetByPrivateKeyAsync(await _cryptographyService.EncryptAsync(privateKey));
             }
             catch (EntityNotFoundException)
             {
@@ -127,7 +125,7 @@ namespace EGID.Infrastructure.Auth.Services
                 return (Result.Failure("لقد حاولت عدة مرات تم تعطيل الحساب لبضع دقائق حاول في وقت لاحق."), null);
 
             // Is this a correct PIN?
-            var isCorrectPin = card.Pin1Hash == _hashService.Create(model.Pin1, card.Pin1Salt);
+            var isCorrectPin = card.Pin1Hash == _hashService.Create(pin1, card.Pin1Salt);
 
             if (isCorrectPin)
             {
@@ -151,7 +149,7 @@ namespace EGID.Infrastructure.Auth.Services
 
         #region Register
 
-        public async Task<(Result result, string cardId)> RegisterAsync(AddCardCommand model)
+        public async Task<(Result result, string cardId)> RegisterAsync(CreateCardCommand model)
         {
             var salt1 = Guid.NewGuid().ToString();
             var salt2 = Guid.NewGuid().ToString();
@@ -219,13 +217,13 @@ namespace EGID.Infrastructure.Auth.Services
 
         #region Change Passwords
 
-        public async Task<Result> ChangePin1Async(ChangePin1Model model)
+        public async Task<Result> ChangePin1Async(string cardId, string puk, string newPin1)
         {
-            var card = await GetAsync(model.CardId);
+            var card = await GetAsync(cardId);
 
             // verify Puk
             var signInResult = await _signInManager
-                .CheckPasswordSignInAsync(card, model.Puk, true);
+                .CheckPasswordSignInAsync(card, puk, true);
 
             if (!signInResult.Succeeded)
             {
@@ -237,14 +235,14 @@ namespace EGID.Infrastructure.Auth.Services
 
             // validate new pin1
 
-            var result = await _passwordValidator.ValidateAsync(_userManager, card, model.NewPin1);
+            var result = await _passwordValidator.ValidateAsync(_userManager, card, newPin1);
 
             if (!result.Succeeded)
                 return result.ToResult();
 
             // change
 
-            card.Pin1Hash = _hashService.Create(model.NewPin1, Guid.NewGuid().ToString());
+            card.Pin1Hash = _hashService.Create(newPin1, Guid.NewGuid().ToString());
 
             try
             {
@@ -259,13 +257,13 @@ namespace EGID.Infrastructure.Auth.Services
             return Result.Success();
         }
 
-        public async Task<Result> ChangePin2Async(ChangePin2Model model)
+        public async Task<Result> ChangePin2Async(string cardId, string puk, string newPin2)
         {
-            var card = await GetAsync(model.CardId);
+            var card = await GetAsync(cardId);
 
             // verify Puk
             var signInResult = await _signInManager
-                .CheckPasswordSignInAsync(card, model.Puk, true);
+                .CheckPasswordSignInAsync(card, puk, true);
 
             if (!signInResult.Succeeded)
                 return Result.Failure(!signInResult.IsLockedOut
@@ -275,14 +273,14 @@ namespace EGID.Infrastructure.Auth.Services
 
             // validate new pin2
 
-            var result = await _passwordValidator.ValidateAsync(_userManager, card, model.NewPin2);
+            var result = await _passwordValidator.ValidateAsync(_userManager, card, newPin2);
 
             if (!result.Succeeded)
                 return result.ToResult();
 
             // change
 
-            card.Pin2Hash = _hashService.Create(model.NewPin2, Guid.NewGuid().ToString());
+            card.Pin2Hash = _hashService.Create(newPin2, Guid.NewGuid().ToString());
 
             try
             {
@@ -297,14 +295,14 @@ namespace EGID.Infrastructure.Auth.Services
             return Result.Success();
         }
 
-        public async Task<Result> ChangePukAsync(ChangePukModel model)
+        public async Task<Result> ChangePukAsync(string cardId, string currentPuk, string newPuk)
         {
-            var card = await GetAsync(model.CardId);
+            var card = await GetAsync(cardId);
 
             // check provided current PUK
 
             var checkPasswordResult = await _signInManager
-                .CheckPasswordSignInAsync(card, model.CurrentPuk, true);
+                .CheckPasswordSignInAsync(card, currentPuk, true);
 
             if (!checkPasswordResult.Succeeded)
                 return Result.Failure(!checkPasswordResult.IsLockedOut
@@ -314,13 +312,13 @@ namespace EGID.Infrastructure.Auth.Services
 
             // validate new PUK
             var validPass = await _passwordValidator
-                .ValidateAsync(_userManager, card, model.NewPuk);
+                .ValidateAsync(_userManager, card, newPuk);
 
             if (!validPass.Succeeded)
                 return validPass.ToResult();
 
             // change
-            var result = await _userManager.ChangePasswordAsync(card, model.CurrentPuk, model.NewPuk);
+            var result = await _userManager.ChangePasswordAsync(card, currentPuk, newPuk);
 
             return result.ToResult();
         }

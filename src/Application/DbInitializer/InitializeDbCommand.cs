@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
@@ -8,19 +9,18 @@ namespace EGID.Application.DbInitializer
     {
         public class InitializeDbHandler : IRequestHandler<InitializeDbCommand>
         {
-            private readonly IEgidDbContext _context;
             private readonly IRoleManagerService _roleManager;
-            private readonly ICardManagerService _userManager;
+            private readonly ICardManagerService _cardManager;
+            private readonly IKeysGeneratorService _keysGenerator;
 
             public InitializeDbHandler(
-                IEgidDbContext context,
-                ICardManagerService userManager,
-                IRoleManagerService roleManager
-            )
+                ICardManagerService cardManager,
+                IRoleManagerService roleManager,
+                IKeysGeneratorService keysGenerator)
             {
-                _context = context;
                 _roleManager = roleManager;
-                _userManager = userManager;
+                _keysGenerator = keysGenerator;
+                _cardManager = cardManager;
             }
 
             public async Task<Unit> Handle(InitializeDbCommand request, CancellationToken _)
@@ -35,18 +35,31 @@ namespace EGID.Application.DbInitializer
             {
                 if (await _roleManager.AnyAsync) return;
 
-                await _roleManager.CreateRoleAsync("Admin");
-                await _roleManager.CreateRoleAsync("CivilAffair");
-                await _roleManager.CreateRoleAsync("Doctor");
+                foreach (var role in Roles.GetRoles())
+                    await _roleManager.CreateRoleAsync(role);
+
             }
 
             private async Task InitializeAdmin()
             {
-                if (await _userManager.AnyAsync) return;
+                if (await _cardManager.AnyAsync) return;
 
-                // await _userManager.CreateUserAsync("admin@admin.com", "P@ssw0rd");
+                var (result, id) = await _cardManager.RegisterAdminAsync(
+                    Guid.NewGuid().ToString(),
+                    "#m1234567",
+                    "admin@admin.com",
+                    "010000000000000",
+                    _keysGenerator.PublicKeyXml,
+                    _keysGenerator.PrivateKeyXml
+                );
+
+                
+                if (!result.Succeeded) throw new Exception("failed to initialize admin");
+
+                result = await _cardManager.AddToRoleAsync(id, Roles.Admin);
+
+                if (!result.Succeeded) throw new Exception("failed to add admin to the admin role");
             }
-
         }
     }
 }
