@@ -1,25 +1,50 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using EGID.Application.Cards.Commands;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class CardController : ControllerBase
+    public class CardController : BaseController
     {
-        [HttpGet]
-        public ActionResult Get()
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Post([FromBody] CreateCardCommand command)
         {
-            return Ok();
+            await Mediator.Send(command);
+
+            return NoContent();
         }
 
-        // [HttpPost]
-        // public async Task<ActionResult> Post([FromBody] CreateCardModel model)
-        // {
-        //     var (result, id) = await _cardManagerService.RegisterAsync(model);
-        //
-        //     if (result.Succeeded) return Ok(id);
-        //
-        //     return BadRequest(new {errors = result.Errors});
-        // }
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Puk([FromBody] ChangePukCommand command)
+        {
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Pin1([FromBody] ChangePin1Command command)
+        {
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Pin2([FromBody] ChangePin2Command command)
+        {
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
     }
 }
