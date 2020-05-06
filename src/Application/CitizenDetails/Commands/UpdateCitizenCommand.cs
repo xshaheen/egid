@@ -2,13 +2,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using EGID.Common.Exceptions;
-using EGID.Common.Models.File;
+using EGID.Common.Models.Files;
 using EGID.Domain.Enums;
 using EGID.Domain.ValueObjects;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace EGID.Application.CitizenDetails.Commands.UpdateCitizen
+namespace EGID.Application.CitizenDetails.Commands
 {
     public class UpdateCitizenCommand : IRequest
     {
@@ -28,6 +29,38 @@ namespace EGID.Application.CitizenDetails.Commands.UpdateCitizen
         public DateTime DateOfBirth { get; set; }
 
         public BinaryFile Photo { get; set; }
+
+        #region Validator
+
+        public class UpdateCitizenValidator : AbstractValidator<UpdateCitizenCommand>
+        {
+            public UpdateCitizenValidator()
+            {
+                RuleFor(x => x.AccountId).MaximumLength(128);
+                RuleFor(x => x.MotherId).MaximumLength(128);
+                RuleFor(x => x.FatherId).MaximumLength(128);
+
+                RuleFor(x => x.FullName).NotNull();
+
+                RuleFor(x => x.FullName.FirstName)
+                    .MaximumLength(50)
+                    .When(x => x.FullName?.FirstName != null);
+
+                RuleFor(x => x.FullName.SecondName)
+                    .MaximumLength(50)
+                    .When(x => x.FullName?.SecondName != null);
+
+                RuleFor(x => x.FullName.ThirdName)
+                    .MaximumLength(50)
+                    .When(x => x.FullName?.ThirdName != null);
+
+                RuleFor(x => x.FullName.LastName)
+                    .MaximumLength(50)
+                    .When(x => x.FullName?.LastName != null);
+            }
+        }
+
+        #endregion
 
         #region Handler
 
