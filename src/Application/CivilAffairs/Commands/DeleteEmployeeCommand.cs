@@ -23,7 +23,7 @@ namespace EGID.Application.CivilAffairs.Commands
             {
                 var result = await _cardManager.RemoveFromRoleAsync(request.CardId, Roles.CivilAffairs);
 
-                if (result.Failed) throw BadRequestException(result.Errors);
+                if (result.Failed) throw new BadRequestException(result.Errors);
 
                 return Unit.Value;
             }

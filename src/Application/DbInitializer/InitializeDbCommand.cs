@@ -11,16 +11,13 @@ namespace EGID.Application.DbInitializer
     {
         public class InitializeDbHandler : IRequestHandler<InitializeDbCommand>
         {
-            private readonly IRoleManagerService _roleManager;
             private readonly ICardManagerService _cardManager;
             private readonly IKeysGeneratorService _keysGenerator;
 
             public InitializeDbHandler(
                 ICardManagerService cardManager,
-                IRoleManagerService roleManager,
                 IKeysGeneratorService keysGenerator)
             {
-                _roleManager = roleManager;
                 _keysGenerator = keysGenerator;
                 _cardManager = cardManager;
             }
@@ -35,10 +32,10 @@ namespace EGID.Application.DbInitializer
 
             private async Task InitializeRoles()
             {
-                if (await _roleManager.AnyAsync) return;
+                if (await _cardManager.AnyRoleAsync) return;
 
                 foreach (var role in Roles.GetRoles())
-                    await _roleManager.CreateRoleAsync(role);
+                    await _cardManager.CreateRoleAsync(role);
             }
 
             private async Task InitializeAdmin()

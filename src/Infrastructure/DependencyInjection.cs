@@ -87,7 +87,6 @@ namespace EGID.Infrastructure
             services.AddSingleton<IHashService>(_ => new HashService(10000, 128));
 
             services.AddScoped<ICardManagerService, CardManagerService>();
-            services.AddScoped<IRoleManagerService, RoleManagerService>();
 
             return services;
         }
