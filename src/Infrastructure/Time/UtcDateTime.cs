@@ -1,5 +1,5 @@
 ﻿using System;
-using EGID.Common.Interfaces;
+using EGID.Application.Common.Interfaces;
 
 namespace EGID.Infrastructure.Time
 {

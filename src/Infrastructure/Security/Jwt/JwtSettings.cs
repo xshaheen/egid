@@ -21,7 +21,7 @@ namespace EGID.Infrastructure.Security.Jwt
             string audience,
             string issuer
         )
-        : this(key, expires)
+            : this(key, expires)
         {
             Audience = audience;
             Issuer = issuer;

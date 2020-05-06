@@ -19,8 +19,10 @@ namespace EGID.Infrastructure.Security.Jwt
             _settings = settings;
         }
 
-        public Dictionary<string, object> Decode(string token) =>
-            new JwtSecurityTokenHandler().ReadJwtToken(token).Payload;
+        public Dictionary<string, object> Decode(string token)
+        {
+            return new JwtSecurityTokenHandler().ReadJwtToken(token).Payload;
+        }
 
         public string Generate(IList<Claim> claims)
         {

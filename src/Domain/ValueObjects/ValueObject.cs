@@ -4,7 +4,8 @@ using System.Linq;
 namespace EGID.Domain.ValueObjects
 {
     /// <summary>
-    ///    For info see https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/implement-value-objects#value-object-implementation-in-c
+    ///     For info see
+    ///     https://docs.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/implement-value-objects#value-object-implementation-in-c
     /// </summary>
     public abstract class ValueObject
     {
@@ -16,7 +17,9 @@ namespace EGID.Domain.ValueObjects
         }
 
         protected static bool NotEqualOperator(ValueObject left, ValueObject right)
-            => !(EqualOperator(left, right));
+        {
+            return !EqualOperator(left, right);
+        }
 
         protected abstract IEnumerable<object> GetAtomicValues();
 

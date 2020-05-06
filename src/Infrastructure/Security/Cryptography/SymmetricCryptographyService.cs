@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using EGID.Application;
+using EGID.Application.Common.Interfaces;
 
 namespace EGID.Infrastructure.Security.Cryptography
 {
@@ -17,23 +17,30 @@ namespace EGID.Infrastructure.Security.Cryptography
         {
             using var algorithm = Algorithm(salt);
 
-            var plainBytes = await TransformAsync(Convert.FromBase64String(cypherText), algorithm.CreateDecryptor());
+            byte[] plainBytes = await TransformAsync(Convert.FromBase64String(cypherText), algorithm.CreateDecryptor());
 
             return Encoding.Unicode.GetString(plainBytes);
         }
 
-        public async Task<string> DecryptAsync(string cypherText) => await DecryptAsync(cypherText, string.Empty);
+        public async Task<string> DecryptAsync(string cypherText)
+        {
+            return await DecryptAsync(cypherText, string.Empty);
+        }
 
         public async Task<string> EncryptAsync(string plainText, string salt)
         {
             using var algorithm = Algorithm(salt);
 
-            var cypherBytes = await TransformAsync(Encoding.Unicode.GetBytes(plainText), algorithm.CreateEncryptor());
+            byte[] cypherBytes =
+                await TransformAsync(Encoding.Unicode.GetBytes(plainText), algorithm.CreateEncryptor());
 
             return Convert.ToBase64String(cypherBytes);
         }
 
-        public async Task<string> EncryptAsync(string plainText) => await EncryptAsync(plainText, string.Empty);
+        public async Task<string> EncryptAsync(string plainText)
+        {
+            return await EncryptAsync(plainText, string.Empty);
+        }
 
         /// <summary>
         ///     Initialize and return the symmetric algorithm.

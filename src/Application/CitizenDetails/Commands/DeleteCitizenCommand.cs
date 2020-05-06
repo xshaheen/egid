@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using EGID.Common.Exceptions;
+using EGID.Application.Common.Exceptions;
+using EGID.Application.Common.Interfaces;
 using EGID.Common.Models.Result;
 using FluentValidation;
 using MediatR;
@@ -40,7 +41,8 @@ namespace EGID.Application.CitizenDetails.Commands
 
             public async Task<Unit> Handle(DeleteCitizenCommand request, CancellationToken cancellationToken)
             {
-                var citizen = await _context.CitizenDetails.FindAsync(request.Id);
+                var citizen = await _context.CitizenDetails.Include(c => c.Card)
+                    .FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
 
                 if (citizen is null) throw new EntityNotFoundException("Citizen", request.Id);
 
@@ -48,7 +50,7 @@ namespace EGID.Application.CitizenDetails.Commands
 
                 try
                 {
-                    result = await _cardManager.DeleteAsync(citizen.CardId);
+                    result = await _cardManager.DeleteAsync(citizen.Card.Id);
                 }
                 catch (EntityNotFoundException) { }
 

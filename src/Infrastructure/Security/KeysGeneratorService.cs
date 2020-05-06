@@ -1,5 +1,5 @@
 ﻿using System.Security.Cryptography;
-using EGID.Application;
+using EGID.Application.Common.Interfaces;
 
 namespace EGID.Infrastructure.Security
 {
@@ -10,7 +10,7 @@ namespace EGID.Infrastructure.Security
     {
         public KeysGeneratorService()
         {
-            using var rsa = new RSACryptoServiceProvider(4096) { PersistKeyInCsp = false };
+            using var rsa = new RSACryptoServiceProvider(4096) {PersistKeyInCsp = false};
 
             PrivateKeyXml = rsa.ToXmlString(true);
             PublicKeyXml = rsa.ToXmlString(false);

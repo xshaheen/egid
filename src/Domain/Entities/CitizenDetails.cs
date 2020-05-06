@@ -7,7 +7,8 @@ namespace EGID.Domain.Entities
     public class CitizenDetail : AuditableEntity
     {
         public string Id { get; set; }
-        public string CardId { get; set; }
+        public Card Card { get; set; }
+
         public string PrivateKey { get; set; }
         public string PublicKey { get; set; }
 
@@ -32,6 +33,9 @@ namespace EGID.Domain.Entities
         public virtual HealthInfo HealthInfo { get; set; }
         public virtual DeathCertificate DeathCertificate { get; set; }
 
-        public override string ToString() => FullName.ToString();
+        public override string ToString()
+        {
+            return FullName.ToString();
+        }
     }
 }

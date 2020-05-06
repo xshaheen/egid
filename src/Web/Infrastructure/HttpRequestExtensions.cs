@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using EGID.Common.Models.File;
+using EGID.Application.Common.Models.Files;
 using Microsoft.AspNetCore.Http;
 
 namespace EGID.Web.Infrastructure
@@ -16,7 +15,7 @@ namespace EGID.Web.Infrastructure
             {
                 using var memoryStream = new MemoryStream();
                 file.CopyTo(memoryStream);
-                files.Add(new BinaryFile(Guid.NewGuid(), file.Name, memoryStream.ToArray(), file.Length, file.ContentType));
+                files.Add(new BinaryFile(file.Name, memoryStream.ToArray(), file.Length, file.ContentType));
             }
 
             return files;

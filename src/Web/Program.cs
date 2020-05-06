@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using EGID.Data;
-using EGID.Infrastructure.Auth;
+using EGID.Application.DbInitializer;
+using EGID.Infrastructure.Data;
+using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,8 +28,9 @@ namespace EGID.Web
                     var appDbContext = services.GetService<EgidDbContext>();
                     await appDbContext.Database.MigrateAsync();
 
-                    var authDbContext = services.GetService<AuthDbContext>();
-                    await authDbContext.Database.MigrateAsync();
+                    var mediator = services.GetService<IMediator>();
+
+                    await mediator.Send(new InitializeDbCommand());
                 }
                 catch (Exception e)
                 {
@@ -40,8 +42,10 @@ namespace EGID.Web
             await host.RunAsync();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        }
     }
 }

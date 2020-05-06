@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using EGID.Common.Exceptions;
+using EGID.Application.Common.Exceptions;
+using EGID.Application.Common.Interfaces;
 using FluentValidation;
 using MediatR;
 
@@ -30,7 +31,8 @@ namespace EGID.Application.Cards.Commands
             RuleFor(c => c.NewPin2)
                 .NotEmpty().WithMessage("من فضلك ادخل رمز Pin2 الجديد.")
                 .Length(6, 128).WithMessage("رمز Pin2 يجب ان تكون بين 6 الي 128 حرف.")
-                .NotEqual(c => c.Puk).WithMessage("رمز Pin2 الجديدة لا يجب ان يكون مطابق لرمز Puk من فضلك اعد المحاولة مع رمز جديد.");
+                .NotEqual(c => c.Puk)
+                .WithMessage("رمز Pin2 الجديدة لا يجب ان يكون مطابق لرمز Puk من فضلك اعد المحاولة مع رمز جديد.");
         }
     }
 

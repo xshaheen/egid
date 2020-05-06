@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using EGID.Common.Exceptions;
-using EGID.Common.Models.Files;
+using EGID.Application.Common.Exceptions;
+using EGID.Application.Common.Interfaces;
+using EGID.Application.Common.Models.Files;
 using EGID.Domain.Enums;
 using EGID.Domain.ValueObjects;
 using FluentValidation;
@@ -14,8 +15,6 @@ namespace EGID.Application.CitizenDetails.Commands
     public class UpdateCitizenCommand : IRequest
     {
         public string Id { get; set; }
-
-        public string AccountId { get; set; }
 
         public string FatherId { get; set; }
         public string MotherId { get; set; }
@@ -36,7 +35,6 @@ namespace EGID.Application.CitizenDetails.Commands
         {
             public UpdateCitizenValidator()
             {
-                RuleFor(x => x.AccountId).MaximumLength(128);
                 RuleFor(x => x.MotherId).MaximumLength(128);
                 RuleFor(x => x.FatherId).MaximumLength(128);
 
@@ -83,20 +81,30 @@ namespace EGID.Application.CitizenDetails.Commands
 
                 if (request.Photo != null)
                 {
-                    try
+                    if (citizen.PhotoUrl is null)
                     {
-                        // will override old photo
-                        await request.Photo.SaveAsync(_directories.CitizenPhotosDirectory, Guid.Parse(request.Id));
+                        await request.Photo.SaveAsync(_directories.CitizenPhotosDirectory);
+
+                        citizen.PhotoUrl = request.Photo.Name;
                     }
-                    catch (Exception)
+                    else
                     {
-                        throw new FileProcessingException(request.Photo.Name);
+                        try
+                        {
+                            BinaryFile.Delete(_directories.CitizenPhotosDirectory, citizen.PhotoUrl);
+
+                            await request.Photo.SaveAsync(_directories.CitizenPhotosDirectory);
+
+                            citizen.PhotoUrl = request.Photo.Name;
+                        }
+                        catch (Exception)
+                        {
+                            throw new FileProcessingException(request.Photo.Name);
+                        }
                     }
                 }
 
                 // update any changes
-
-                if (request.AccountId != null) citizen.CardId = request.AccountId;
 
                 if (request.FatherId != null) citizen.FatherId = request.FatherId;
                 if (request.MotherId != null) citizen.MotherId = request.MotherId;

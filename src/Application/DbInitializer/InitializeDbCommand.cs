@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using EGID.Application.Common;
+using EGID.Application.Common.Interfaces;
 using MediatR;
 
 namespace EGID.Application.DbInitializer
@@ -37,7 +39,6 @@ namespace EGID.Application.DbInitializer
 
                 foreach (var role in Roles.GetRoles())
                     await _roleManager.CreateRoleAsync(role);
-
             }
 
             private async Task InitializeAdmin()
@@ -53,7 +54,7 @@ namespace EGID.Application.DbInitializer
                     _keysGenerator.PrivateKeyXml
                 );
 
-                
+
                 if (!result.Succeeded) throw new Exception("failed to initialize admin");
 
                 result = await _cardManager.AddToRoleAsync(id, Roles.Admin);

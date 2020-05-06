@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using EGID.Common.Exceptions;
+using EGID.Application.Common.Exceptions;
+using EGID.Application.Common.Interfaces;
 using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace EGID.Application.Cards.Commands
 {
@@ -47,10 +43,13 @@ namespace EGID.Application.Cards.Commands
 
             public async Task<string> Handle(SignHashCommand request, CancellationToken cancellationToken)
             {
-                var citizen = await _context.CitizenDetails.FirstOrDefaultAsync(c => c.CardId == _currentUser.UserId,
-                    cancellationToken: cancellationToken);
+                var card = await _context.Cards.FindAsync(_currentUser.UserId);
 
-                if (citizen == null) throw new EntityNotFoundException("Card", _currentUser.UserId);
+                if (card is null) throw new EntityNotFoundException("Card", _currentUser.UserId);
+
+                var citizen = await _context.CitizenDetails.FindAsync(card.CitizenId);
+
+                if (citizen is null) throw new EntityNotFoundException("Citizen", card.CitizenId);
 
                 var signature = _digitalSignatureService.SignHash(request.Base64Sha512DataHash, citizen.PrivateKey);
 

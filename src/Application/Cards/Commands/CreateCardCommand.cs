@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common;
+using EGID.Application.Common.Interfaces;
 using FluentValidation;
 using MediatR;
 

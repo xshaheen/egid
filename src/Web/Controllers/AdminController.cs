@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace EGID.Web.Controllers
+﻿namespace EGID.Web.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class AdminController : ControllerBase
+    public class AdminController : BaseController
     {
         // get all employees
 

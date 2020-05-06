@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using EGID.Common.Models.Files;
+using EGID.Application.Common.Interfaces;
+using EGID.Application.Common.Models.Files;
 using EGID.Domain.Entities;
 using EGID.Domain.Enums;
 using EGID.Domain.ValueObjects;
@@ -12,8 +13,6 @@ namespace EGID.Application.CitizenDetails.Commands
 {
     public class CreateCitizenCommand : IRequest<string>
     {
-        public string AccountId { get; set; }
-
         public string FatherId { get; set; }
         public string MotherId { get; set; }
 
@@ -38,7 +37,6 @@ namespace EGID.Application.CitizenDetails.Commands
         {
             public CreateCitizenValidator()
             {
-                RuleFor(x => x.AccountId).MaximumLength(128);
                 RuleFor(x => x.MotherId).MaximumLength(128);
                 RuleFor(x => x.FatherId).MaximumLength(128);
 
@@ -95,7 +93,6 @@ namespace EGID.Application.CitizenDetails.Commands
                     PrivateKey = await _cryptographyService.EncryptAsync(_keys.PrivateKeyXml),
                     PublicKey = _keys.PublicKeyXml,
                     Id = Guid.NewGuid().ToString(),
-                    CardId = request.AccountId,
                     FatherId = request.FatherId,
                     MotherId = request.MotherId,
                     FullName = request.FullName,

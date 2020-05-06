@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using EGID.Application;
-using EGID.Common.Interfaces;
+using EGID.Application.Common.Interfaces;
+using EGID.Domain.Entities;
 using EGID.Infrastructure.Auth;
-using EGID.Infrastructure.Auth.Services;
+using EGID.Infrastructure.Data;
 using EGID.Infrastructure.Security;
 using EGID.Infrastructure.Security.Cryptography;
 using EGID.Infrastructure.Security.DigitalSignature;
@@ -27,7 +27,9 @@ namespace EGID.Infrastructure
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<EgidDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddScoped<IEgidDbContext>(provider => provider.GetService<EgidDbContext>());
 
             services.AddIdentity<Card, IdentityRole>(options =>
                 {
@@ -37,7 +39,7 @@ namespace EGID.Infrastructure
                     options.Password.RequireDigit = true;
                     options.Lockout.DefaultLockoutTimeSpan = new TimeSpan(0, 5, 0);
                 })
-                .AddEntityFrameworkStores<AuthDbContext>()
+                .AddEntityFrameworkStores<EgidDbContext>()
                 .AddDefaultTokenProviders();
 
             // remove default claims

@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using EGID.Application.Common.Behavior;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

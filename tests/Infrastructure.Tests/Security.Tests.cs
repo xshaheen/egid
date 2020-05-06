@@ -2,6 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using EGID.Application;
+using EGID.Application.Common.Interfaces;
 using EGID.Infrastructure.Security;
 using EGID.Infrastructure.Security.Cryptography;
 using EGID.Infrastructure.Security.DigitalSignature;

@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 using EGID.Application;
-using EGID.Data;
+using EGID.Application.Common.Interfaces;
 using EGID.Infrastructure;
-using EGID.Web.Infrastructure.Middleware.CustomExceptionHandlerMiddleware;
+using EGID.Web.Infrastructure.Middleware;
 using EGID.Web.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -23,8 +23,11 @@ namespace EGID.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.AddDatabase(Configuration);
+
+            services.AddTransient<IFilesDirectoryService, FilesDirectoryService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddHttpContextAccessor();
 
@@ -42,9 +45,6 @@ namespace EGID.Web
                     opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 }).AddFluentValidation(config =>
                     config.RegisterValidatorsFromAssemblyContaining<IEgidDbContext>());
-
-            services.AddTransient<IFilesDirectoryService, FilesDirectoryService>();
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddSpaStaticFiles(config => { config.RootPath = "ClientApp/dist"; });
 
