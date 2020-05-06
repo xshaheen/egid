@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using EGID.Application.Cards.Commands;
+using EGID.Application.CivilAffairs.Queries;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
 using EGID.Common.Models.Result;
 using EGID.Domain.Entities;
 using EGID.Infrastructure.Common;
+using EGID.Infrastructure.Data;
 using EGID.Infrastructure.Security.Hash;
 using EGID.Infrastructure.Security.Jwt;
 using Microsoft.AspNetCore.Identity;
@@ -18,8 +21,9 @@ namespace EGID.Infrastructure.Auth
 {
     public class CardManagerService : ICardManagerService
     {
-        private readonly IEgidDbContext _context;
+        private readonly EgidDbContext _context;
         private readonly UserManager<Card> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<Card> _signInManager;
         private readonly IPasswordValidator<Card> _passwordValidator;
 
@@ -33,8 +37,9 @@ namespace EGID.Infrastructure.Auth
         #region Constructor
 
         public CardManagerService(
-            IEgidDbContext context,
+            EgidDbContext context,
             UserManager<Card> userManager,
+            RoleManager<IdentityRole> roleManager,
             SignInManager<Card> signInManager,
             IPasswordValidator<Card> passwordValidator,
             IKeysGeneratorService keysGenerator,
@@ -52,6 +57,7 @@ namespace EGID.Infrastructure.Auth
             _hashService = hashService;
             _cryptographyService = cryptographyService;
             _jwtTokenService = jwtTokenService;
+            _roleManager = roleManager;
         }
 
         #endregion Constructor
@@ -386,5 +392,56 @@ namespace EGID.Infrastructure.Auth
         }
 
         #endregion Change Active State
+
+        #region Roles
+
+        public async Task<IList<EmployeesVm>> InRole(string roleName)
+        {
+            var role = await _context.Roles
+                .SingleOrDefaultAsync(r => r.NormalizedName == roleName.ToUpper());
+
+            if (role is null) return new List<EmployeesVm>();
+
+            var query = from userRole in _context.UserRoles
+                        join card in _context.Users on userRole.UserId equals card.Id
+                        where userRole.RoleId.Equals(role.Id)
+                        join citizen in _context.CitizenDetails on card.CitizenId equals citizen.Id 
+                        select new EmployeesVm
+                        {
+                            Id = citizen.Id,
+                            CardId = card.Id,
+                            FullName = citizen.FullName,
+                            Address = citizen.Address,
+                            Gender = citizen.Gender,
+                            Religion = citizen.Religion,
+                            SocialStatus = citizen.SocialStatus,
+                            DateOfBirth = citizen.DateOfBirth,
+                            PhotoUrl = citizen.PhotoUrl
+                        };
+            
+            return await query.ToListAsync();
+        }
+
+        public Task<bool> AnyRoleAsync => _roleManager.Roles.AnyAsync();
+
+        public async Task<Result> CreateRoleAsync(string roleName)
+        {
+            var result = await _roleManager.CreateAsync(new IdentityRole(roleName));
+
+            return result.ToResult();
+        }
+
+        public async Task<Result> RemoveFromRoleAsync(string cardId, string roleName)
+        {
+            var card = await _userManager.FindByIdAsync(cardId);
+
+            if (card is null) return Result.Failure();
+
+            var result = await _userManager.RemoveFromRoleAsync(card, roleName);
+
+            return result.ToResult();
+        }
+
+        #endregion
     }
 }

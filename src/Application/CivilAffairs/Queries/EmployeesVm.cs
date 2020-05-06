@@ -2,7 +2,7 @@
 using EGID.Domain.Enums;
 using EGID.Domain.ValueObjects;
 
-namespace EGID.Application.CivilAffairs.Queries.GetEmployeesList
+namespace EGID.Application.CivilAffairs.Queries
 {
     public class EmployeesVm
     {

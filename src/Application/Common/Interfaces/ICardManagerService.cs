@@ -1,47 +1,18 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using EGID.Application.Cards.Commands;
+using EGID.Application.CivilAffairs.Queries;
 using EGID.Application.Common.Exceptions;
 using EGID.Common.Models.Result;
 
 namespace EGID.Application.Common.Interfaces
 {
-    public class CardModel
-    {
-        public string OwnerId { get; set; }
-
-        public string Puk { get; set; }
-
-        public string Pin1 { get; set; }
-
-        public string Pin2 { get; set; }
-
-        public string Email { get; set; }
-
-        public string PhoneNumber { get; set; }
-    }
-
     public interface ICardManagerService
     {
         /// <summary>
         ///     Is there exit any users returns true if there users, false otherwise.
         /// </summary>
         Task<bool> AnyAsync { get; }
-
-        // /// <summary>
-        // ///     Get a card by id or return an exception if not find it.
-        // /// </summary>
-        // /// <exception cref="EntityNotFoundException">
-        // ///     Can not find card.
-        // /// </exception>
-        // Task<Card> GetAsync(string id);
-        //
-        // /// <summary>
-        // ///     Get a card by id or return an exception if not find it.
-        // /// </summary>
-        // /// <exception cref="EntityNotFoundException">
-        // ///     Can not find card.
-        // /// </exception>
-        // Task<Card> GetByPrivateKeyAsync(string privateKeyXml);
 
         /// <summary>
         ///     Returns a flag to indelicate that the card is active or not
@@ -117,16 +88,36 @@ namespace EGID.Application.Common.Interfaces
         public Task<Result> ActivateAsync(string id);
 
         /// <summary>
-        ///     Add a card to role.
-        /// </summary>
-        Task<Result> AddToRoleAsync(string cardId, string role);
-
-        /// <summary>
         ///     Delete card async or throw exception if entity not founded.
         /// </summary>
         /// <exception cref="EntityNotFoundException">
         ///     Can not find card.
         /// </exception>
         Task<Result> DeleteAsync(string cardId);
+
+        /// <summary>
+        ///     Find cards that belong to the specified role.
+        /// </summary>
+        Task<IList<EmployeesVm>> InRole(string roleName);
+
+        /// <summary>
+        ///     Is there exit any roles in database. true if exist, false otherwise.
+        /// </summary>
+        Task<bool> AnyRoleAsync { get; }
+
+        /// <summary>
+        ///     Create a new role and save to database.
+        /// </summary>
+        Task<Result> CreateRoleAsync(string roleName);
+
+        /// <summary>
+        ///     Add a card to role.
+        /// </summary>
+        Task<Result> AddToRoleAsync(string cardId, string role);
+
+        /// <summary>
+        ///     Remove card from role.
+        /// </summary>
+        Task<Result> RemoveFromRoleAsync(string cardId, string roleName);
     }
 }

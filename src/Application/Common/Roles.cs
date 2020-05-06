@@ -4,11 +4,10 @@
     {
         public const string Admin = "Administrator";
         public const string CivilAffairs = "CivilAffairsEmpolyee";
-        public const string Doctor = "Doctor";
 
         public static string[] GetRoles()
         {
-            return new[] {Admin, CivilAffairs, Doctor};
+            return new[] {Admin, CivilAffairs};
         }
     }
 }
