@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace EGID.Web.Controllers
 {
     [Authorize]
-    public class HealthInfoControllerBase : ApiControllerBase
+    public class HealthInfoController : ApiControllerBase
     {
         [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get(string citizenId)
+        public async Task<IActionResult> GetOne(string citizenId)
         {
             await Mediator.Send(new GetHealthInfoQuery());
 

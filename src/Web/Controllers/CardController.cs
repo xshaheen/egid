@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EGID.Web.Controllers
 {
     [Authorize]
-    public class CardControllerBase : ApiControllerBase
+    public class CardController : ApiControllerBase
     {
         [Authorize(Roles = Roles.CivilAffairs + "," + Roles.Admin)]
         [HttpPost]

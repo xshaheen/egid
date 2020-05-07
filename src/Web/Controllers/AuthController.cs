@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EGID.Web.Controllers
 {
     [AllowAnonymous]
-    public class AuthControllerBase : ApiControllerBase
+    public class AuthController : ApiControllerBase
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]

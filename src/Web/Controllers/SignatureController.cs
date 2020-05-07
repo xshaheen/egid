@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EGID.Web.Controllers
 {
     [Authorize]
-    public class SignatureControllerBase : ApiControllerBase
+    public class SignatureController : ApiControllerBase
     {
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

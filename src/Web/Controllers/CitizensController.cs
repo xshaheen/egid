@@ -11,12 +11,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
-    public class CitizensControllerBase : ApiControllerBase
+    [Authorize(Roles = Roles.CivilAffairs + "," + Roles.Admin)]
+    public class CitizensController : ApiControllerBase
     {
         private readonly ICurrentUserService _currentUser;
         private readonly ICardManagerService _cardManager;
 
-        public CitizensControllerBase(ICurrentUserService currentUser, ICardManagerService cardManager)
+        public CitizensController(ICurrentUserService currentUser, ICardManagerService cardManager)
         {
             _currentUser = currentUser;
             _cardManager = cardManager;
@@ -24,7 +25,7 @@ namespace EGID.Web.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> Get()
+        public async Task<ActionResult> GetAll()
         {
             var citizens = await Mediator.Send(new GetCitizenDetailsListQuery());
 
@@ -35,12 +36,13 @@ namespace EGID.Web.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Get(string id, [FromBody] GetCitizenDetailsQuery query)
+        public async Task<ActionResult> GetOne(string id, [FromBody] GetCitizenDetailsQuery query)
         {
             if (id != query.Id) return NotFound();
 
             if (_currentUser.UserId != id ||
-                await _cardManager.IsInRoleAsync(_currentUser.UserId, Roles.CivilAffairs))
+                await _cardManager.IsInRoleAsync(_currentUser.UserId, Roles.CivilAffairs) ||
+                await _cardManager.IsInRoleAsync(_currentUser.UserId, Roles.Admin))
                 return Forbid();
 
             await Mediator.Send(query);

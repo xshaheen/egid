@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace EGID.Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class ApiControllerBase : ControllerBase
     {
         private IMediator _mediator;

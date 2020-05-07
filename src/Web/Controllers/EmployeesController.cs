@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace EGID.Web.Controllers
 {
     [Authorize(Roles = Roles.Admin)]
-    public class EmployeesControllerBase : ApiControllerBase
+    public class EmployeesController : ApiControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IList<EmployeesVm>>> Get() =>
+        public async Task<ActionResult<IList<EmployeesVm>>> GetAll() =>
             Ok(await Mediator.Send(new GetEmployeesListQuery()));
 
         [HttpPost]
