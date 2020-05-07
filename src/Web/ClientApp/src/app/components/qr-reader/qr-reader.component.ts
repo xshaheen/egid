@@ -14,8 +14,9 @@ import { MatSelectChange } from "@angular/material/select";
   styleUrls: ["./qr-reader.component.scss"],
 })
 export class QrReaderComponent {
-  @Output() qrResult: EventEmitter<string>;
+  @Output() codeResult: EventEmitter<string> = new EventEmitter();
 
+  done = false;
   scannerEnabled: boolean;
 
   availableDevices: MediaDeviceInfo[];
@@ -30,19 +31,23 @@ export class QrReaderComponent {
 
   constructor(private readonly _dialog: MatDialog) {}
 
-  onCodeResult(result: string) {
+  onScanSuccess(result: string) {
+    this.done = true;
     this.scannerEnabled = false;
-    this.qrResult.emit(result);
+    this.codeResult.emit(result);
   }
 
   onPlayStopClicked() {
     this.scannerEnabled = !this.scannerEnabled;
+    this.done = false;
   }
 
   onCamerasFound(devices: MediaDeviceInfo[]): void {
     this.availableDevices = devices;
-    // this.currentDeviceId = this.currentDevice?.deviceId;
     this.hasDevices = Boolean(devices && devices.length);
+
+    this.currentDevice = devices[0];
+    this.currentDeviceId = this.currentDevice?.deviceId;
   }
 
   onDeviceSelectChange(selected: MatSelectChange) {

@@ -6,7 +6,7 @@
     class="scan-box"
     [torch]="torchEnabled"
     [(device)]="currentDevice"
-    (scanSuccess)="onCodeResult($event)"
+    (scanSuccess)="onScanSuccess($event)"
     (permissionResponse)="onHasPermission($event)"
     (camerasFound)="onCamerasFound($event)"
     (torchCompatible)="onTorchCompatible($event)"
@@ -16,7 +16,7 @@
   <!--Actions-->
   <mat-card-actions>
     <!--Choose a camera-->
-    <mat-form-field>
+    <mat-form-field dir="rtl">
       <label>
         {{
           !hasPermission
@@ -46,7 +46,16 @@
 
     <!--Play/Stop-->
     <button class="icon" mat-icon-button (click)="onPlayStopClicked()">
-      <i class="fas fa-stop-circle"></i>
+      <i
+        *ngIf="scannerEnabled"
+        class="fas fa-stop-circle"
+        style="color: rgb(240, 13, 13);"
+      ></i>
+      <i
+        *ngIf="!scannerEnabled"
+        class="fas fa-play-circle"
+        style="color: rgb(19, 187, 27);"
+      ></i>
     </button>
     <!--#Play/Stop-->
 
@@ -68,34 +77,35 @@
     <!--#Flash-->
   </mat-card-actions>
   <!--#Actions-->
+  <div class="done" *ngIf="done"><i class="fa fa-check done-icon"></i></div>
 </mat-card>
 
 <!-- <ng-container *ngIf="hasPermission === undefined">
-    <h2>Waiting for permissions.</h2>
+  <h2>Waiting for permissions.</h2>
 
-    <blockquote>
-      If your device does not has cameras, no permissions will be asked.
-    </blockquote>
-  </ng-container>
+  <blockquote>
+    If your device does not has cameras, no permissions will be asked.
+  </blockquote>
+</ng-container>
 
-  <ng-container *ngIf="hasPermission === false">
-    <h2>
-      You denied the camera permission, we can't scan anything without it. 😪
-    </h2>
-  </ng-container>
+<ng-container *ngIf="hasPermission === false">
+  <h2>
+    You denied the camera permission, we can't scan anything without it. 😪
+  </h2>
+</ng-container>
 
-  <ng-container *ngIf="hasDevices === undefined">
-    <h2>Couldn't check for devices.</h2>
+<ng-container *ngIf="hasDevices === undefined">
+  <h2>Couldn't check for devices.</h2>
 
-    <blockquote>
-      This may be caused by some security error.
-    </blockquote>
-  </ng-container>
+  <blockquote>
+    This may be caused by some security error.
+  </blockquote>
+</ng-container>
 
-  <ng-container *ngIf="hasDevices === false">
-    <h2>No devices were found.</h2>
+<ng-container *ngIf="hasDevices === false">
+  <h2>No devices were found.</h2>
 
-    <blockquote>
-      I believe your device has no media devices attached to.
-    </blockquote>
-  </ng-container> -->
+  <blockquote>
+    I believe your device has no media devices attached to.
+  </blockquote>
+</ng-container> -->
