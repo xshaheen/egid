@@ -8,7 +8,7 @@ namespace EGID.Web.Controllers
 {
     public class HealthInfoController : BaseController
     {
-        [HttpGet("/")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(string citizenId)
@@ -18,7 +18,7 @@ namespace EGID.Web.Controllers
             return Ok();
         }
 
-        [HttpPost("/")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
@@ -29,7 +29,7 @@ namespace EGID.Web.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]

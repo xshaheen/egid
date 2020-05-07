@@ -9,7 +9,7 @@ namespace EGID.Web.Controllers
     [AllowAnonymous]
     public class AuthController : BaseController
     {
-        [HttpPost("/")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> SignIn([FromBody] LoginCommand command)

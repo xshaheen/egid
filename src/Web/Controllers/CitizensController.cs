@@ -8,7 +8,7 @@ namespace EGID.Web.Controllers
 {
     public class CitizensController : BaseController
     {
-        [HttpGet("/")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> Get()
         {
@@ -29,7 +29,7 @@ namespace EGID.Web.Controllers
             return NoContent();
         }
 
-        [HttpPost("/")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Post([FromBody] CreateCitizenCommand command)

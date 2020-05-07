@@ -8,20 +8,20 @@ namespace EGID.Web.Controllers
 {
     public class SignatureController : BaseController
     {
-        [HttpPost]
+        [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<string>> SignHash([FromBody] SignHashCommand command)
+        public async Task<ActionResult<string>> Sign([FromBody] SignHashCommand command)
         {
             var signature = await Mediator.Send(command);
 
             return Ok(signature);
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<(bool valid, FullName name, string Photo)>> VerifySignature(
+        public async Task<ActionResult<(bool valid, FullName name, string Photo)>> Verify(
             [FromBody] VerifySignatureCommand command)
         {
             var result = await Mediator.Send(command);

@@ -17,7 +17,7 @@ namespace EGID.Web.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Puk([FromBody] ChangePukCommand command)
@@ -27,7 +27,7 @@ namespace EGID.Web.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Pin1([FromBody] ChangePin1Command command)
@@ -37,7 +37,7 @@ namespace EGID.Web.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Pin2([FromBody] ChangePin2Command command)

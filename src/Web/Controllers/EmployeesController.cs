@@ -9,12 +9,12 @@ namespace EGID.Web.Controllers
 {
     public class EmployeesController : BaseController
     {
-        [HttpGet("/")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IList<EmployeesVm>>> Get() =>
             Ok(await Mediator.Send(new GetEmployeesListQuery()));
 
-        [HttpPost("/")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Post([FromBody] AddEmployeeCommand command)
