@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using EGID.Application.CitizenDetails.Commands;
 using EGID.Application.CitizenDetails.Queries;
 using EGID.Application.Common;
 using EGID.Application.Common.Interfaces;
+using EGID.Web.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +53,8 @@ namespace EGID.Web.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Post([FromBody] CreateCitizenCommand command)
         {
+            command.Photo = Request.Files().FirstOrDefault();
+
             await Mediator.Send(command);
 
             return NoContent();

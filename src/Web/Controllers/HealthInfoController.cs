@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using EGID.Application.Health.Commands;
 using EGID.Application.Health.Queries;
+using EGID.Web.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,8 @@ namespace EGID.Web.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> Post([FromBody]AddHealthRecordCommand command)
         {
+            command.Attachments = Request.Files();
+
             await Mediator.Send(command);
 
             return NoContent();
