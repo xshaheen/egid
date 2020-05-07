@@ -1,0 +1,42 @@
+<h1 mat-dialog-title style="text-align: center;">
+  <i class="fas fa-chevron-left"></i>
+  من فضلك قم بتسجيل الدخول للاستمرار
+</h1>
+
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  "
+>
+  <eg-qr-reader (codeResult)="onGetLoginString($event)"></eg-qr-reader>
+</div>
+
+<div mat-dialog-content>
+  <mat-form-field style="width: 100%;">
+    <mat-label>ادخل رمز PIN1</mat-label>
+    <input
+      type="password"
+      matInput
+      required
+      [(ngModel)]="loginModel.pin1"
+      type="pin1"
+      cdkFocusInitial
+    />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onClickCancel()">رجوع</button>
+  <button
+    mat-button
+    [mat-dialog-close]="loginModel"
+    [disabled]="!isValid"
+    ariaLabel="موافق"
+  >
+    تم
+  </button>
+</div>
