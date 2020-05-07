@@ -8,7 +8,7 @@ namespace EGID.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<HealthRecordAttachment> builder)
         {
-            builder.Property(e => e.Id).HasMaxLength(128);
+            builder.Property(e => e.Id).HasMaxLength(135);
 
             builder.Property(e => e.HealthRecordId).IsRequired().HasMaxLength(128);
 

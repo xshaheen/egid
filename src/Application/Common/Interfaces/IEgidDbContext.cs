@@ -16,9 +16,6 @@ namespace EGID.Application.Common.Interfaces
 
         DbSet<HealthInfo> HealthInformation { get; set; }
 
-        DbSet<ExitHospitalRecord> ExitHospitalRecords { get; set; }
-        DbSet<ExitHospitalRecordAttachment> ExitHospitalRecordAttachments { get; set; }
-
         DbSet<HealthRecord> HealthRecords { get; set; }
         DbSet<HealthRecordAttachment> HealthRecordAttachments { get; set; }
 

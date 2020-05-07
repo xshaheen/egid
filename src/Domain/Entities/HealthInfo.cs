@@ -5,11 +5,7 @@ namespace EGID.Domain.Entities
 {
     public class HealthInfo
     {
-        public HealthInfo()
-        {
-            HealthRecords = new HashSet<HealthRecord>();
-            ExitHospitalRecords = new List<ExitHospitalRecord>();
-        }
+        public HealthInfo() => HealthRecords = new HashSet<HealthRecord>();
 
         public string Id { get; set; }
 
@@ -23,6 +19,5 @@ namespace EGID.Domain.Entities
         public virtual CitizenDetail Citizen { get; set; }
 
         public virtual ICollection<HealthRecord> HealthRecords { get; }
-        public virtual ICollection<ExitHospitalRecord> ExitHospitalRecords { get; }
     }
 }

@@ -6,9 +6,15 @@ namespace EGID.Web.Services
 {
     public class FilesDirectoryService : IFilesDirectoryService
     {
-        public FilesDirectoryService(IWebHostEnvironment env) =>
-            CitizenPhotosDirectory = Path.Combine(env.WebRootPath, "Img", "CitizenPhotos");
+        public FilesDirectoryService(IWebHostEnvironment env)
+        {
+            var imgPath = Path.Combine(env.WebRootPath, "Img");
+            CitizenPhotosDirectory = Path.Combine(imgPath, "CitizenPhotos");
+            HealthInfoDirectory = Path.Combine(imgPath, "HealthAttachments");
+        }
 
         public string CitizenPhotosDirectory { get; }
+
+        public string HealthInfoDirectory { get; }
     }
 }

@@ -37,9 +37,6 @@ namespace EGID.Infrastructure.Data
 
         public virtual DbSet<HealthInfo> HealthInformation { get; set; }
 
-        public virtual DbSet<ExitHospitalRecord> ExitHospitalRecords { get; set; }
-        public virtual DbSet<ExitHospitalRecordAttachment> ExitHospitalRecordAttachments { get; set; }
-
         public virtual DbSet<HealthRecord> HealthRecords { get; set; }
         public virtual DbSet<HealthRecordAttachment> HealthRecordAttachments { get; set; }
 

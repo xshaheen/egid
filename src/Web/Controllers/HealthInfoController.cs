@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using EGID.Application.Health.Commands;
 using EGID.Application.Health.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,6 @@ namespace EGID.Web.Controllers
 {
     public class HealthInfoController : BaseController
     {
-        // get health information records
         [HttpGet("/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -18,8 +18,27 @@ namespace EGID.Web.Controllers
             return Ok();
         }
 
-        // add a record
+        [HttpPost("/")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> Post([FromBody]AddHealthRecordCommand command)
+        {
+            await Mediator.Send(command);
 
-        // add a hospital discharge
+            return NoContent();
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> EmergencyPhones([FromBody]UpdateEmergencyPhonesCommand command)
+        {
+            await Mediator.Send(command);
+
+            return NoContent();
+        }
+
     }
 }

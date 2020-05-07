@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EGID.Application.Health.Commands
 {
-    public class UpdateHealthInfoCommand : IRequest
+    public class UpdateEmergencyPhonesCommand : IRequest
     {
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
@@ -18,7 +18,7 @@ namespace EGID.Application.Health.Commands
 
         #region Validator
 
-        public class UpdateHealthInfoValidator : AbstractValidator<UpdateHealthInfoCommand>
+        public class UpdateHealthInfoValidator : AbstractValidator<UpdateEmergencyPhonesCommand>
         {
             public UpdateHealthInfoValidator() { }
         }
@@ -27,7 +27,7 @@ namespace EGID.Application.Health.Commands
 
         #region Handler
 
-        public class UpdateHealthInfoHandler : IRequestHandler<UpdateHealthInfoCommand>
+        public class UpdateHealthInfoHandler : IRequestHandler<UpdateEmergencyPhonesCommand>
         {
             private readonly IEgidDbContext _context;
             private readonly ICurrentUserService _currentUser;
@@ -38,7 +38,7 @@ namespace EGID.Application.Health.Commands
                 _currentUser = currentUser;
             }
 
-            public async Task<Unit> Handle(UpdateHealthInfoCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(UpdateEmergencyPhonesCommand request, CancellationToken cancellationToken)
             {
                 var card = await _context.Cards
                     .Include(c => c.Citizen)
