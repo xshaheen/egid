@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using EGID.Application.Common;
 using EGID.Application.Common.Interfaces;
 using EGID.Application.Common.Models.Files;
 using EGID.Domain.Entities;
@@ -37,30 +38,77 @@ namespace EGID.Application.CitizenDetails.Commands
         {
             public CreateCitizenValidator()
             {
-                RuleFor(x => x.MotherId).MaximumLength(128);
-                RuleFor(x => x.FatherId).MaximumLength(128);
+                RuleFor(x => x.MotherId)
+                    .MaximumLength(128).WithMessage("خطأ هذا العنصر غير مطابق النمط الصحيح");
 
-                RuleFor(x => x.FullName).NotNull();
-                RuleFor(x => x.FullName.FirstName).NotEmpty().MaximumLength(50);
-                RuleFor(x => x.FullName.SecondName).NotEmpty().MaximumLength(50);
-                RuleFor(x => x.FullName.ThirdName).NotEmpty().MaximumLength(50);
-                RuleFor(x => x.FullName.LastName).NotEmpty().MaximumLength(50);
+                RuleFor(x => x.FatherId)
+                    .MaximumLength(128).WithMessage("خطأ هذا العنصر غير مطابق النمط الصحيح");
 
-                RuleFor(x => x.Address).NotNull();
+                RuleFor(x => x.FullName)
+                    .NotNull().WithMessage("يرجي ادخال اسم المواطن");
+                RuleFor(x => x.FullName.FirstName)
+                    .NotEmpty().WithMessage("يرجي ادخال الاسم الاول للمواطن.")
+                    .MaximumLength(50).WithMessage("الاسم لايمكن ان يتجاوز الخمسون حرفا.");
+                RuleFor(x => x.FullName.SecondName)
+                    .NotEmpty().WithMessage("يرجي ادخال الاسم الثاني للمواطن.")
+                    .MaximumLength(50).WithMessage("الاسم لايمكن ان يتجاوز الخمسون حرفا.");
+                RuleFor(x => x.FullName.ThirdName)
+                    .NotEmpty().WithMessage("يرجي ادخال الثالث للمواطن.")
+                    .MaximumLength(50).WithMessage("الاسم لايمكن ان يتجاوز الخمسون حرفا.");
+                RuleFor(x => x.FullName.LastName)
+                    .NotEmpty().WithMessage("يرجي ادخال الاسم الاخير للمواطن.")
+                    .MaximumLength(50).WithMessage("الاسم لايمكن ان يتجاوز الخمسون حرفا.");
 
-                RuleFor(x => x.Address.Country).NotEmpty();
-                RuleFor(x => x.Address.State).NotEmpty();
-                RuleFor(x => x.Address.City).NotEmpty();
+                RuleFor(x => x.Address)
+                    .NotNull().WithMessage("يرجي اضافة العنوان.");
 
-                RuleFor(x => x.Gender).NotEqual(Gender.None);
-                RuleFor(x => x.Religion).NotEqual(Religion.None);
-                RuleFor(x => x.SocialStatus).NotEqual(SocialStatus.None);
+                RuleFor(x => x.Address.Country)
+                    .NotEmpty().WithMessage("يرجي اختيار الدولة المقيم بها المواطن حاليا.");
 
-                RuleFor(x => x.DateOfBirth).NotEqual((DateTime) default);
+                RuleFor(x => x.Address.State)
+                    .NotEmpty().WithMessage("يرجي اختيار المحافظة التابع لها المواطن.");
 
-                RuleFor(x => x.Photo).NotNull();
-                RuleFor(x => x.Photo.Bytes).NotNull();
-                RuleFor(x => x.Photo.Name).NotNull();
+                RuleFor(x => x.Address.City)
+                    .NotEmpty().WithMessage("يرجي اختيار المدينة التابع لها المواطن.");
+
+                RuleFor(x => x.Gender)
+                    .NotEqual(Gender.None).WithMessage("يرجي ادخال النوع.");
+
+                RuleFor(x => x.Religion)
+                    .NotEqual(Religion.None).WithMessage("يرجي اختيار الديانة.");
+
+                RuleFor(x => x.SocialStatus)
+                    .NotEqual(SocialStatus.None).WithMessage("يرجي اختيار الحالة الاجتماعية.");
+
+                RuleFor(x => x.DateOfBirth)
+                    .NotEqual((DateTime) default).WithMessage("اختر تاريخ ميلاد صحيح.");
+
+                RuleFor(x => x.Photo)
+                    .NotNull().WithMessage("ارفق صورة المواطن.");
+
+                RuleFor(x => x.Photo.Bytes)
+                    .NotNull().WithMessage("الصورة غير صحيحية");
+
+                RuleFor(x => x.Photo.Name)
+                    .NotNull().WithMessage("الصورة غير صحيحية");
+
+                RuleFor(x => x.HealthEmergencyPhone1)
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
+                    .Matches(Regexes.InternationalPhone)
+                    .WithMessage("رقم الهاتف غير صحيح.");
+
+                RuleFor(x => x.HealthEmergencyPhone2)
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
+                    .Matches(Regexes.InternationalPhone)
+                    .WithMessage("رقم الهاتف غير صحيح.");
+
+                RuleFor(x => x.HealthEmergencyPhone3)
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
+                    .Matches(Regexes.InternationalPhone)
+                    .WithMessage("رقم الهاتف غير صحيح.");
+
+                RuleFor(x => x.BloodType)
+                    .NotEqual(BloodType.None).WithMessage("يرجي اختيار فصيلة الدم.");
             }
         }
 

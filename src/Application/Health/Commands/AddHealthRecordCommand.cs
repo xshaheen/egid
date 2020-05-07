@@ -7,6 +7,7 @@ using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
 using EGID.Application.Common.Models.Files;
 using EGID.Domain.Entities;
+using FluentValidation;
 using MediatR;
 
 namespace EGID.Application.Health.Commands
@@ -20,6 +21,27 @@ namespace EGID.Application.Health.Commands
         public string Diagnosis { get; set; }
 
         public virtual ICollection<BinaryFile> Attachments { get; set; }
+
+        #region Validator
+
+        public class AddHealthRecordValidator : AbstractValidator<AddHealthRecordCommand>
+        {
+            public AddHealthRecordValidator()
+            {
+                RuleFor(x => x.HealthInfoId)
+                    .NotEmpty().Length(128);
+
+                RuleFor(x => x.Diagnosis)
+                    .NotEmpty().WithMessage("يرجي ملأ خانة التشخيص.")
+                    .MaximumLength(4096).WithMessage("تجاوزت الحد الاقصي عدد للحروف 4096 حرف");
+
+                RuleFor(x => x.Medications)
+                    .NotEmpty().WithMessage("يرجي ملأ خانة العلاج.")
+                    .MaximumLength(4096).WithMessage("تجاوزت الحد الاقصي عدد للحروف 4096 حرف");
+            }
+        }
+
+        #endregion
 
         #region Handler
 
