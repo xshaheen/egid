@@ -1,12 +1,16 @@
 ﻿using System.Threading.Tasks;
 using EGID.Application.Cards.Commands;
+using EGID.Application.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
+    [Authorize]
     public class CardControllerBase : ApiControllerBase
     {
+        [Authorize(Roles = Roles.CivilAffairs + "," + Roles.Admin)]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]

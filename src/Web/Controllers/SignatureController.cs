@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using EGID.Application.Cards.Commands;
 using EGID.Domain.ValueObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
+    [Authorize]
     public class SignatureControllerBase : ApiControllerBase
     {
         [HttpPost("[action]")]

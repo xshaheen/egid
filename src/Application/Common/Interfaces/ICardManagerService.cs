@@ -119,5 +119,10 @@ namespace EGID.Application.Common.Interfaces
         ///     Remove card from role.
         /// </summary>
         Task<Result> RemoveFromRoleAsync(string cardId, string roleName);
+
+        /// <summary>
+        ///     Check if the user have a role.
+        /// </summary>
+        Task<bool> IsInRoleAsync(string cardId, string roleName);
     }
 }

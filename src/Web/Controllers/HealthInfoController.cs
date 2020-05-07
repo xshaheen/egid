@@ -1,13 +1,16 @@
 ﻿using System.Threading.Tasks;
 using EGID.Application.Health.Commands;
 using EGID.Application.Health.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
+    [Authorize]
     public class HealthInfoControllerBase : ApiControllerBase
     {
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -442,6 +442,14 @@ namespace EGID.Infrastructure.Auth
             return result.ToResult();
         }
 
+        public async Task<bool> IsInRoleAsync(string cardId, string roleName)
+        {
+            var card = await _userManager.FindByIdAsync(cardId);
+
+            return await _userManager.IsInRoleAsync(card, roleName);
+
+        }
+
         #endregion
     }
 }

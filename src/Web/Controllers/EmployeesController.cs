@@ -2,11 +2,14 @@
 using System.Threading.Tasks;
 using EGID.Application.CivilAffairs.Commands;
 using EGID.Application.CivilAffairs.Queries;
+using EGID.Application.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
+    [Authorize(Roles = Roles.Admin)]
     public class EmployeesControllerBase : ApiControllerBase
     {
         [HttpGet]
