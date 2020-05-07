@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using EGID.Application;
 using EGID.Application.Common.Interfaces;
+using EGID.Application.Common.Models.Files;
 using EGID.Infrastructure;
 using EGID.Web.Infrastructure;
 using EGID.Web.Services;
@@ -51,6 +52,10 @@ namespace EGID.Web
             services.AddOpenApiDocument(document =>
             {
                 document.DocumentName = "specification";
+                document.Title = "EGID API";
+                document.GenerateEnumMappingDescription = true;
+                document.ExcludedTypeNames = new[] { nameof(BinaryFile) };
+                document.Description = "EGID API specification";
                 document.PostProcess = d =>
                 {
                     d.Info.Title = "EGID API";

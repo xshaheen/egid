@@ -3,23 +3,656 @@
   "openapi": "3.0.0",
   "info": {
     "title": "EGID API",
+    "description": "EGID API specification",
     "version": "0.0.1"
   },
   "paths": {
-    "/card": {
-      "get": {
+    "/api/auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "operationId": "Auth_SignIn",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/card": {
+      "post": {
         "tags": [
           "Card"
         ],
-        "operationId": "Card_Get",
+        "operationId": "Card_Post",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCardCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/card/puk": {
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "operationId": "Card_Puk",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePukCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/card/pin1": {
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "operationId": "Card_Pin1",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePin1Command"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/card/pin2": {
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "operationId": "Card_Pin2",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePin2Command"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/citizens": {
+      "get": {
+        "tags": [
+          "Citizens"
+        ],
+        "operationId": "Citizens_GetAll",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Citizens"
+        ],
+        "operationId": "Citizens_Post",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCitizenCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/citizens/{id}": {
+      "get": {
+        "tags": [
+          "Citizens"
+        ],
+        "operationId": "Citizens_GetOne",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "query",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCitizenDetailsQuery"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Citizens"
+        ],
+        "operationId": "Citizens_Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCitizenCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Citizens"
+        ],
+        "operationId": "Citizens_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/employees": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_GetAll",
         "responses": {
           "200": {
             "description": "",
             "content": {
-              "application/octet-stream": {
+              "application/json": {
                 "schema": {
-                  "type": "string",
-                  "format": "binary"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EmployeesVm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_Post",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddEmployeeCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/employees/{id}": {
+      "delete": {
+        "tags": [
+          "Employees"
+        ],
+        "operationId": "Employees_Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/healthinfo": {
+      "get": {
+        "tags": [
+          "HealthInfo"
+        ],
+        "operationId": "HealthInfo_GetOne",
+        "parameters": [
+          {
+            "name": "citizenId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "HealthInfo"
+        ],
+        "operationId": "HealthInfo_Post",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHealthRecordCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/healthinfo/emergencyphones": {
+      "post": {
+        "tags": [
+          "HealthInfo"
+        ],
+        "operationId": "HealthInfo_EmergencyPhones",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEmergencyPhonesCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/signature/sign": {
+      "post": {
+        "tags": [
+          "Signature"
+        ],
+        "operationId": "Signature_Sign",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignHashCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/signature/verify": {
+      "post": {
+        "tags": [
+          "Signature"
+        ],
+        "operationId": "Signature_Verify",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifySignatureCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueTupleOfBooleanAndFullNameAndString"
                 }
               }
             }
@@ -28,5 +661,560 @@
       }
     }
   },
-  "components": {}
+  "components": {
+    "schemas": {
+      "ProblemDetails": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          },
+          "extensions": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {}
+          }
+        }
+      },
+      "LoginCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "privateKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "pin1": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateCardCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ownerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "puk": {
+            "type": "string",
+            "nullable": true
+          },
+          "pin1": {
+            "type": "string",
+            "nullable": true
+          },
+          "pin2": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ChangePukCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cardId": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPuk": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPuk": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ChangePin1Command": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cardId": {
+            "type": "string",
+            "nullable": true
+          },
+          "puk": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPin1": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ChangePin2Command": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cardId": {
+            "type": "string",
+            "nullable": true
+          },
+          "puk": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPin2": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetCitizenDetailsQuery": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateCitizenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "fatherId": {
+            "type": "string",
+            "nullable": true
+          },
+          "motherId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FullName"
+              }
+            ]
+          },
+          "address": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          },
+          "religion": {
+            "$ref": "#/components/schemas/Religion"
+          },
+          "socialStatus": {
+            "$ref": "#/components/schemas/SocialStatus"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "photo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BinaryFile"
+              }
+            ]
+          },
+          "bloodType": {
+            "$ref": "#/components/schemas/BloodType"
+          },
+          "healthEmergencyPhone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthEmergencyPhone2": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthEmergencyPhone3": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "FullName": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ValueObject"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "nullable": true
+              },
+              "secondName": {
+                "type": "string",
+                "nullable": true
+              },
+              "thirdName": {
+                "type": "string",
+                "nullable": true
+              },
+              "lastName": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "ValueObject": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false
+      },
+      "Address": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ValueObject"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "street": {
+                "type": "string",
+                "nullable": true
+              },
+              "city": {
+                "type": "string",
+                "nullable": true
+              },
+              "state": {
+                "type": "string",
+                "nullable": true
+              },
+              "postalCode": {
+                "type": "string",
+                "nullable": true
+              },
+              "country": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "Gender": {
+        "type": "integer",
+        "description": "0 = None\n1 = Male\n2 = Female",
+        "x-enumNames": [
+          "None",
+          "Male",
+          "Female"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "Religion": {
+        "type": "integer",
+        "description": "0 = None\n1 = Muslim\n2 = Christian",
+        "x-enumNames": [
+          "None",
+          "Muslim",
+          "Christian"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "SocialStatus": {
+        "type": "integer",
+        "description": "0 = None\n1 = Single\n2 = Married",
+        "x-enumNames": [
+          "None",
+          "Single",
+          "Married"
+        ],
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "BinaryFile": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "bytes": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "BloodType": {
+        "type": "integer",
+        "description": "0 = None\n1 = A\n2 = B\n3 = O",
+        "x-enumNames": [
+          "None",
+          "A",
+          "B",
+          "O"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "UpdateCitizenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "fatherId": {
+            "type": "string",
+            "nullable": true
+          },
+          "motherId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FullName"
+              }
+            ]
+          },
+          "address": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          },
+          "religion": {
+            "$ref": "#/components/schemas/Religion"
+          },
+          "socialStatus": {
+            "$ref": "#/components/schemas/SocialStatus"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "photo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BinaryFile"
+              }
+            ]
+          }
+        }
+      },
+      "EmployeesVm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FullName"
+              }
+            ]
+          },
+          "address": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              }
+            ]
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          },
+          "religion": {
+            "$ref": "#/components/schemas/Religion"
+          },
+          "socialStatus": {
+            "$ref": "#/components/schemas/SocialStatus"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "photoUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AddEmployeeCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "cardId": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AddHealthRecordCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "healthInfoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "medications": {
+            "type": "string",
+            "nullable": true
+          },
+          "diagnosis": {
+            "type": "string",
+            "nullable": true
+          },
+          "attachments": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BinaryFile"
+            }
+          }
+        }
+      },
+      "UpdateEmergencyPhonesCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "healthInfoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone2": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone3": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "SignHashCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "base64Sha512DataHash": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ValueTupleOfBooleanAndFullNameAndString": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "item1": {
+            "type": "boolean"
+          },
+          "item2": {
+            "$ref": "#/components/schemas/FullName"
+          },
+          "item3": {
+            "type": "string"
+          }
+        }
+      },
+      "VerifySignatureCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "base64Sha512DataHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "signature": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
 }

@@ -67,12 +67,12 @@
       "httpClass": "HttpClient",
       "withCredentials": false,
       "useSingletonProvider": true,
-      "injectionTokenType": "OpaqueToken",
+      "injectionTokenType": "InjectionToken",
       "rxJsVersion": 6.0,
       "dateTimeType": "Date",
-      "nullValue": "Undefined",
+      "nullValue": "Null",
       "generateClientClasses": true,
-      "generateClientInterfaces": true,
+      "generateClientInterfaces": false,
       "generateOptionalParameters": false,
       "exportTypes": true,
       "wrapDtoExceptions": false,
@@ -90,14 +90,16 @@
       "operationGenerationMode": "MultipleClientsFromOperationId",
       "markOptionalProperties": true,
       "generateCloneMethod": false,
-      "typeStyle": "Class",
+      "typeStyle": "Interface",
       "enumStyle": "Enum",
       "useLeafType": false,
       "classTypes": [],
       "extendedClasses": [],
       "extensionCode": null,
       "generateDefaultValues": true,
-      "excludedTypeNames": [],
+      "excludedTypeNames": [
+        "BinaryFile"
+      ],
       "excludedParameterNames": [],
       "handleReferences": false,
       "generateConstructorInterface": true,
@@ -114,7 +116,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "ClientApp/src/app/services/data-source.service.ts"
+      "output": "ClientApp/src/app/api.ts"
     }
   }
 }
