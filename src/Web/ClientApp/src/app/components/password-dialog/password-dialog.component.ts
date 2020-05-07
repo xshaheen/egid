@@ -17,6 +17,10 @@ export class PasswordDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: IPasswordDialogData
   ) {}
 
+  public get isValid(): boolean {
+    return this.password && this.password.length > 4;
+  }
+
   onClickCancel(): void {
     this.dialogRef.close();
   }
