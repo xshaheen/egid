@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
-    public class CitizensController : BaseController
+    public class CitizensControllerBase : ApiControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

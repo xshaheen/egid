@@ -6,7 +6,7 @@ namespace EGID.Web.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class BaseController : ControllerBase
+    public class ApiControllerBase : ControllerBase
     {
         private IMediator _mediator;
 

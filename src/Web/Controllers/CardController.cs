@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
-    public class CardController : BaseController
+    public class CardControllerBase : ApiControllerBase
     {
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

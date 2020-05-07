@@ -9,25 +9,22 @@ namespace EGID.Application.Common.Exceptions
     {
         public ValidationException()
             : base("One or more validation failures have occurred.")
-            => Failures = new Dictionary<string, string[]>();
+            => Errors = new Dictionary<string, string[]>();
 
         public ValidationException(IReadOnlyCollection<ValidationFailure> failures) : this()
         {
-            IEnumerable<string> propertyNames = failures
-                .Select(e => e.PropertyName)
-                .Distinct();
+            var failureGroups = failures
+                .GroupBy(failure => failure.PropertyName, f => f.ErrorMessage);
 
-            foreach (var propertyName in propertyNames)
+            foreach (var failureGroup in failureGroups)
             {
-                string[] propertyFailures = failures
-                    .Where(e => e.PropertyName == propertyName)
-                    .Select(e => e.ErrorMessage)
-                    .ToArray();
+                var propertyName = failureGroup.Key;
+                var propertyFailures = failureGroup.ToArray();
 
-                Failures.Add(propertyName, propertyFailures);
+                Errors.Add(propertyName, propertyFailures);
             }
         }
 
-        public IDictionary<string, string[]> Failures { get; }
+        public IDictionary<string, string[]> Errors { get; }
     }
 }

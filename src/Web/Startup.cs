@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using EGID.Application;
 using EGID.Application.Common.Interfaces;
 using EGID.Infrastructure;
-using EGID.Web.Infrastructure.Middleware;
+using EGID.Web.Infrastructure;
 using EGID.Web.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +37,7 @@ namespace EGID.Web
                 options.AppendTrailingSlash = false;
             });
 
-            services.AddControllers()
+            services.AddControllers(config => config.Filters.Add<ApiExceptionFilter>())
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.IgnoreNullValues = true;
@@ -72,7 +72,6 @@ namespace EGID.Web
                 app.UseHsts();
             }
 
-            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
-    public class HealthInfoController : BaseController
+    public class HealthInfoControllerBase : ApiControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

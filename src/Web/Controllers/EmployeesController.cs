@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EGID.Web.Controllers
 {
-    public class EmployeesController : BaseController
+    public class EmployeesControllerBase : ApiControllerBase
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
