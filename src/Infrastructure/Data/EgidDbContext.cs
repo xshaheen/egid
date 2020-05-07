@@ -60,10 +60,13 @@ namespace EGID.Infrastructure.Data
             return base.SaveChangesAsync(cancellationToken);
         }
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfigurationsFromAssembly(typeof(EgidDbContext).Assembly);
+            base.OnModelCreating(builder);
 
+            builder.ApplyConfigurationsFromAssembly(typeof(EgidDbContext).Assembly);
+        
             builder.Entity<Card>().ToTable("EGCards");
             builder.Entity<IdentityRole>().ToTable("EGRoles");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("EGRoleClaim");
