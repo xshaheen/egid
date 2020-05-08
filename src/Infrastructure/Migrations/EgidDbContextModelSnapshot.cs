@@ -388,7 +388,7 @@ namespace EGID.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EGUserClaims");
+                    b.ToTable("EGCardClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -410,7 +410,7 @@ namespace EGID.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EGUserLogins");
+                    b.ToTable("EGCardLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -425,7 +425,7 @@ namespace EGID.Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("EGUserRoles");
+                    b.ToTable("EGCardRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -444,7 +444,7 @@ namespace EGID.Infrastructure.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("EGUserToken");
+                    b.ToTable("EGCardToken");
                 });
 
             modelBuilder.Entity("EGID.Domain.Entities.Card", b =>

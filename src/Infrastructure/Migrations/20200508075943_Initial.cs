@@ -162,7 +162,7 @@ namespace EGID.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EGUserClaims",
+                name: "EGCardClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -173,9 +173,9 @@ namespace EGID.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EGUserClaims", x => x.Id);
+                    table.PrimaryKey("PK_EGCardClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EGUserClaims_EGCards_UserId",
+                        name: "FK_EGCardClaims_EGCards_UserId",
                         column: x => x.UserId,
                         principalTable: "EGCards",
                         principalColumn: "Id",
@@ -183,7 +183,7 @@ namespace EGID.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EGUserLogins",
+                name: "EGCardLogins",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(nullable: false),
@@ -193,9 +193,9 @@ namespace EGID.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EGUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.PrimaryKey("PK_EGCardLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_EGUserLogins_EGCards_UserId",
+                        name: "FK_EGCardLogins_EGCards_UserId",
                         column: x => x.UserId,
                         principalTable: "EGCards",
                         principalColumn: "Id",
@@ -203,7 +203,7 @@ namespace EGID.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EGUserRoles",
+                name: "EGCardRoles",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -211,15 +211,15 @@ namespace EGID.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EGUserRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_EGCardRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_EGUserRoles_EGRoles_RoleId",
+                        name: "FK_EGCardRoles_EGRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "EGRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EGUserRoles_EGCards_UserId",
+                        name: "FK_EGCardRoles_EGCards_UserId",
                         column: x => x.UserId,
                         principalTable: "EGCards",
                         principalColumn: "Id",
@@ -227,7 +227,7 @@ namespace EGID.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EGUserToken",
+                name: "EGCardToken",
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
@@ -237,9 +237,9 @@ namespace EGID.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EGUserToken", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.PrimaryKey("PK_EGCardToken", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_EGUserToken_EGCards_UserId",
+                        name: "FK_EGCardToken_EGCards_UserId",
                         column: x => x.UserId,
                         principalTable: "EGCards",
                         principalColumn: "Id",
@@ -295,6 +295,21 @@ namespace EGID.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_EGCardClaims_UserId",
+                table: "EGCardClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EGCardLogins_UserId",
+                table: "EGCardLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EGCardRoles_RoleId",
+                table: "EGCardRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EGCards_CitizenId",
                 table: "EGCards",
                 column: "CitizenId",
@@ -325,21 +340,6 @@ namespace EGID.Infrastructure.Migrations
                 filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EGUserClaims_UserId",
-                table: "EGUserClaims",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EGUserLogins_UserId",
-                table: "EGUserLogins",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EGUserRoles_RoleId",
-                table: "EGUserRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_HealthInformation_CitizenId",
                 table: "HealthInformation",
                 column: "CitizenId",
@@ -362,28 +362,28 @@ namespace EGID.Infrastructure.Migrations
                 name: "DeathCertificates");
 
             migrationBuilder.DropTable(
+                name: "EGCardClaims");
+
+            migrationBuilder.DropTable(
+                name: "EGCardLogins");
+
+            migrationBuilder.DropTable(
+                name: "EGCardRoles");
+
+            migrationBuilder.DropTable(
+                name: "EGCardToken");
+
+            migrationBuilder.DropTable(
                 name: "EGRoleClaim");
-
-            migrationBuilder.DropTable(
-                name: "EGUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "EGUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "EGUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "EGUserToken");
 
             migrationBuilder.DropTable(
                 name: "HealthRecordAttachments");
 
             migrationBuilder.DropTable(
-                name: "EGRoles");
+                name: "EGCards");
 
             migrationBuilder.DropTable(
-                name: "EGCards");
+                name: "EGRoles");
 
             migrationBuilder.DropTable(
                 name: "HealthRecords");
