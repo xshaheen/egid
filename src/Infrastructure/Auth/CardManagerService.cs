@@ -305,6 +305,20 @@ namespace EGID.Infrastructure.Auth
 
         #endregion Change Passwords
 
+        #region Verify
+
+        public bool VerifyPin2(Card card, string pin2)
+        {
+            var pin2Hash = card.Pin2Hash;
+            var salt = card.Pin2Salt;
+
+            var hash = _hashService.Create(pin2, salt);
+
+            return pin2Hash == hash;
+        }
+
+        #endregion
+
         #region Change Active State
 
         public async Task<Result> InactivateAsync(string id)

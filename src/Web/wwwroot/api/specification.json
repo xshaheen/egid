@@ -1399,9 +1399,14 @@
         "type": "object",
         "additionalProperties": false,
         "required": [
+          "pin2",
           "base64Sha512DataHash"
         ],
         "properties": {
+          "pin2": {
+            "type": "string",
+            "minLength": 1
+          },
           "base64Sha512DataHash": {
             "type": "string",
             "minLength": 1

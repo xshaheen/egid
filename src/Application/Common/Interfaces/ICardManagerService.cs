@@ -4,6 +4,7 @@ using EGID.Application.Cards.Commands;
 using EGID.Application.CivilAffairs.Queries;
 using EGID.Application.Common.Exceptions;
 using EGID.Common.Models.Result;
+using EGID.Domain.Entities;
 
 namespace EGID.Application.Common.Interfaces
 {
@@ -70,6 +71,11 @@ namespace EGID.Application.Common.Interfaces
         ///     Can not find card.
         /// </exception>
         Task<Result> ChangePukAsync(string cardId, string currentPuk, string newPuk);
+
+        /// <summary>
+        ///     Verify Pin2 is correct.
+        /// </summary>
+        bool VerifyPin2(Card card, string pin2);
 
         /// <summary>
         ///     Inactive a card.
