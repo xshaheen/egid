@@ -1,15 +1,16 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { SignInModel, AuthService } from "src/app/services/auth.service";
+import { AuthService } from "src/app/services/auth.service";
+import { ILoginCommand, LoginCommand } from "src/app/api";
 
 @Component({
   templateUrl: "./login-dialog.component.html",
 })
 export class LoginDialogComponent {
-  loginModel: SignInModel = {
-    pin1: null,
+  loginModel: ILoginCommand = {
     cardId: null,
+    pin1: null,
   };
 
   constructor(
@@ -34,7 +35,7 @@ export class LoginDialogComponent {
   }
 
   signIn() {
-    this.authService.signIn(this.loginModel);
+    this.authService.signIn(new LoginCommand(this.loginModel));
     this.dialogRef.close();
   }
 }
