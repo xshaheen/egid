@@ -10,8 +10,9 @@ import { CivilAffairsModule } from "./views/civil-affairs/civil-affairs.module";
 import { RecordsModule } from "./views/health/records/records.module";
 import { AddModule } from "./views/health/add/add.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ManageModule } from "./views/manage/manage.module";
+import { AppHttpInterceptor } from "./core/interceptor";
 
 @NgModule({
   imports: [
@@ -28,5 +29,8 @@ import { ManageModule } from "./views/manage/manage.module";
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
+  ],
 })
 export class AppModule {}
