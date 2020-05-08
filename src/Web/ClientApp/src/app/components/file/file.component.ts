@@ -1,17 +1,12 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 
-export class FileModel {
-  file: File;
-  progress: number;
-}
-
 @Component({
   selector: "eg-file",
   templateUrl: "./file.component.html",
-  styleUrls: ["./file.component.scss"]
+  styleUrls: ["./file.component.scss"],
 })
 export class FileComponent {
-  @Output() fileDropped = new EventEmitter<FileModel>();
+  @Output() fileDropped = new EventEmitter<File>();
 
   @Input() disabled = false;
   @Input() required = false;
@@ -28,8 +23,7 @@ export class FileComponent {
       return;
     }
     for (let i = 0; i < files.length; i++) {
-      const f = files.item(i) as File;
-      this.fileDropped.emit({ file: f, progress: 0 });
+      this.fileDropped.emit(files.item(i) as File);
     }
   }
 }
