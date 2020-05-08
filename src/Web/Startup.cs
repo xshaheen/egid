@@ -54,7 +54,6 @@ namespace EGID.Web
                 document.DocumentName = "specification";
                 document.Title = "EGID API";
                 document.GenerateEnumMappingDescription = true;
-                document.ExcludedTypeNames = new[] { nameof(BinaryFile) };
                 document.Description = "EGID API specification";
                 document.PostProcess = d =>
                 {

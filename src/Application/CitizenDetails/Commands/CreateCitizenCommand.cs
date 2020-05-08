@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common;
@@ -17,17 +18,21 @@ namespace EGID.Application.CitizenDetails.Commands
         public string FatherId { get; set; }
         public string MotherId { get; set; }
 
-        public FullName FullName { get; set; }
-        public Address Address { get; set; }
+        [Required] public FullName FullName { get; set; }
+        [Required] public Address Address { get; set; }
 
         public Gender Gender { get; set; }
+
         public Religion Religion { get; set; }
+
         public SocialStatus SocialStatus { get; set; }
+
         public DateTime DateOfBirth { get; set; }
 
         public BinaryFile Photo { get; set; }
 
         public BloodType BloodType { get; set; }
+
         public string HealthEmergencyPhone1 { get; set; }
         public string HealthEmergencyPhone2 { get; set; }
         public string HealthEmergencyPhone3 { get; set; }
@@ -163,7 +168,7 @@ namespace EGID.Application.CitizenDetails.Commands
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return citizen.Id;
+                return citizen.HealthInfo.Id;
             }
         }
 

@@ -12,18 +12,18 @@ const routes: Routes = [
     path: "",
     component: ManageComponent,
     children: [
-      { path: "", redirectTo: "sign" },
+      { path: "", redirectTo: "sign", pathMatch: "full" },
       { path: "sign", component: SignDocComponent },
       { path: "verify", component: VerifySignatureComponent },
       { path: "update", component: UpdateInfoComponent },
       { path: "card", component: CardComponent },
-      { path: "health-info", component: UpdateHealthInfoComponent }
-    ]
-  }
+      { path: "health-info", component: UpdateHealthInfoComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ManageRoutingModule {}

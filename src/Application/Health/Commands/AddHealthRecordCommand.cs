@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,11 +15,11 @@ namespace EGID.Application.Health.Commands
 {
     public class AddHealthRecordCommand : IRequest
     {
-        public string HealthInfoId { get; set; }
+        [Required] public string HealthInfoId { get; set; }
 
-        public string Medications { get; set; }
+        [Required] public string Medications { get; set; }
 
-        public string Diagnosis { get; set; }
+        [Required] public string Diagnosis { get; set; }
 
         public virtual ICollection<BinaryFile> Attachments { get; set; }
 

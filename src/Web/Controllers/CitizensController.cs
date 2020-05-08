@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EGID.Application.CitizenDetails.Commands;
 using EGID.Application.CitizenDetails.Queries;
@@ -25,7 +26,7 @@ namespace EGID.Web.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult<List<CitizenDetailsVm>>> GetAll()
         {
             var citizens = await Mediator.Send(new GetCitizenDetailsListQuery());
 
@@ -36,7 +37,7 @@ namespace EGID.Web.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> GetOne(string id, [FromBody] GetCitizenDetailsQuery query)
+        public async Task<ActionResult<CitizenDetailsVm>> GetOne(string id, [FromBody] GetCitizenDetailsQuery query)
         {
             if (id != query.Id) return NotFound();
 
@@ -45,21 +46,21 @@ namespace EGID.Web.Controllers
                 await _cardManager.IsInRoleAsync(_currentUser.UserId, Roles.Admin))
                 return Forbid();
 
-            await Mediator.Send(query);
+            var result = await Mediator.Send(query);
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Post([FromBody] CreateCitizenCommand command)
+        public async Task<ActionResult<string>> Post([FromBody] CreateCitizenCommand command)
         {
             command.Photo = Request.Files().FirstOrDefault();
 
-            await Mediator.Send(command);
+            var healthInfoId = await Mediator.Send(command);
 
-            return NoContent();
+            return Ok(healthInfoId);
         }
 
         [HttpPost("{id}")]

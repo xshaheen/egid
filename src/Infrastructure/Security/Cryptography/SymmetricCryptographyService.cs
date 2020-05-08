@@ -12,7 +12,7 @@ namespace EGID.Infrastructure.Security.Cryptography
         private readonly string _key;
 
         public SymmetricCryptographyService(string key) => _key = key;
-
+        
         public async Task<string> DecryptAsync(string cypherText, string salt)
         {
             using var algorithm = Algorithm(salt);

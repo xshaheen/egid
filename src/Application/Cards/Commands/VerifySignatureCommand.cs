@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common.Exceptions;
@@ -12,9 +13,9 @@ namespace EGID.Application.Cards.Commands
 {
     public class VerifySignatureCommand : IRequest<(bool valid, FullName name, string Photo)>
     {
-        public string Base64Sha512DataHash { get; set; }
+        [Required] public string Base64Sha512DataHash { get; set; }
 
-        public string Signature { get; set; }
+        [Required] public string Signature { get; set; }
 
         #region Validator
 

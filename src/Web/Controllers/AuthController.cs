@@ -12,7 +12,7 @@ namespace EGID.Web.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> SignIn([FromBody] LoginCommand command)
+        public async Task<ActionResult<string>> SignIn([FromBody] LoginCommand command)
         {
             var token = await Mediator.Send(command);
 

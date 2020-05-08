@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common.Exceptions;
@@ -12,7 +13,7 @@ namespace EGID.Application.CitizenDetails.Commands
 {
     public class DeleteCitizenCommand : IRequest
     {
-        public string Id { get; set; }
+        [Required] public string Id { get; set; }
 
         #region Validator
 

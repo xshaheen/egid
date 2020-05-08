@@ -23,12 +23,21 @@ namespace EGID.Web.Controllers
         [HttpPost("[action]")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<(bool valid, FullName name, string Photo)>> Verify(
+        public async Task<ActionResult<VerifySignatureResult>> Verify(
             [FromBody] VerifySignatureCommand command)
         {
-            var result = await Mediator.Send(command);
+            var (valid, fullName, photo) = await Mediator.Send(command);
 
-            return Ok(result);
+            return Ok(new VerifySignatureResult{FullName = fullName, Valid = valid, Photo = photo});
         }
+    }
+
+    public class VerifySignatureResult
+    {
+        public bool Valid { get; set; }
+
+        public FullName FullName { get; set; }
+
+        public string Photo { get; set; }
     }
 }

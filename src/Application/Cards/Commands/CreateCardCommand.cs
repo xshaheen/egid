@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common;
 using EGID.Application.Common.Interfaces;
@@ -9,16 +10,13 @@ namespace EGID.Application.Cards.Commands
 {
     public class CreateCardCommand : IRequest<string>
     {
-        public string OwnerId { get; set; }
+        [Required] public string OwnerId { get; set; }
 
-        public string Puk { get; set; }
-
-        public string Pin1 { get; set; }
-
-        public string Pin2 { get; set; }
+        [Required] public string Puk { get; set; }
+        [Required] public string Pin1 { get; set; }
+        [Required] public string Pin2 { get; set; }
 
         public string Email { get; set; }
-
         public string PhoneNumber { get; set; }
 
         #region Validator

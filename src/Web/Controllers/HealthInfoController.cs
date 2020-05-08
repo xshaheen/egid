@@ -15,18 +15,18 @@ namespace EGID.Web.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetOne(string citizenId)
+        public async Task<ActionResult<HealthInfoVm>> GetOne(string citizenId)
         {
-            await Mediator.Send(new GetHealthInfoQuery());
+            var result = await Mediator.Send(new GetHealthInfoQuery {HealthInfoId = citizenId});
 
-            return Ok();
+            return Ok(result);
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Post([FromBody]AddHealthRecordCommand command)
+        public async Task<IActionResult> Post([FromBody] AddHealthRecordCommand command)
         {
             command.Attachments = Request.Files();
 
@@ -39,12 +39,11 @@ namespace EGID.Web.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> EmergencyPhones([FromBody]UpdateEmergencyPhonesCommand command)
+        public async Task<IActionResult> EmergencyPhones([FromBody] UpdateEmergencyPhonesCommand command)
         {
             await Mediator.Send(command);
 
             return NoContent();
         }
-
     }
 }

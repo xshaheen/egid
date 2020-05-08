@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common;
 using EGID.Application.Common.Exceptions;
@@ -9,7 +10,7 @@ namespace EGID.Application.CivilAffairs.Commands
 {
     public class DeleteEmployeeCommand : IRequest
     {
-        public string CardId { get; set; }
+        [Required] public string CardId { get; set; }
 
         #region Handler
 

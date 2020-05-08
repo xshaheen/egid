@@ -9,7 +9,7 @@ using EGID.Domain.ValueObjects;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
+// TODO: Validate update citizen
 namespace EGID.Application.CitizenDetails.Commands
 {
     public class UpdateCitizenCommand : IRequest

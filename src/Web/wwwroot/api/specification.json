@@ -219,7 +219,7 @@
           "x-position": 1
         },
         "responses": {
-          "204": {
+          "200": {
             "description": ""
           },
           "default": {
@@ -705,36 +705,46 @@
       "LoginCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "cardId",
+          "pin1"
+        ],
         "properties": {
           "cardId": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "pin1": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         }
       },
       "CreateCardCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "ownerId",
+          "puk",
+          "pin1",
+          "pin2"
+        ],
         "properties": {
           "ownerId": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "puk": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "pin1": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "pin2": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "email": {
             "type": "string",
@@ -749,54 +759,69 @@
       "ChangePukCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "cardId",
+          "currentPuk",
+          "newPuk"
+        ],
         "properties": {
           "cardId": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "currentPuk": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "newPuk": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         }
       },
       "ChangePin1Command": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "cardId",
+          "puk",
+          "newPin1"
+        ],
         "properties": {
           "cardId": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "puk": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "newPin1": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         }
       },
       "ChangePin2Command": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "cardId",
+          "puk",
+          "newPin2"
+        ],
         "properties": {
           "cardId": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "puk": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "newPin2": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         }
       },
@@ -813,6 +838,10 @@
       "CreateCitizenCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "fullName",
+          "address"
+        ],
         "properties": {
           "fatherId": {
             "type": "string",
@@ -823,20 +852,10 @@
             "nullable": true
           },
           "fullName": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/FullName"
-              }
-            ]
+            "$ref": "#/components/schemas/FullName"
           },
           "address": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Address"
-              }
-            ]
+            "$ref": "#/components/schemas/Address"
           },
           "gender": {
             "$ref": "#/components/schemas/Gender"
@@ -1129,28 +1148,36 @@
       "AddEmployeeCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "cardId"
+        ],
         "properties": {
           "cardId": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         }
       },
       "AddHealthRecordCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "healthInfoId",
+          "medications",
+          "diagnosis"
+        ],
         "properties": {
           "healthInfoId": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "medications": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "diagnosis": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "attachments": {
             "type": "array",
@@ -1186,10 +1213,13 @@
       "SignHashCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "base64Sha512DataHash"
+        ],
         "properties": {
           "base64Sha512DataHash": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         }
       },
@@ -1211,14 +1241,18 @@
       "VerifySignatureCommand": {
         "type": "object",
         "additionalProperties": false,
+        "required": [
+          "base64Sha512DataHash",
+          "signature"
+        ],
         "properties": {
           "base64Sha512DataHash": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           },
           "signature": {
             "type": "string",
-            "nullable": true
+            "minLength": 1
           }
         }
       }

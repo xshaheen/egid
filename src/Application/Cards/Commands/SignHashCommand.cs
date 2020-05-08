@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
@@ -9,7 +10,7 @@ namespace EGID.Application.Cards.Commands
 {
     public class SignHashCommand : IRequest<string>
     {
-        public string Base64Sha512DataHash { get; set; }
+        [Required] public string Base64Sha512DataHash { get; set; }
 
         #region Validator
 

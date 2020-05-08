@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
@@ -9,9 +10,9 @@ namespace EGID.Application.Cards.Login
 {
     public class LoginCommand : IRequest<string>
     {
-        public string CardId { get; set; }
+        [Required] public string CardId { get; set; }
 
-        public string Pin1 { get; set; }
+        [Required] public string Pin1 { get; set; }
 
         #region Validator
 

@@ -8,7 +8,7 @@ using EGID.Domain.Entities;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
+// TODO: Validate
 namespace EGID.Application.Health.Commands
 {
     public class UpdateEmergencyPhonesCommand : IRequest

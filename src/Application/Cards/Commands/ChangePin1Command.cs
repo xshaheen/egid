@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
@@ -9,9 +10,9 @@ namespace EGID.Application.Cards.Commands
 {
     public class ChangePin1Command : IRequest
     {
-        public string CardId { get; set; }
-        public string Puk { get; set; }
-        public string NewPin1 { get; set; }
+        [Required] public string CardId { get; set; }
+        [Required] public string Puk { get; set; }
+        [Required] public string NewPin1 { get; set; }
     }
 
     #region Validator
