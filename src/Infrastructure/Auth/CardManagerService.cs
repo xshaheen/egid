@@ -122,8 +122,8 @@ namespace EGID.Infrastructure.Auth
                 var token = _jwtTokenService.Generate(
                     new List<Claim>()
                         .AddJti()
-                        .AddNameIdentifier(card.Id)
-                        .AddSub(card.CitizenId)
+                        .AddNameIdentifier(card.CitizenId)
+                        .AddSub(card.Id)
                         .AddRoles(cardRoles.ToArray())
                 );
 

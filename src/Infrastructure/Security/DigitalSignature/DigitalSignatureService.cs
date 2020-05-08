@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography;
+using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
 
 namespace EGID.Infrastructure.Security.DigitalSignature
@@ -8,7 +9,16 @@ namespace EGID.Infrastructure.Security.DigitalSignature
     {
         public string SignHash(string base64Hash, string privateKeyXml)
         {
-            byte[] sha512HashBytes = Convert.FromBase64String(base64Hash);
+            byte[] sha512HashBytes;
+
+            try
+            {
+                sha512HashBytes = Convert.FromBase64String(base64Hash);
+            }
+            catch
+            {
+                throw new BadRequestException(new []{"صيغة كود الملف base64 غير صحيحة."});
+            }
 
             var rsa = new RSACryptoServiceProvider(4096) {PersistKeyInCsp = false};
             // import the private key used for signing the message
@@ -22,8 +32,17 @@ namespace EGID.Infrastructure.Security.DigitalSignature
 
         public bool VerifySignature(string dataHash, string signature, string publicKeyXml)
         {
-            byte[] dataHashBytes = Convert.FromBase64String(dataHash);
-            byte[] signatureBytes = Convert.FromBase64String(signature);
+            byte[] dataHashBytes;
+            byte[] signatureBytes;
+            try
+            {
+                dataHashBytes = Convert.FromBase64String(dataHash);
+                signatureBytes = Convert.FromBase64String(signature);
+            }
+            catch
+            {
+                throw new BadRequestException(new []{"صيغة كود الملف base64 غير صحيحة."});
+            }
 
             // instantiate RSA to verify
             using var rsa = RSA.Create();
