@@ -46,10 +46,10 @@ namespace EGID.Infrastructure
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             var jwtSettings = new JwtSettings(
-                configuration.GetSection("JWT")["JwtKey"],
+                configuration["Jwt:Key"],
                 new TimeSpan(0, 30, 0),
-                configuration.GetSection("JWT")["JwtIssuer"],
-                configuration.GetSection("JWT")["JwtIssuer"]
+                configuration["Jwt:Issuer"],
+                configuration["Jwt:Issuer"]
             );
 
             services.AddAuthentication(options =>

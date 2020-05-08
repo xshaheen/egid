@@ -1,7 +1,9 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.DbInitializer;
 using EGID.Infrastructure.Data;
+using EGID.Infrastructure.Security.Jwt;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +32,7 @@ namespace EGID.Web
 
                     var mediator = services.GetService<IMediator>();
 
-                    await mediator.Send(new InitializeDbCommand());
+                    await mediator.Send(new InitializeDbCommand(), CancellationToken.None);
                 }
                 catch (Exception e)
                 {

@@ -14,9 +14,10 @@ namespace EGID.Infrastructure.Security.Jwt
 
         public JwtTokenService(JwtSettings settings)
         {
+            _settings = settings;
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
             _signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
-            _settings = settings;
         }
 
         public Dictionary<string, object> Decode(string token)
