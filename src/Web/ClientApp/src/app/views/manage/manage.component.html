@@ -14,7 +14,11 @@
       <i class="fas fa-question-circle icon"></i>
     </button>
 
-    <button mat-button *ngIf="!authService.isAuthenticated">
+    <button
+      mat-button
+      *ngIf="!authService.isAuthenticated"
+      (click)="openLoginDialog()"
+    >
       <i class="fa fa-sign-in-alt"></i> تسجيل الدخول
     </button>
   </span>

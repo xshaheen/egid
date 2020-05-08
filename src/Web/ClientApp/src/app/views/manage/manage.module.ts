@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
 import { ManageRoutingModule } from "./manage-routing.module";
 import { MaterialModule } from "src/app/material.module";
 import { FileModule } from "src/app/components/file/file.module";
@@ -12,6 +13,7 @@ import { VerifySignatureComponent } from "./verify-signature/verify-signature.co
 import { UpdateHealthInfoComponent } from "./update-health-info/update-health-info.component";
 import { PasswordDialogModule } from "src/app/components/password-dialog/password-dialog.module";
 import { ConfirmDialogModule } from "src/app/components/confirm-dialog/confirm-dialog.module";
+import { LoginDialogModule } from "src/app/components/login-dialog/login-dialog.module";
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { ConfirmDialogModule } from "src/app/components/confirm-dialog/confirm-d
     FileModule,
     PasswordDialogModule,
     ConfirmDialogModule,
+    LoginDialogModule,
   ],
 })
 export class ManageModule {}

@@ -10,21 +10,23 @@ import { CivilAffairsModule } from "./views/civil-affairs/civil-affairs.module";
 import { RecordsModule } from "./views/health/records/records.module";
 import { AddModule } from "./views/health/add/add.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthModule } from "./views/auth/auth.module";
+import { HttpClientModule } from "@angular/common/http";
+import { ManageModule } from "./views/manage/manage.module";
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
     MainModule,
     AdminModule,
     CivilAffairsModule,
     RecordsModule,
     AddModule,
-    AuthModule
+    ManageModule,
   ],
   declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

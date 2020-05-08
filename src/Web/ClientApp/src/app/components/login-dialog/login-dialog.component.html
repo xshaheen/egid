@@ -31,12 +31,7 @@
 
 <div mat-dialog-actions>
   <button mat-button (click)="onClickCancel()">رجوع</button>
-  <button
-    mat-button
-    [mat-dialog-close]="loginModel"
-    [disabled]="!isValid"
-    ariaLabel="موافق"
-  >
+  <button mat-button (click)="signIn()" [disabled]="!isValid" ariaLabel="موافق">
     تم
   </button>
 </div>

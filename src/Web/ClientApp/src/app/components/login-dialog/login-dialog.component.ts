@@ -1,8 +1,7 @@
-import { Component, Inject } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Component } from "@angular/core";
+import { MatDialogRef } from "@angular/material/dialog";
 import { Router } from "@angular/router";
-import { SignInModel } from "src/app/services/auth.service";
-import { createWriteStream } from "fs";
+import { SignInModel, AuthService } from "src/app/services/auth.service";
 
 @Component({
   templateUrl: "./login-dialog.component.html",
@@ -10,17 +9,18 @@ import { createWriteStream } from "fs";
 export class LoginDialogComponent {
   loginModel: SignInModel = {
     pin1: null,
-    privateKey: null,
+    cardId: null,
   };
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   public get isValid(): boolean {
     const valid =
-      this.loginModel.pin1 != null && this.loginModel.privateKey != null;
+      this.loginModel.pin1 != null && this.loginModel.cardId != null;
     return valid;
   }
 
@@ -30,6 +30,11 @@ export class LoginDialogComponent {
   }
 
   onGetLoginString(result: string) {
-    this.loginModel.privateKey = result;
+    this.loginModel.cardId = result;
+  }
+
+  signIn() {
+    this.authService.signIn(this.loginModel);
+    this.dialogRef.close();
   }
 }

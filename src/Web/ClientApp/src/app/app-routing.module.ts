@@ -1,49 +1,51 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AuthComponent } from "./views/auth/auth.component";
+import { AuthGuard } from "./guards/auth.guard";
 
 const routes: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./views/main/main.module").then(m => m.MainModule)
-  },
-  {
-    path: "auth",
-    component: AuthComponent
+      import("./views/main/main.module").then((m) => m.MainModule),
   },
   {
     path: "admin",
+    canActivate: [AuthGuard],
     loadChildren: () =>
-      import("./views/admin/admin.module").then(m => m.AdminModule)
+      import("./views/admin/admin.module").then((m) => m.AdminModule),
   },
   {
+    canActivate: [AuthGuard],
     path: "civil-affairs",
     loadChildren: () =>
       import("./views/civil-affairs/civil-affairs.module").then(
-        m => m.CivilAffairsModule
-      )
+        (m) => m.CivilAffairsModule
+      ),
   },
   {
     path: "manage",
+    canActivate: [AuthGuard],
     loadChildren: () =>
-      import("./views/manage/manage.module").then(m => m.ManageModule)
+      import("./views/manage/manage.module").then((m) => m.ManageModule),
   },
   {
     path: "health/records",
     loadChildren: () =>
-      import("./views/health/records/records.module").then(m => m.RecordsModule)
+      import("./views/health/records/records.module").then(
+        (m) => m.RecordsModule
+      ),
   },
   {
+    canActivate: [AuthGuard],
     path: "health/add",
     loadChildren: () =>
-      import("./views/health/add/add.module").then(m => m.AddModule)
+      import("./views/health/add/add.module").then((m) => m.AddModule),
   },
-  { path: "**", redirectTo: "" }
+  { path: "**", redirectTo: "" },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
