@@ -50,20 +50,20 @@ namespace EGID.Application.Cards.Commands
 
             public async Task<string> Handle(SignHashCommand request, CancellationToken cancellationToken)
             {
-                var card = await _context.Cards.FindAsync(_currentUser.UserId);
+                var card = await _context.Cards.FindAsync(_currentUser.CardId);
 
-                if (card is null) throw new EntityNotFoundException("Card", _currentUser.UserId);
+                if (card is null) throw new EntityNotFoundException("Card", _currentUser.CardId);
 
                 if (!_cardManager.VerifyPin2(card, request.Pin2))
                     throw new BadRequestException(new[] {"خطأ رمز PIN2 غير صحيح."});
 
-                var citizen = await _context.CitizenDetails.FindAsync(card.CitizenId);
+                var citizen = await _context.CitizenDetails.FindAsync(_currentUser.CitizenId);
 
                 if (citizen is null) throw new EntityNotFoundException("Citizen", card.CitizenId);
 
                 var signature = _digitalSignatureService.SignHash(request.Base64Sha512DataHash, citizen.PrivateKey);
 
-                return _currentUser.UserId + signature;
+                return citizen.Id + signature;
             }
         }
 

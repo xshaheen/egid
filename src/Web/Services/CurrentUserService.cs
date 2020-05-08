@@ -8,11 +8,15 @@ namespace EGID.Web.Services
     {
         public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
-            UserId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
-            IsAuthenticated = UserId != null;
+            CitizenId = httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+            CardId = httpContextAccessor.HttpContext?.User?.FindFirstValue("sub");
+            IsAuthenticated = CardId != null;
         }
 
-        public string UserId { get; }
+        public string CitizenId { get; }
+
+        public string CardId { get; }
+
         public bool IsAuthenticated { get; }
     }
 }

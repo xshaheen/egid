@@ -41,9 +41,9 @@ namespace EGID.Web.Controllers
         {
             if (id != query.Id) return NotFound();
 
-            if (_currentUser.UserId != id ||
-                await _cardManager.IsInRoleAsync(_currentUser.UserId, Roles.CivilAffairs) ||
-                await _cardManager.IsInRoleAsync(_currentUser.UserId, Roles.Admin))
+            if (_currentUser.CardId != id ||
+                await _cardManager.IsInRoleAsync(_currentUser.CardId, Roles.CivilAffairs) ||
+                await _cardManager.IsInRoleAsync(_currentUser.CardId, Roles.Admin))
                 return Forbid();
 
             var result = await Mediator.Send(query);

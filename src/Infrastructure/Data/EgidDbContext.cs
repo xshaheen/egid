@@ -48,11 +48,11 @@ namespace EGID.Infrastructure.Data
                 {
                     case EntityState.Added:
                         entry.Entity.Create = _dateTime.Now;
-                        entry.Entity.CreateBy = _currentUser.UserId;
+                        entry.Entity.CreateBy = _currentUser.CitizenId;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModified = _dateTime.Now;
-                        entry.Entity.LastModifiedBy = _currentUser.UserId;
+                        entry.Entity.LastModifiedBy = _currentUser.CitizenId;
                         break;
                 }
             }
@@ -70,10 +70,10 @@ namespace EGID.Infrastructure.Data
             builder.Entity<Card>().ToTable("EGCards");
             builder.Entity<IdentityRole>().ToTable("EGRoles");
             builder.Entity<IdentityRoleClaim<string>>().ToTable("EGRoleClaim");
-            builder.Entity<IdentityUserRole<string>>().ToTable("EGUserRoles");
-            builder.Entity<IdentityUserClaim<string>>().ToTable("EGUserClaims");
-            builder.Entity<IdentityUserLogin<string>>().ToTable("EGUserLogins");
-            builder.Entity<IdentityUserToken<string>>().ToTable("EGUserToken");
+            builder.Entity<IdentityUserRole<string>>().ToTable("EGCardRoles");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("EGCardClaims");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("EGCardLogins");
+            builder.Entity<IdentityUserToken<string>>().ToTable("EGCardToken");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using EGID.Application.Cards.Commands;
 using EGID.Application.CivilAffairs.Queries;
+using EGID.Application.Common;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
 using EGID.Common.Models.Result;
@@ -115,13 +115,17 @@ namespace EGID.Infrastructure.Auth
             // Is this a correct PIN?
             var isCorrectPin = card.Pin1Hash == _hashService.Create(pin1, card.Pin1Salt);
 
+            var cardRoles = await _userManager.GetRolesAsync(card);
+
             if (isCorrectPin)
             {
-                var token = _jwtTokenService.Generate(new List<Claim>
-                {
-                    new Claim(JwtRegisteredClaimNames.Sub, card.Id),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                });
+                var token = _jwtTokenService.Generate(
+                    new List<Claim>()
+                        .AddJti()
+                        .AddNameIdentifier(card.Id)
+                        .AddSub(card.CitizenId)
+                        .AddRoles(cardRoles.ToArray())
+                );
 
                 return (Result.Success(), token);
             }
@@ -155,7 +159,7 @@ namespace EGID.Infrastructure.Auth
                 TerminationDate = DateTime.UtcNow.AddYears(4),
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
-                CardIssuer = _currentUser.UserId,
+                CardIssuer = _currentUser.CitizenId,
                 UserName = Guid.NewGuid().ToString()
             };
 

@@ -3,9 +3,14 @@
     public interface ICurrentUserService
     {
         /// <summary>
-        ///     Current user id.
+        ///     Current citizen id.
         /// </summary>
-        string UserId { get; }
+        public string CitizenId { get; }
+
+        /// <summary>
+        ///     Current card id.
+        /// </summary>
+        string CardId { get; }
 
         /// <summary>
         ///     Returns true if the current request is authenticated.
