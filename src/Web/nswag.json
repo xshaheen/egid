@@ -90,16 +90,14 @@
       "operationGenerationMode": "MultipleClientsFromOperationId",
       "markOptionalProperties": true,
       "generateCloneMethod": false,
-      "typeStyle": "Interface",
+      "typeStyle": "Class",
       "enumStyle": "Enum",
       "useLeafType": false,
       "classTypes": [],
       "extendedClasses": [],
       "extensionCode": null,
       "generateDefaultValues": true,
-      "excludedTypeNames": [
-        "BinaryFile"
-      ],
+      "excludedTypeNames": [],
       "excludedParameterNames": [],
       "handleReferences": false,
       "generateConstructorInterface": true,
