@@ -27,7 +27,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "default": {
             "description": "",
@@ -197,7 +204,17 @@
         "operationId": "Citizens_GetAll",
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CitizenDetailsVm"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -220,7 +237,14 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "default": {
             "description": "",
@@ -480,7 +504,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthInfoVm"
+                }
+              }
+            }
           },
           "404": {
             "description": "",
@@ -659,7 +690,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ValueTupleOfBooleanAndFullNameAndString"
+                  "$ref": "#/components/schemas/VerifySignatureResult"
                 }
               }
             }
@@ -825,75 +856,63 @@
           }
         }
       },
-      "GetCitizenDetailsQuery": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          }
-        }
-      },
-      "CreateCitizenCommand": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": [
-          "fullName",
-          "address"
-        ],
-        "properties": {
-          "fatherId": {
-            "type": "string",
-            "nullable": true
+      "CitizenDetailsVm": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AuditableEntity"
           },
-          "motherId": {
-            "type": "string",
-            "nullable": true
-          },
-          "fullName": {
-            "$ref": "#/components/schemas/FullName"
-          },
-          "address": {
-            "$ref": "#/components/schemas/Address"
-          },
-          "gender": {
-            "$ref": "#/components/schemas/Gender"
-          },
-          "religion": {
-            "$ref": "#/components/schemas/Religion"
-          },
-          "socialStatus": {
-            "$ref": "#/components/schemas/SocialStatus"
-          },
-          "dateOfBirth": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "photo": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/BinaryFile"
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "nullable": true
+              },
+              "fatherId": {
+                "type": "string",
+                "nullable": true
+              },
+              "motherId": {
+                "type": "string",
+                "nullable": true
+              },
+              "fullName": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/FullName"
+                  }
+                ]
+              },
+              "address": {
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Address"
+                  }
+                ]
+              },
+              "gender": {
+                "$ref": "#/components/schemas/Gender"
+              },
+              "religion": {
+                "$ref": "#/components/schemas/Religion"
+              },
+              "socialStatus": {
+                "$ref": "#/components/schemas/SocialStatus"
+              },
+              "dateOfBirth": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "photoUrl": {
+                "type": "string",
+                "nullable": true
               }
-            ]
-          },
-          "bloodType": {
-            "$ref": "#/components/schemas/BloodType"
-          },
-          "healthEmergencyPhone1": {
-            "type": "string",
-            "nullable": true
-          },
-          "healthEmergencyPhone2": {
-            "type": "string",
-            "nullable": true
-          },
-          "healthEmergencyPhone3": {
-            "type": "string",
-            "nullable": true
+            }
           }
-        }
+        ]
       },
       "FullName": {
         "allOf": [
@@ -1003,6 +1022,99 @@
           1,
           2
         ]
+      },
+      "AuditableEntity": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "create": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "GetCitizenDetailsQuery": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CreateCitizenCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fullName",
+          "address"
+        ],
+        "properties": {
+          "fatherId": {
+            "type": "string",
+            "nullable": true
+          },
+          "motherId": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "$ref": "#/components/schemas/FullName"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "gender": {
+            "$ref": "#/components/schemas/Gender"
+          },
+          "religion": {
+            "$ref": "#/components/schemas/Religion"
+          },
+          "socialStatus": {
+            "$ref": "#/components/schemas/SocialStatus"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "photo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/BinaryFile"
+              }
+            ]
+          },
+          "bloodType": {
+            "$ref": "#/components/schemas/BloodType"
+          },
+          "healthEmergencyPhone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthEmergencyPhone2": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthEmergencyPhone3": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "BinaryFile": {
         "type": "object",
@@ -1158,6 +1270,79 @@
           }
         }
       },
+      "HealthInfoVm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "citizenName": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FullName"
+              }
+            ]
+          },
+          "citizenPhoto": {
+            "type": "string",
+            "nullable": true
+          },
+          "bloodType": {
+            "$ref": "#/components/schemas/BloodType"
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone2": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone3": {
+            "type": "string",
+            "nullable": true
+          },
+          "healthRecords": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/HealthRecordVm"
+            }
+          }
+        }
+      },
+      "HealthRecordVm": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "medications": {
+            "type": "string",
+            "nullable": true
+          },
+          "diagnosis": {
+            "type": "string",
+            "nullable": true
+          },
+          "create": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "attachments": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "AddHealthRecordCommand": {
         "type": "object",
         "additionalProperties": false,
@@ -1223,18 +1408,24 @@
           }
         }
       },
-      "ValueTupleOfBooleanAndFullNameAndString": {
+      "VerifySignatureResult": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "item1": {
+          "valid": {
             "type": "boolean"
           },
-          "item2": {
-            "$ref": "#/components/schemas/FullName"
+          "fullName": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FullName"
+              }
+            ]
           },
-          "item3": {
-            "type": "string"
+          "photo": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

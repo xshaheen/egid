@@ -10,18 +10,12 @@
       <i class="fas fa-bars icon" aria-label="Side nav toggle icon"></i>
     </button>
 
-    <button mat-icon-button>
+    <button mat-icon-button [routerLink]="['']">
       <i class="fas fa-question-circle icon"></i>
     </button>
 
-    <button mat-icon-button>
-      <i
-        class="fas fa-bell icon"
-        matBadge="2"
-        matBadgePosition="before"
-        matBadgeColor="primary"
-        matBadgeSize="small"
-      ></i>
+    <button mat-button *ngIf="!authService.isAuthenticated">
+      <i class="fa fa-sign-in-alt"></i> تسجيل الدخول
     </button>
   </span>
 
@@ -78,7 +72,11 @@
       </mat-nav-list>
       <div class="spacer"></div>
       <mat-nav-list>
-        <a mat-list-item [routerLink]="['#']">
+        <a
+          mat-list-item
+          *ngIf="authService.isAuthenticated"
+          (click)="authService.signOut()"
+        >
           <i class="fas fa-sign-out-alt sidenav-icon"></i> تسجيل خروج
         </a>
       </mat-nav-list>
