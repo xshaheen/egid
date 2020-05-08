@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EGID.Infrastructure.Migrations
 {
     [DbContext(typeof(EgidDbContext))]
-    [Migration("20200507231740_Initial")]
+    [Migration("20200508012517_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,14 +97,6 @@ namespace EGID.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PrivateKeyXml")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PublicKeyXml")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -144,7 +136,6 @@ namespace EGID.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreateBy")
-                        .IsRequired()
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
@@ -179,6 +170,7 @@ namespace EGID.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PublicKey")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte>("Religion")
@@ -474,19 +466,29 @@ namespace EGID.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(128)");
 
                             b1.Property<string>("City")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("Country")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("PostalCode")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("State")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("Street")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.HasKey("CitizenDetailId");
 
@@ -502,16 +504,24 @@ namespace EGID.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(128)");
 
                             b1.Property<string>("FirstName")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("LastName")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("SecondName")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.Property<string>("ThirdName")
-                                .HasColumnType("nvarchar(max)");
+                                .IsRequired()
+                                .HasColumnType("nvarchar(50)")
+                                .HasMaxLength(50);
 
                             b1.HasKey("CitizenDetailId");
 

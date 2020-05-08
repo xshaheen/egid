@@ -61,8 +61,15 @@
           "x-position": 1
         },
         "responses": {
-          "204": {
-            "description": ""
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "default": {
             "description": "",
@@ -699,7 +706,7 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "privateKey": {
+          "cardId": {
             "type": "string",
             "nullable": true
           },

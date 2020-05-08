@@ -30,7 +30,7 @@ namespace EGID.Application.Common.Interfaces
         /// <exception cref="EntityNotFoundException">
         ///     Can not find card.
         /// </exception>
-        Task<(Result result, string token)> LoginAsync(string privateKey, string pin1);
+        Task<(Result result, string token)> LoginAsync(string cardId, string pin1);
 
         /// <summary>
         ///     Register card and return success result with card id
@@ -42,7 +42,7 @@ namespace EGID.Application.Common.Interfaces
         ///     Add Admin Card.
         /// </summary>
         Task<(Result result, string cardId)> RegisterAdminAsync(string ownerId, string puk,
-            string email, string phone, string publicKey, string privateKey);
+            string email, string phone);
 
         /// <summary>
         ///     Change Pin1 and returns success result or a failed

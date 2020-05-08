@@ -12,13 +12,13 @@ namespace EGID.Web.Controllers
     {
         [Authorize(Roles = Roles.CivilAffairs + "," + Roles.Admin)]
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult> Post([FromBody] CreateCardCommand command)
+        public async Task<ActionResult<string>> Post([FromBody] CreateCardCommand command)
         {
-            await Mediator.Send(command);
+            var cardId = await Mediator.Send(command);
 
-            return NoContent();
+            return Ok(cardId);
         }
 
         [HttpPost("[action]")]

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace EGID.Application.Cards.Commands
 {
-    public class CreateCardCommand : IRequest
+    public class CreateCardCommand : IRequest<string>
     {
         public string OwnerId { get; set; }
 
@@ -57,17 +57,17 @@ namespace EGID.Application.Cards.Commands
 
         #region Handler
 
-        public class AddCardCommandHandler : IRequestHandler<CreateCardCommand>
+        public class AddCardCommandHandler : IRequestHandler<CreateCardCommand, string>
         {
             private readonly ICardManagerService _cardManager;
 
             public AddCardCommandHandler(ICardManagerService cardManager) => _cardManager = cardManager;
 
-            public async Task<Unit> Handle(CreateCardCommand request, CancellationToken _)
+            public async Task<string> Handle(CreateCardCommand request, CancellationToken _)
             {
-                await _cardManager.RegisterAsync(request);
+                var (_, id) = await _cardManager.RegisterAsync(request);
 
-                return Unit.Value;
+                return id;
             }
         }
 

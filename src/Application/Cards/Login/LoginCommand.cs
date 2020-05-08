@@ -9,7 +9,7 @@ namespace EGID.Application.Cards.Login
 {
     public class LoginCommand : IRequest<string>
     {
-        public string PrivateKey { get; set; }
+        public string CardId { get; set; }
 
         public string Pin1 { get; set; }
 
@@ -20,7 +20,7 @@ namespace EGID.Application.Cards.Login
             public LoginValidator()
             {
                 RuleFor(c => c.Pin1).NotEmpty().WithMessage("من فضلك ادخل رمز Pin1 لتسجيل الدخول.");
-                RuleFor(c => c.PrivateKey).NotEmpty();
+                RuleFor(c => c.CardId).NotEmpty();
             }
         }
 
@@ -36,7 +36,7 @@ namespace EGID.Application.Cards.Login
 
             public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
             {
-                var (result, token) = await _cardManager.LoginAsync(request.PrivateKey, request.Pin1);
+                var (result, token) = await _cardManager.LoginAsync(request.CardId, request.Pin1);
 
                 if (result.Failed) throw new BadRequestException(result.Errors);
 

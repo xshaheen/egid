@@ -31,8 +31,6 @@ namespace EGID.Infrastructure.Auth
         private readonly ICurrentUserService _currentUser;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly IHashService _hashService;
-        private readonly IKeysGeneratorService _keysGenerator;
-        private readonly ISymmetricCryptographyService _cryptographyService;
 
         #region Constructor
 
@@ -42,20 +40,17 @@ namespace EGID.Infrastructure.Auth
             RoleManager<IdentityRole> roleManager,
             SignInManager<Card> signInManager,
             IPasswordValidator<Card> passwordValidator,
-            IKeysGeneratorService keysGenerator,
             IDateTime dateTime,
             ICurrentUserService currentUser, IHashService hashService,
-            ISymmetricCryptographyService cryptographyService, IJwtTokenService jwtTokenService)
+            IJwtTokenService jwtTokenService)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _passwordValidator = passwordValidator;
-            _keysGenerator = keysGenerator;
             _dateTime = dateTime;
             _currentUser = currentUser;
             _hashService = hashService;
-            _cryptographyService = cryptographyService;
             _jwtTokenService = jwtTokenService;
             _roleManager = roleManager;
         }
@@ -76,19 +71,6 @@ namespace EGID.Infrastructure.Auth
             return card;
         }
 
-        public async Task<Card> GetByPrivateKeyAsync(string privateKeyXml)
-        {
-            var cypher = privateKeyXml;
-
-            var card = await _userManager.Users
-                .FirstOrDefaultAsync(c => c.PrivateKeyXml == cypher);
-
-            if (card == null)
-                throw new EntityNotFoundException(nameof(Card), privateKeyXml);
-
-            return card;
-        }
-
         #endregion Get
 
         #region Active
@@ -104,14 +86,14 @@ namespace EGID.Infrastructure.Auth
 
         #region SignIn
 
-        public async Task<(Result result, string token)> LoginAsync(string privateKey, string pin1)
+        public async Task<(Result result, string token)> LoginAsync(string cardId, string pin1)
         {
             Card card;
 
             // Is the card exist?
             try
             {
-                card = await GetByPrivateKeyAsync(await _cryptographyService.EncryptAsync(privateKey));
+                card = await GetAsync(cardId);
             }
             catch (EntityNotFoundException)
             {
@@ -163,8 +145,6 @@ namespace EGID.Infrastructure.Auth
             var card = new Card
             {
                 Id = Guid.NewGuid().ToString(),
-                PublicKeyXml = _keysGenerator.PublicKeyXml,
-                PrivateKeyXml = await _cryptographyService.EncryptAsync(_keysGenerator.PrivateKeyXml),
                 CitizenId = model.OwnerId,
                 Pin1Hash = _hashService.Create(model.Pin1, salt1),
                 Pin1Salt = salt1,
@@ -188,21 +168,17 @@ namespace EGID.Infrastructure.Auth
             string ownerId,
             string puk,
             string email,
-            string phone,
-            string publicKey,
-            string privateKey)
+            string phone)
         {
             var salt1 = Guid.NewGuid().ToString();
             var salt2 = Guid.NewGuid().ToString();
 
             var card = new Card
             {
-                Id = ownerId,
+                Id = Guid.NewGuid().ToString(),
                 CardIssuer = ownerId,
                 UserName = ownerId,
                 CitizenId = ownerId,
-                PublicKeyXml = publicKey,
-                PrivateKeyXml = await _cryptographyService.EncryptAsync(privateKey),
                 Pin1Hash = _hashService.Create(puk, salt1),
                 Pin1Salt = salt1,
                 Pin2Hash = _hashService.Create(puk, salt2),
@@ -405,7 +381,7 @@ namespace EGID.Infrastructure.Auth
             var query = from userRole in _context.UserRoles
                         join card in _context.Users on userRole.UserId equals card.Id
                         where userRole.RoleId.Equals(role.Id)
-                        join citizen in _context.CitizenDetails on card.CitizenId equals citizen.Id 
+                        join citizen in _context.CitizenDetails on card.CitizenId equals citizen.Id
                         select new EmployeesVm
                         {
                             Id = citizen.Id,
@@ -418,7 +394,7 @@ namespace EGID.Infrastructure.Auth
                             DateOfBirth = citizen.DateOfBirth,
                             PhotoUrl = citizen.PhotoUrl
                         };
-            
+
             return await query.ToListAsync();
         }
 
@@ -447,7 +423,6 @@ namespace EGID.Infrastructure.Auth
             var card = await _userManager.FindByIdAsync(cardId);
 
             return await _userManager.IsInRoleAsync(card, roleName);
-
         }
 
         #endregion

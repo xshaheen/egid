@@ -10,7 +10,7 @@ namespace EGID.Infrastructure.Data.Configuration
         {
             builder.Property(e => e.Id).HasMaxLength(128);
 
-            builder.Property(e => e.CreateBy).IsRequired().HasMaxLength(128);
+            builder.Property(e => e.CreateBy).HasMaxLength(128);
             builder.Property(e => e.LastModifiedBy).HasMaxLength(128);
             builder.Property(e => e.LastModified).HasColumnType("datetime");
 
@@ -18,13 +18,28 @@ namespace EGID.Infrastructure.Data.Configuration
             builder.Property(e => e.FatherId).HasMaxLength(128);
 
             builder.Property(e => e.PrivateKey).IsRequired();
+            builder.Property(e => e.PublicKey).IsRequired();
 
             builder.Property(e => e.DateOfBirth).HasColumnType("date");
 
             builder.Property(e => e.PhotoUrl).IsRequired().HasMaxLength(2048);
 
-            builder.OwnsOne(e => e.Address);
-            builder.OwnsOne(e => e.FullName);
+            builder.OwnsOne(e => e.Address, address =>
+            {
+                address.Property(a => a.Street).IsRequired().HasMaxLength(50);
+                address.Property(a => a.City).IsRequired().HasMaxLength(50);
+                address.Property(a => a.State).IsRequired().HasMaxLength(50);
+                address.Property(a => a.PostalCode).IsRequired().HasMaxLength(50);
+                address.Property(a => a.Country).IsRequired().HasMaxLength(50);
+            });
+
+            builder.OwnsOne(e => e.FullName, name =>
+            {
+                name.Property(n => n.FirstName).IsRequired().HasMaxLength(50);
+                name.Property(n => n.SecondName).IsRequired().HasMaxLength(50);
+                name.Property(n => n.ThirdName).IsRequired().HasMaxLength(50);
+                name.Property(n => n.LastName).IsRequired().HasMaxLength(50);
+            });
 
             builder.HasOne(d => d.HealthInfo)
                 .WithOne(i => i.Citizen)

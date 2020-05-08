@@ -8,9 +8,6 @@ namespace EGID.Domain.Entities
         public string CitizenId { get; set; }
         public CitizenDetail Citizen { get; set; }
 
-        public string PrivateKeyXml { get; set; }
-        public string PublicKeyXml { get; set; }
-
         public string Pin1Hash { get; set; }
         public string Pin1Salt { get; set; }
         public string Pin2Hash { get; set; }
