@@ -18,13 +18,20 @@ export class AppModalService {
   }
 
   showSuccessSnackBar(message: string): void {
-    this.snackBar.open(message, null, { direction: "rtl" });
+    this.snackBar.open(message, null, {
+      direction: "rtl",
+      panelClass: ["snack-success"],
+    });
   }
 
   showErrorSnackBar(message: string): void {
     this.snackBar.open(message, "X", {
-      panelClass: ["error"],
+      panelClass: ["snack-error"],
       direction: "rtl",
     });
+  }
+
+  showNormalSnackBar(message: string): void {
+    this.snackBar.open(message, null, { direction: "rtl" });
   }
 }

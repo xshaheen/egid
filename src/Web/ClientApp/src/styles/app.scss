@@ -50,3 +50,11 @@ button:not(:disabled) {
 .icon {
   font-size: 1.2rem;
 }
+
+.snack-error {
+  background-color: rgb(133, 56, 49);
+}
+
+.snack-success {
+  background-color: rgb(47, 128, 71);
+}

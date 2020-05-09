@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { AppTokenService } from "./token.service";
 import { AuthClient, LoginCommand } from "../api";
 import { ErrorService } from "./error.service";
+import { AppModalService } from "./modal.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -10,7 +11,8 @@ export class AuthService {
     private readonly authClient: AuthClient,
     private readonly router: Router,
     private readonly appTokenService: AppTokenService,
-    private readonly errorService: ErrorService
+    private readonly errorService: ErrorService,
+    private readonly modal: AppModalService
   ) {}
 
   public get isAuthenticated(): boolean {
@@ -24,6 +26,7 @@ export class AuthService {
           return;
         }
         this.appTokenService.set(token);
+        this.modal.showSuccessSnackBar("تم تسجيل الدخول بنجاح.");
       },
       (err) => this.errorService.handleError(err)
     );
@@ -32,5 +35,6 @@ export class AuthService {
   signOut() {
     this.appTokenService.clear();
     this.router.navigateByUrl("/");
+    this.modal.showSuccessSnackBar("تم تسجيل الخروج بنجاح.");
   }
 }
