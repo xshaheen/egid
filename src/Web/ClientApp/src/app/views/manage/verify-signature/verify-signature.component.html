@@ -1,1 +1,42 @@
-<p>verify-signature</p>
+<div class="flex-center">
+  <h1>التحقق من التوقيع</h1>
+  <div class="rows">
+    <label class="signature-zone" [for]="'Signature'">
+      <i class="fas fa-cloud-upload-alt"></i> ارفق ملف التوقيع
+      <input
+        type="file"
+        [name]="'Signature'"
+        required
+        (change)="addSignFile($event.target.files)"
+      />
+    </label>
+
+    <label class="doc-zone" [for]="'doc'">
+      <i class="fas fa-cloud-upload-alt"></i> ارفق الوثيقة الاصلية
+      <input
+        type="file"
+        [name]="'doc'"
+        required
+        (change)="addDocFile($event.target.files)"
+      />
+    </label>
+  </div>
+
+  <button mat-flat-button color="warn" [disabled]="!isValid" (click)="verify()">
+    التحقق
+  </button>
+
+  <div *ngIf="result">
+    {{
+      result.fullName.firstName +
+        " " +
+        result.fullName.secondName +
+        " " +
+        result.fullName.thirdName +
+        " " +
+        result.fullName.lastName
+    }}
+    {{ result.photo }}
+    {{ result.valid }}
+  </div>
+</div>

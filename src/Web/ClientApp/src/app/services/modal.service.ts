@@ -28,7 +28,7 @@ export class AppModalService {
   showErrorSnackBar(message: string): void {
     this.snackBar.open(message, "X", {
       direction: "rtl",
-      panelClass: ["snack-success"],
+      panelClass: ["snack-error"],
       duration: 10000,
     });
   }

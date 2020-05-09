@@ -1,8 +1,13 @@
 import { Injectable } from "@angular/core";
-import { SignatureClient, SignHashCommand } from "../api";
+import {
+  SignatureClient,
+  SignHashCommand,
+  VerifySignatureResult,
+  VerifySignatureCommand,
+} from "../api";
 import { HashService } from "./hash.service";
 import { Observable, throwError } from "rxjs";
-import { switchMap, catchError, map } from "rxjs/operators";
+import { switchMap, catchError, map, mergeMap, buffer } from "rxjs/operators";
 import { ErrorService } from "./error.service";
 
 export interface SignatureFile {
@@ -45,30 +50,25 @@ export class SignDocService {
     );
   }
 
-  // VerifySignature(
-  //   signature: File,
-  //   file: File
-  // ): Observable<VerifySignatureResult> {
-  //   let signatureText: string;
+  VerifySignature(
+    signature: File,
+    file: File
+  ): Observable<VerifySignatureResult> {
+    let signatureText: string;
 
-  //   const reader = new FileReader();
-  //   // Todo: asset that reader.result is not ArrayBuffer by validate file type or throw error.
-  //   reader.onload = () => (signatureText = reader.result as string);
-  //   reader.readAsText(signature, "utf-8");
+    const reader = new FileReader();
+    reader.onload = () => (signatureText = reader.result as string);
+    reader.readAsText(signature, "utf-8");
 
-  //   return this.hashService.toBuffer(file).pipe(
-  //     mergeMap((buffer) =>
-  //       this.hashService.hash(buffer).pipe(
-  //         mergeMap((hash) =>
-  //           this.signatureClient.verify(
-  //             new VerifySignatureCommand({
-  //               base64Sha512DataHash: hash,
-  //               signature: signatureText,
-  //             })
-  //           )
-  //         )
-  //       )
-  //     )
-  //   );
-  // }
+    return this.hashService.hash(file).pipe(
+      mergeMap((hash) =>
+        this.signatureClient.verify(
+          new VerifySignatureCommand({
+            base64Sha512DataHash: hash,
+            signature: signatureText,
+          })
+        )
+      )
+    );
+  }
 }
