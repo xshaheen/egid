@@ -113,6 +113,16 @@
           "204": {
             "description": ""
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "default": {
             "description": "",
             "content": {
@@ -148,6 +158,16 @@
           "204": {
             "description": ""
           },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
           "default": {
             "description": "",
             "content": {
@@ -182,6 +202,68 @@
         "responses": {
           "204": {
             "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/card/iscorrectpin2": {
+      "post": {
+        "tags": [
+          "Card"
+        ],
+        "operationId": "Card_IsCorrectPin2",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IsCorrectPin2Query"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           },
           "default": {
             "description": "",
@@ -871,6 +953,19 @@
             "minLength": 1
           },
           "newPin2": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "IsCorrectPin2Query": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pin2"
+        ],
+        "properties": {
+          "pin2": {
             "type": "string",
             "minLength": 1
           }
