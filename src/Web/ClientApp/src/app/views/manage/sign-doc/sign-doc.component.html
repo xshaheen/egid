@@ -1,15 +1,13 @@
 <div class="rows">
+  <h1>توقيع ملفات</h1>
+
   <!--File Field-->
   <eg-file (fileDropped)="onAddFile($event)"></eg-file>
   <!--#File Field-->
-  <li>
-    <button mat-raised-button (click)="openPinDialog()">Open PIN Dialog</button>
-    <button mat-raised-button (click)="openConfirmDialog()">
-      Open Confirm Dialog
-    </button>
-  </li>
 
-  <div class="files-list">
+  {{ link }}
+
+  <!-- <div class="files-list">
     <div class="single-file" *ngFor="let item of files; let i = index">
       <div class="file-icon" style="width: 50px;">
         <svg
@@ -66,5 +64,12 @@
         <i class="fa fa-save"></i>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
+
+<!-- <li>
+    <button mat-raised-button (click)="openPinDialog()">Open PIN Dialog</button>
+    <button mat-raised-button (click)="openConfirmDialog()">
+      Open Confirm Dialog
+    </button>
+  </li> -->
