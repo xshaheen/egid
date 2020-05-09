@@ -1,31 +1,42 @@
 import { Injectable } from "@angular/core";
-import {
-  SignatureClient,
-  SignHashCommand,
-  VerifySignatureResult,
-  VerifySignatureCommand,
-} from "../api";
+import { SignatureClient, SignHashCommand } from "../api";
 import { HashService } from "./hash.service";
-import { Observable, of, throwError } from "rxjs";
-import { switchMap, catchError } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
+import { switchMap, catchError, map } from "rxjs/operators";
 import { ErrorService } from "./error.service";
+
+export interface SignatureFile {
+  fileUrl: string;
+  fileName: string;
+}
 
 @Injectable({
   providedIn: "root",
 })
 export class SignDocService {
   constructor(
-    private signatureClient: SignatureClient,
-    private hashService: HashService,
+    private readonly signatureClient: SignatureClient,
+    private readonly hashService: HashService,
     private readonly errorService: ErrorService
   ) {}
 
-  signDoc(file: File, pin2: string): Observable<string> {
+  signDoc(file: File, pin2: string): Observable<SignatureFile> {
     return this.hashService.hash(file).pipe(
       switchMap((base64) => {
         return this.signatureClient.sign(
-          new SignHashCommand({ base64Sha512DataHash: base64, pin2 })
+          new SignHashCommand({
+            base64Sha512DataHash: base64,
+            pin2,
+            fileName: file.name,
+          })
         );
+      }),
+      map((response) => {
+        const f: SignatureFile = {
+          fileName: response.fileName,
+          fileUrl: URL.createObjectURL(response.data),
+        };
+        return f;
       }),
       catchError((err: any) => {
         this.errorService.handleError(err);

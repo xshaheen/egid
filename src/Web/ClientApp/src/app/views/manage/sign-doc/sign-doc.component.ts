@@ -1,8 +1,15 @@
-import { Component, OnInit, Injector } from "@angular/core";
-import { SignDocService } from "src/app/services/sign-doc.service";
+import { Component } from "@angular/core";
+import {
+  SignDocService,
+  SignatureFile,
+} from "src/app/services/sign-doc.service";
 import { MatDialog } from "@angular/material/dialog";
-import { PasswordDialogComponent } from "src/app/components/password-dialog/password-dialog.component";
 import { Observable } from "rxjs";
+import { CardClient, IsCorrectPin2Query } from "src/app/api";
+import { ErrorService } from "src/app/services/error.service";
+import { AppModalService } from "src/app/services/modal.service";
+import { PasswordDialogComponent } from "src/app/components/password-dialog/password-dialog.component";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: "eg-sign-doc",
@@ -10,12 +17,60 @@ import { Observable } from "rxjs";
   styleUrls: ["./sign-doc.component.scss"],
 })
 export class SignDocComponent {
-  files: File[] = [];
-  link: string;
+  pin2: string = null;
+  files: SignatureFile[] = [];
 
-  constructor(private signService: SignDocService, private dialog: MatDialog) {}
+  constructor(
+    private signService: SignDocService,
+    private dialog: MatDialog,
+    private cardClient: CardClient,
+    private errorHandler: ErrorService,
+    private modal: AppModalService,
+    private readonly sanitizer: DomSanitizer
+  ) {}
 
-  openPin2Dialog(): Observable<string> {
+  onAddFile(file: File) {
+    if (this.pin2 && this.pin2.length > 4) {
+      this.signDoc(file);
+      return;
+    }
+
+    this.pin2Dialog().subscribe((pin2) => {
+      if (!pin2 || pin2.length < 4) {
+        this.modal.showNormalSnackBar(
+          "يجب ادخال رمز PIN2 حتي تتمكن من توقيع الملفات!"
+        );
+        return;
+      }
+
+      this.cardClient.isCorrectPin2(new IsCorrectPin2Query({ pin2 })).subscribe(
+        (correct) => {
+          if (correct === true) {
+            this.modal.showSuccessSnackBar(
+              "رمز PIN2  صحيح جاري توقيع الملفات."
+            );
+            this.pin2 = pin2;
+          } else {
+            this.modal.showErrorSnackBar("رمز PIN2 غير صحيح.");
+            this.onAddFile(file);
+          }
+        },
+        (error) => this.errorHandler.handleError(error),
+        () => this.signDoc(file)
+      );
+    });
+  }
+
+  signDoc(file: File) {
+    this.signService.signDoc(file, this.pin2).subscribe(
+      (res) => {
+        this.files.push(res);
+      },
+      (err) => this.errorHandler.handleError(err)
+    );
+  }
+
+  pin2Dialog(): Observable<string> {
     // open a dialog and get a reference to it
     const dialogRef = this.dialog.open(PasswordDialogComponent, {
       width: "450px",
@@ -28,60 +83,7 @@ export class SignDocComponent {
     return dialogRef.afterClosed();
   }
 
-  // openConfirmDialog(): void {
-  //   // open a dialog and get a reference to it
-  //   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-  //     width: "450px",
-  //     direction: "rtl",
-  //     disableClose: true,
-  //     closeOnNavigation: true,
-  //     data: "هل انت متاكد من انك تريد حذف هذا الموظف؟",
-  //   });
-  //   // subscribe to close event to get the result
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       this.confirm = result;
-  //     } else {
-  //       this.confirm = false;
-  //     }
-  //   });
-  // }
-
-  onAddFile(file: File) {
-    this.openPin2Dialog().subscribe((pin2) => {
-      this.signService.signDoc(file, pin2).subscribe((res) => {
-        console.log(res);
-        this.link =
-          "data:application/octet-stream;charset=utf-8;base64,//" + res;
-        this.files.push(file);
-      });
-    });
+  sanitize(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }
-
-// Simulate it for now
-// uploadToSign(index: number) {
-//   const progressInterval = setInterval(() => {
-//     if (this.files[index].progress === 100) {
-//       clearInterval(progressInterval);
-//     } else {
-//       this.files[index].progress += 5;
-//     }
-//   }, 200);
-// }
-
-// /**
-//  * format bytes
-//  * @param bytes (File size in bytes)
-//  * @param decimals (Decimals point precision)
-//  */
-// formatBytes(bytes: number, decimals = 2): string {
-//   if (bytes === 0) {
-//     return "0 Bytes";
-//   }
-//   const k = 1024;
-//   const dm = decimals <= 0 ? 0 : decimals;
-//   const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
-//   const i = Math.floor(Math.log(bytes) / Math.log(k));
-//   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
-// }
