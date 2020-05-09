@@ -1,9 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit, Injector } from "@angular/core";
 import { SignDocService } from "src/app/services/sign-doc.service";
 import { MatDialog } from "@angular/material/dialog";
 import { PasswordDialogComponent } from "src/app/components/password-dialog/password-dialog.component";
-import { Observable, from } from "rxjs";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "eg-sign-doc",
@@ -14,11 +13,7 @@ export class SignDocComponent {
   files: File[] = [];
   link: string;
 
-  constructor(
-    private signService: SignDocService,
-    private dialog: MatDialog,
-    private readonly router: Router
-  ) {}
+  constructor(private signService: SignDocService, private dialog: MatDialog) {}
 
   openPin2Dialog(): Observable<string> {
     // open a dialog and get a reference to it
@@ -55,10 +50,10 @@ export class SignDocComponent {
   onAddFile(file: File) {
     this.openPin2Dialog().subscribe((pin2) => {
       this.signService.signDoc(file, pin2).subscribe((res) => {
+        console.log(res);
         this.link =
           "data:application/octet-stream;charset=utf-8;base64,//" + res;
         this.files.push(file);
-        console.log(res);
       });
     });
   }

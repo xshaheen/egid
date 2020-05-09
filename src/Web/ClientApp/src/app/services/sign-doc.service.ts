@@ -6,8 +6,9 @@ import {
   VerifySignatureCommand,
 } from "../api";
 import { HashService } from "./hash.service";
-import { Observable, of } from "rxjs";
-import { map, mergeMap } from "rxjs/operators";
+import { Observable, of, throwError } from "rxjs";
+import { switchMap, catchError } from "rxjs/operators";
+import { ErrorService } from "./error.service";
 
 @Injectable({
   providedIn: "root",
@@ -15,19 +16,22 @@ import { map, mergeMap } from "rxjs/operators";
 export class SignDocService {
   constructor(
     private signatureClient: SignatureClient,
-    private hashService: HashService
+    private hashService: HashService,
+    private readonly errorService: ErrorService
   ) {}
 
   signDoc(file: File, pin2: string): Observable<string> {
-    return this.hashService
-      .hash(file)
-      .pipe(
-        mergeMap((base64) =>
-          this.signatureClient.sign(
-            new SignHashCommand({ base64Sha512DataHash: base64, pin2 })
-          )
-        )
-      );
+    return this.hashService.hash(file).pipe(
+      switchMap((base64) => {
+        return this.signatureClient.sign(
+          new SignHashCommand({ base64Sha512DataHash: base64, pin2 })
+        );
+      }),
+      catchError((err: any) => {
+        this.errorService.handleError(err);
+        return throwError(err);
+      })
+    );
   }
 
   // VerifySignature(
