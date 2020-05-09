@@ -25,6 +25,7 @@ export class LoginService {
       if (isCanceled || !returnUrl) {
         this.router.navigateByUrl("/");
       } else {
+        this.router.navigateByUrl("/");
         this.router.navigateByUrl(returnUrl);
       }
     });
