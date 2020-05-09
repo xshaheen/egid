@@ -11,8 +11,9 @@ namespace EGID.Web.Controllers
     public class SignatureController : ApiControllerBase
     {
         [HttpPost("[action]")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<string>> Sign([FromBody] SignHashCommand command)
         {
             var signature = await Mediator.Send(command);
@@ -21,8 +22,9 @@ namespace EGID.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<VerifySignatureResult>> Verify(
             [FromBody] VerifySignatureCommand command)
         {

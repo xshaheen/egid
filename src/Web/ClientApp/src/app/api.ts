@@ -1193,7 +1193,7 @@ export class HealthInfoClient {
 
   getOne(citizenId: string | null | undefined): Observable<HealthInfoVm> {
     let url_ = this.baseUrl + "/api/healthinfo?";
-    if (citizenId !== undefined)
+    if (citizenId !== undefined && citizenId !== null)
       url_ += "citizenId=" + encodeURIComponent("" + citizenId) + "&";
     url_ = url_.replace(/[?&]$/, "");
 
@@ -1550,7 +1550,19 @@ export class SignatureClient {
         _headers[key] = response.headers.get(key);
       }
     }
-    if (status === 404) {
+    if (status === 200) {
+      return blobToText(responseBlob).pipe(
+        _observableMergeMap((_responseText) => {
+          let result200: any = null;
+          let resultData200 =
+            _responseText === ""
+              ? null
+              : JSON.parse(_responseText, this.jsonParseReviver);
+          result200 = resultData200 !== undefined ? resultData200 : <any>null;
+          return _observableOf(result200);
+        })
+      );
+    } else if (status === 404) {
       return blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
           let result404: any = null;
@@ -1568,16 +1580,22 @@ export class SignatureClient {
           );
         })
       );
-    } else if (status === 200) {
+    } else if (status === 400) {
       return blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
-          let result200: any = null;
-          let resultData200 =
+          let result400: any = null;
+          let resultData400 =
             _responseText === ""
               ? null
               : JSON.parse(_responseText, this.jsonParseReviver);
-          result200 = resultData200 !== undefined ? resultData200 : <any>null;
-          return _observableOf(result200);
+          result400 = ProblemDetails.fromJS(resultData400);
+          return throwException(
+            "A server side error occurred.",
+            status,
+            _responseText,
+            _headers,
+            result400
+          );
         })
       );
     } else if (status !== 200 && status !== 204) {
@@ -1653,7 +1671,19 @@ export class SignatureClient {
         _headers[key] = response.headers.get(key);
       }
     }
-    if (status === 404) {
+    if (status === 200) {
+      return blobToText(responseBlob).pipe(
+        _observableMergeMap((_responseText) => {
+          let result200: any = null;
+          let resultData200 =
+            _responseText === ""
+              ? null
+              : JSON.parse(_responseText, this.jsonParseReviver);
+          result200 = VerifySignatureResult.fromJS(resultData200);
+          return _observableOf(result200);
+        })
+      );
+    } else if (status === 404) {
       return blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
           let result404: any = null;
@@ -1671,16 +1701,22 @@ export class SignatureClient {
           );
         })
       );
-    } else if (status === 200) {
+    } else if (status === 400) {
       return blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
-          let result200: any = null;
-          let resultData200 =
+          let result400: any = null;
+          let resultData400 =
             _responseText === ""
               ? null
               : JSON.parse(_responseText, this.jsonParseReviver);
-          result200 = VerifySignatureResult.fromJS(resultData200);
-          return _observableOf(result200);
+          result400 = ProblemDetails.fromJS(resultData400);
+          return throwException(
+            "A server side error occurred.",
+            status,
+            _responseText,
+            _headers,
+            result400
+          );
         })
       );
     } else if (status !== 200 && status !== 204) {
