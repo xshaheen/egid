@@ -38,14 +38,16 @@ namespace EGID.Application.Cards.Commands
             private readonly IEgidDbContext _context;
             private readonly ICurrentUserService _currentUser;
             private readonly ICardManagerService _cardManager;
+            private readonly ISymmetricCryptographyService _cryptoService;
 
             public SignHashCommandHandler(IDigitalSignatureService digitalSignatureService, IEgidDbContext context,
-                ICurrentUserService currentUser, ICardManagerService cardManager)
+                ICurrentUserService currentUser, ICardManagerService cardManager, ISymmetricCryptographyService cryptoService)
             {
                 _digitalSignatureService = digitalSignatureService;
                 _context = context;
                 _currentUser = currentUser;
                 _cardManager = cardManager;
+                _cryptoService = cryptoService;
             }
 
             public async Task<string> Handle(SignHashCommand request, CancellationToken cancellationToken)
@@ -61,7 +63,7 @@ namespace EGID.Application.Cards.Commands
 
                 if (citizen is null) throw new EntityNotFoundException("Citizen", card.CitizenId);
 
-                var signature = _digitalSignatureService.SignHash(request.Base64Sha512DataHash, citizen.PrivateKey);
+                var signature = _digitalSignatureService.SignHash(request.Base64Sha512DataHash, await _cryptoService.DecryptAsync(citizen.PrivateKey));
 
                 return citizen.Id + signature;
             }
