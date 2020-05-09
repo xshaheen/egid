@@ -20,8 +20,4 @@ export class PasswordDialogComponent {
   public get isValid(): boolean {
     return this.password && this.password.length > 4;
   }
-
-  onClickCancel(): void {
-    this.dialogRef.close();
-  }
 }

@@ -21,13 +21,15 @@ export class AppModalService {
     this.snackBar.open(message, null, {
       direction: "rtl",
       panelClass: ["snack-success"],
+      duration: 5000,
     });
   }
 
   showErrorSnackBar(message: string): void {
     this.snackBar.open(message, "X", {
-      panelClass: ["snack-error"],
       direction: "rtl",
+      panelClass: ["snack-success"],
+      duration: 10000,
     });
   }
 

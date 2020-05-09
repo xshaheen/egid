@@ -26,15 +26,17 @@ export class AppHttpInterceptor implements HttpInterceptor {
     });
 
     return next.handle(request).pipe(
-      retry(1),
-      catchError((error: HttpErrorResponse) => {
-        // Handle Unauthorized response
-        if (error.status === 401) {
-          this.modal.showErrorSnackBar(
-            "الجلسة انتهم من فضلك اعد تسجيل الدخول للاستمرار"
-          );
-          this.loginService.login();
-          return next.handle(request);
+      catchError((error) => {
+        if (error instanceof HttpErrorResponse) {
+          // Handle Unauthorized response
+          if (error.status === 401) {
+            this.modal.showNormalSnackBar(
+              "الجلسة انتهم من فضلك اعد تسجيل الدخول للاستمرار"
+            );
+
+            this.loginService.login();
+            return next.handle(request);
+          }
         }
         // Other error throw it the API client will handle it
         return throwError(error);
