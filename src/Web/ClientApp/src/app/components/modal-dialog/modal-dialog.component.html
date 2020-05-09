@@ -7,8 +7,13 @@
   {{ message }}
 </div>
 
-<div mat-dialog-actions>
-  <button mat-flat-button color="primary" ariaLabel="موافق">
-    موافق
+<div mat-dialog-actions style="justify-content: center;">
+  <button
+    mat-flat-button
+    color="warn"
+    ariaLabel="اغلاق"
+    (click)="this.dialogRef.close()"
+  >
+    اغلاق
   </button>
 </div>

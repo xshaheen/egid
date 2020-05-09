@@ -30,7 +30,6 @@ import { LoginDialogModule } from "src/app/components/login-dialog/login-dialog.
     MaterialModule,
     FileModule,
     PasswordDialogModule,
-    ConfirmDialogModule,
   ],
 })
 export class ManageModule {}

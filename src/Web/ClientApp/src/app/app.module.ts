@@ -11,9 +11,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ManageModule } from "./views/manage/manage.module";
 import { AppHttpInterceptor } from "./core/interceptor";
-import { AppErrorHandler } from "./core/error.handler";
 import { LoginDialogModule } from "./components/login-dialog/login-dialog.module";
 import { ModalDialogModule } from "./components/modal-dialog/modal-dialog.module";
+import { ConfirmDialogModule } from "./components/confirm-dialog/confirm-dialog.module";
+import { AppErrorHandler } from "./core/error.handler";
 
 @NgModule({
   imports: [
@@ -21,14 +22,15 @@ import { ModalDialogModule } from "./components/modal-dialog/modal-dialog.module
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    LoginDialogModule,
+    ModalDialogModule,
+    ConfirmDialogModule,
     MainModule,
     AdminModule,
     CivilAffairsModule,
     RecordsModule,
     AddModule,
     ManageModule,
-    LoginDialogModule,
-    ModalDialogModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
