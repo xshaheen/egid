@@ -4,6 +4,7 @@ using EGID.Domain.ValueObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace EGID.Web.Controllers
 {
@@ -11,14 +12,14 @@ namespace EGID.Web.Controllers
     public class SignatureController : ApiControllerBase
     {
         [HttpPost("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(FileContentResult), 200)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<string>> Sign([FromBody] SignHashCommand command)
+        public async Task<FileContentResult> Sign([FromBody] SignHashCommand command)
         {
             var signature = await Mediator.Send(command);
 
-            return Ok(signature);
+            return File(signature.Bytes, signature.ContentType, signature.Name);
         }
 
         [HttpPost("[action]")]

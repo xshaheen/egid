@@ -1,16 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
+using EGID.Application.Common.Models.Files;
 using FluentValidation;
 using MediatR;
 
 namespace EGID.Application.Cards.Commands
 {
-    public class SignHashCommand : IRequest<string>
+    public class SignHashCommand : IRequest<BinaryFile>
     {
         [Required] public string Pin2 { get; set; }
+
+        [Required] public string FileName { get; set; }
 
         [Required] public string Base64Sha512DataHash { get; set; }
 
@@ -32,7 +36,7 @@ namespace EGID.Application.Cards.Commands
 
         #region Handler
 
-        public class SignHashCommandHandler : IRequestHandler<SignHashCommand, string>
+        public class SignHashCommandHandler : IRequestHandler<SignHashCommand, BinaryFile>
         {
             private readonly IDigitalSignatureService _digitalSignatureService;
             private readonly IEgidDbContext _context;
@@ -50,7 +54,7 @@ namespace EGID.Application.Cards.Commands
                 _cryptoService = cryptoService;
             }
 
-            public async Task<string> Handle(SignHashCommand request, CancellationToken cancellationToken)
+            public async Task<BinaryFile> Handle(SignHashCommand request, CancellationToken cancellationToken)
             {
                 var card = await _context.Cards.FindAsync(_currentUser.CardId);
 
@@ -65,7 +69,18 @@ namespace EGID.Application.Cards.Commands
 
                 var signature = _digitalSignatureService.SignHash(request.Base64Sha512DataHash, await _cryptoService.DecryptAsync(citizen.PrivateKey));
 
-                return citizen.Id + signature;
+                var s = citizen.Id + signature;
+
+                var memory = new MemoryStream();
+                var writer = new StreamWriter(memory);
+
+                await writer.WriteAsync(s);
+                await writer.FlushAsync();
+
+                var name = Path.GetFileNameWithoutExtension(request.FileName) + ".sign";
+                var bytes = memory.ToArray();
+
+                return new BinaryFile(name, bytes, bytes.Length, "text/plain");
             }
         }
 
