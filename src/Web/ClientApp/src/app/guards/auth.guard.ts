@@ -1,31 +1,27 @@
 import { Injectable } from "@angular/core";
-import { CanActivate, Router } from "@angular/router";
+import {
+  CanActivate,
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+} from "@angular/router";
 import { AppTokenService } from "../services/token.service";
-import { MatDialog } from "@angular/material/dialog";
-import { LoginDialogComponent } from "../components/login-dialog/login-dialog.component";
+import { LoginService } from "../services/login.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthGuard implements CanActivate {
   constructor(
     private readonly router: Router,
     private readonly appTokenService: AppTokenService,
-    public dialog: MatDialog
+    private readonly loginService: LoginService
   ) {}
 
-  canActivate() {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.appTokenService.any()) {
       return true;
     }
-    this.openLoginDialog();
+    this.loginService.login(state.url);
+    this.router.navigateByUrl("/");
     return false;
-  }
-
-  openLoginDialog(): void {
-    const dialogRef = this.dialog.open(LoginDialogComponent, {
-      width: "550px",
-      direction: "rtl",
-      disableClose: true,
-      closeOnNavigation: true,
-    });
   }
 }
