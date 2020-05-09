@@ -1,35 +1,39 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-import { AuthService } from "src/app/services/auth.service";
-import { ILoginCommand, LoginCommand } from "src/app/api";
+
+export interface LoginDialogResult {
+  isCanceled: boolean;
+  cardId: string;
+  pin1: string;
+}
 
 @Component({
   templateUrl: "./login-dialog.component.html",
 })
 export class LoginDialogComponent {
-  loginModel: ILoginCommand = {
+  result: LoginDialogResult = {
+    isCanceled: true,
     cardId: null,
     pin1: null,
   };
 
-  constructor(
-    public dialogRef: MatDialogRef<LoginDialogComponent>,
-    private authService: AuthService
-  ) {}
+  constructor(public dialogRef: MatDialogRef<LoginDialogComponent>) {}
+
+  ok() {
+    this.result.isCanceled = false;
+    this.dialogRef.close(this.result);
+  }
+
+  cancel() {
+    this.result.isCanceled = true;
+    this.dialogRef.close(this.result);
+  }
+
+  onQrSuccess(result: string) {
+    this.result.cardId = result;
+  }
 
   public get isValid(): boolean {
-    const valid =
-      this.loginModel.pin1 != null && this.loginModel.cardId != null;
-    return valid;
-  }
-
-  onGetLoginString(result: string) {
-    this.loginModel.cardId = result;
-  }
-
-  signIn() {
-    this.authService.signIn(new LoginCommand(this.loginModel));
-    this.dialogRef.close(false);
-    // return boolean indicated that the dialog not cancelled
+    return this.result.pin1 != null && this.result.cardId != null;
   }
 }

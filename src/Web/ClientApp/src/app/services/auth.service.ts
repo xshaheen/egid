@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { AppTokenService } from "./token.service";
 import { AuthClient, LoginCommand } from "../api";
-import { ErrorService } from "./error.service";
 import { AppModalService } from "./modal.service";
+import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -11,7 +12,6 @@ export class AuthService {
     private readonly authClient: AuthClient,
     private readonly router: Router,
     private readonly appTokenService: AppTokenService,
-    private readonly errorService: ErrorService,
     private readonly modal: AppModalService
   ) {}
 
@@ -19,16 +19,14 @@ export class AuthService {
     return this.appTokenService.any();
   }
 
-  signIn(model: LoginCommand): void {
-    this.authClient.signIn(model).subscribe(
-      (token) => {
+  signIn(model: LoginCommand): Observable<void> {
+    return this.authClient.signIn(model).pipe(
+      map((token) => {
         if (!token) {
           return;
         }
         this.appTokenService.set(token);
-        this.modal.showSuccessSnackBar("تم تسجيل الدخول بنجاح.");
-      },
-      (err) => this.errorService.handleError(err)
+      })
     );
   }
 
