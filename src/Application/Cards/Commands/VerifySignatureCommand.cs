@@ -55,8 +55,8 @@ namespace EGID.Application.Cards.Commands
             public async Task<(bool valid, FullName name, string Photo)> Handle(VerifySignatureCommand request,
                 CancellationToken cancellationToken)
             {
-                var citizenId = request.Signature[..128];
-                var dataSignature = request.Signature[128..];
+                var citizenId = request.Signature[..36];
+                var dataSignature = request.Signature[36..];
 
                 var citizen = await _context.CitizenDetails.FirstOrDefaultAsync(c => c.Id == citizenId,
                     cancellationToken);
