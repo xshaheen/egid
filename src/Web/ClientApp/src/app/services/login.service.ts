@@ -21,11 +21,11 @@ export class LoginService {
     });
 
     // after close try to navigate again
-    dialogRef.afterClosed().subscribe(() => {
-      if (returnUrl && this.authService.isAuthenticated) {
-        this.router.navigateByUrl(returnUrl);
-      } else {
+    dialogRef.afterClosed().subscribe((isCanceled) => {
+      if (isCanceled || !returnUrl) {
         this.router.navigateByUrl("/");
+      } else {
+        this.router.navigateByUrl(returnUrl);
       }
     });
   }

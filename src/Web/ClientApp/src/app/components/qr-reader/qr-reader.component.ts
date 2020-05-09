@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter } from "@angular/core";
 import { AppInfoDialogComponent } from "./app-info-dialog/app-info-dialog.component";
 import { BehaviorSubject } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
-import { ResultAndError } from "@zxing/ngx-scanner/lib/ResultAndError";
 import { MatSelectChange } from "@angular/material/select";
 
 // TODO: improve buttons

@@ -31,6 +31,6 @@ export class AuthService {
 
   signOut() {
     this.appTokenService.clear();
-    this.router.navigate(["/main/home"]);
+    this.router.navigateByUrl("/");
   }
 }

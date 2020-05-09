@@ -20,7 +20,11 @@ export class AuthGuard implements CanActivate {
     if (this.appTokenService.any()) {
       return true;
     }
-    this.loginService.login(state.url);
+    const returnUrl = state.url;
+    console.log(next.url);
+    console.log("RETURN URL", returnUrl);
+    this.loginService.login(returnUrl);
+    console.log(state.url);
     this.router.navigateByUrl("/");
     return false;
   }

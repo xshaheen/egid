@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { MatDialogRef } from "@angular/material/dialog";
-import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { ILoginCommand, LoginCommand } from "src/app/api";
 
@@ -15,7 +14,6 @@ export class LoginDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -25,17 +23,13 @@ export class LoginDialogComponent {
     return valid;
   }
 
-  onClickCancel(): void {
-    this.dialogRef.close();
-    this.router.navigateByUrl("/");
-  }
-
   onGetLoginString(result: string) {
     this.loginModel.cardId = result;
   }
 
   signIn() {
     this.authService.signIn(new LoginCommand(this.loginModel));
-    this.dialogRef.close();
+    this.dialogRef.close(false);
+    // return boolean indicated that the dialog not cancelled
   }
 }

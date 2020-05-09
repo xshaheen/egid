@@ -30,7 +30,7 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onClickCancel()">رجوع</button>
+  <button mat-button [mat-dialog-close]="true">رجوع</button>
   <button mat-button (click)="signIn()" [disabled]="!isValid" ariaLabel="موافق">
     تم
   </button>
