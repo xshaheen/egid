@@ -22,32 +22,13 @@ import { MatTableModule } from "@angular/material/table";
 import { MatCardModule } from "@angular/material/card";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { CdkStepperModule } from "@angular/cdk/stepper";
+import { MatStepperModule } from "@angular/material/stepper";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
-  imports: [
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatGridListModule,
-    LayoutModule,
-    MatDividerModule,
-    MatSelectModule,
-    MatTreeModule,
-    MatBadgeModule,
-    MatDialogModule,
-    MatMenuModule,
-    MatInputModule,
-    MatTableModule,
-    MatCardModule,
-    MatSnackBarModule,
-    MatPaginatorModule,
-  ],
   exports: [
     MatSidenavModule,
     MatToolbarModule,
@@ -71,6 +52,11 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     MatCardModule,
     MatSnackBarModule,
     MatPaginatorModule,
+    CdkStepperModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
   ],
 })
 export class MaterialModule {}

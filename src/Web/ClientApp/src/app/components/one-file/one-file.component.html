@@ -1,0 +1,13 @@
+<div class="x-file">
+  <input
+    #input
+    type="file"
+    [disabled]="disabled"
+    [required]="required"
+    [id]="formControlName"
+    [name]="formControlName"
+    (change)="addFile(input.files)"
+  />
+  <button class="btn"><i class="fa fa-cloud-upload-alt"></i> اختر ملف</button>
+  <span *ngIf="fileName" style="margin-right: 10px;">{{ fileName }}</span>
+</div>
