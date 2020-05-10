@@ -10,7 +10,7 @@
         مرحبا {{ authService.userName }}!
       </button>
       <ng-template #signIn>
-        <button mat-button (click)="openLoginDialog()">
+        <button mat-button (click)="loginService.login()">
           <i class="fa fa-sign-in-alt"></i> تسجيل الدخول
         </button>
       </ng-template>
