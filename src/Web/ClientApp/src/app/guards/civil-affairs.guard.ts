@@ -16,7 +16,8 @@ export class CivilAffairsGuard implements CanActivate {
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.userRole.toLowerCase() === "administrator") {
+    const role = this.authService.userRole.toLowerCase();
+    if (role === "civilaffairsempolyee" || role === "administrator") {
       return true;
     }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "src/app/services/auth.service";
 import { BreakpointsService } from "src/app/services/breakpoints.service";
+
 @Component({
   selector: "eg-civil-affairs",
   templateUrl: "./civil-affairs.component.html",
@@ -8,7 +10,10 @@ import { BreakpointsService } from "src/app/services/breakpoints.service";
 export class CivilAffairsComponent implements OnInit {
   isHandset: boolean;
 
-  constructor(private breakpoints: BreakpointsService) {}
+  constructor(
+    public authService: AuthService,
+    private breakpoints: BreakpointsService
+  ) {}
 
   ngOnInit(): void {
     this.breakpoints

@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   public get userName(): string {
-    return this.appTokenService.decode("name");
+    return this.appTokenService.decode("firstname");
   }
 
   public get userImg(): string {

@@ -31,6 +31,11 @@ export class AppTokenService {
     if (!decodedToken) {
       return null;
     }
-    return decodedToken[key];
+    const value = decodedToken[key];
+
+    if (value === undefined) {
+      return null;
+    }
+    return value;
   }
 }

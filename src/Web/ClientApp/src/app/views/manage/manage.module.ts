@@ -6,7 +6,6 @@ import { FileModule } from "src/app/components/file/file.module";
 
 import { ManageComponent } from "./manage.component";
 import { CardComponent } from "./card/card.component";
-import { UpdateInfoComponent } from "./update-info/update-info.component";
 import { SignDocComponent } from "./sign-doc/sign-doc.component";
 import { VerifySignatureComponent } from "./verify-signature/verify-signature.component";
 import { UpdateHealthInfoComponent } from "./update-health-info/update-health-info.component";
@@ -17,7 +16,6 @@ import { FormsModule } from "@angular/forms";
   declarations: [
     ManageComponent,
     CardComponent,
-    UpdateInfoComponent,
     SignDocComponent,
     VerifySignatureComponent,
     UpdateHealthInfoComponent,

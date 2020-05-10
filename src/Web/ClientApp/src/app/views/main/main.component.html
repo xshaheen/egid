@@ -1,10 +1,19 @@
 <!--Navbar-->
 <nav>
   <mat-toolbar class="navbar" color="primary" aria-label="Top Toolbar">
-    <span *ngIf="!authService.isAuthenticated">
-      <button mat-button (click)="openLoginDialog()">
-        <i class="fa fa-sign-in-alt"></i> تسجيل الدخول
+    <span>
+      <button
+        mat-button
+        [routerLink]="['/manage']"
+        *ngIf="authService.userName != null; else signIn"
+      >
+        مرحبا {{ authService.userName }}!
       </button>
+      <ng-template #signIn>
+        <button mat-button (click)="openLoginDialog()">
+          <i class="fa fa-sign-in-alt"></i> تسجيل الدخول
+        </button>
+      </ng-template>
     </span>
 
     <span class="links">
