@@ -1,6 +1,9 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
+import { AdminGuard } from "./guards/admin.guard";
+import { CivilAffairsGuard } from "./guards/civil-affairs.guard";
+import { ForbiddenComponent } from "./views/forbidden/forbidden.component";
 
 const routes: Routes = [
   {
@@ -9,13 +12,17 @@ const routes: Routes = [
       import("./views/main/main.module").then((m) => m.MainModule),
   },
   {
+    path: "forbidden",
+    component: ForbiddenComponent,
+  },
+  {
     path: "admin",
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     loadChildren: () =>
       import("./views/admin/admin.module").then((m) => m.AdminModule),
   },
   {
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, CivilAffairsGuard],
     path: "civil-affairs",
     loadChildren: () =>
       import("./views/civil-affairs/civil-affairs.module").then(
