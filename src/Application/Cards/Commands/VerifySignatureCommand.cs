@@ -69,7 +69,7 @@ namespace EGID.Application.Cards.Commands
                     _digitalSignatureService.VerifySignature(request.Base64Sha512DataHash, dataSignature,
                         citizen.PublicKey);
 
-                return (valid, citizen.FullName, Path.Combine(_directory.CitizenPhotosDirectory, citizen.PhotoUrl));
+                return (valid, citizen.FullName, Path.Combine(_directory.CitizenPhotosRelativePath, citizen.PhotoUrl));
             }
         }
 

@@ -34,7 +34,7 @@ namespace EGID.Application.Health.Queries
                     {
                         Id = h.Id,
                         CitizenName = h.Citizen.FullName,
-                        CitizenPhoto = Path.Combine(_directoryService.CitizenPhotosDirectory, h.Citizen.PhotoUrl),
+                        CitizenPhoto = Path.Combine(_directoryService.CitizenPhotosRelativePath, h.Citizen.PhotoUrl),
                         BloodType = h.BloodType,
                         Phone1 = h.Phone1,
                         Phone2 = h.Phone2,
@@ -47,7 +47,7 @@ namespace EGID.Application.Health.Queries
                             Create = healthRecord.Create,
                             CreateBy = healthRecord.CreateBy,
                             Attachments = healthRecord.Attachments
-                                .Select(a =>  Path.Combine(_directoryService.HealthInfoDirectory, a.HealthRecordId))
+                                .Select(a =>  Path.Combine(_directoryService.HealthInfoRelativePath, a.HealthRecordId))
                                 .ToList()
                         }).ToList()
                     })
