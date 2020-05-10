@@ -1,42 +1,64 @@
 <div class="flex-center">
   <h1>التحقق من التوقيع</h1>
+
   <div class="rows">
+    <!--SignatureZone-->
     <label class="signature-zone" [for]="'Signature'">
-      <i class="fas fa-cloud-upload-alt"></i> ارفق ملف التوقيع
+      <i class="fas fa-signature"></i> ارفق ملف التوقيع
       <input
         type="file"
         [name]="'Signature'"
         required
         (change)="addSignFile($event.target.files)"
       />
+      <div *ngIf="signatureFile" class="file">
+        <div><i class="fa fa-file-signature x-icon"></i></div>
+        <div *ngIf="signatureFile" class="fileName">
+          {{ signatureFile.name }}
+        </div>
+      </div>
     </label>
+    <!--#SignatureZone-->
 
+    <!--DocZone-->
     <label class="doc-zone" [for]="'doc'">
-      <i class="fas fa-cloud-upload-alt"></i> ارفق الوثيقة الاصلية
+      <i class="fas fa-file-contract"></i> ارفق الوثيقة الاصلية
       <input
         type="file"
         [name]="'doc'"
         required
         (change)="addDocFile($event.target.files)"
       />
+      <div *ngIf="docFile" class="file">
+        <div><i class="fa fa-file-contract x-icon"></i></div>
+        <div class="fileName">{{ docFile.name }}</div>
+      </div>
     </label>
+    <!--#DocZone-->
   </div>
 
   <button mat-flat-button color="warn" [disabled]="!isValid" (click)="verify()">
     التحقق
   </button>
 
-  <div *ngIf="result">
-    {{
-      result.fullName.firstName +
-        " " +
-        result.fullName.secondName +
-        " " +
-        result.fullName.thirdName +
-        " " +
-        result.fullName.lastName
-    }}
-    {{ result.photo }}
-    {{ result.valid }}
-  </div>
+  <!--Result-->
+  <mat-card *ngIf="result">
+    <div *ngIf="!result.valid; else valid">
+      هذا التوقيع غير صحيح
+    </div>
+
+    <ng-template #valid>
+      <mat-form-field class="x-name">
+        <mat-label>اسم الموقع</mat-label>
+        <input matInput [value]="result.fullName" disabled />
+      </mat-form-field>
+      <div class="signer-img">
+        <img [src]="result.img" alt="signer photo" />
+      </div>
+      <div class="check">
+        <i class="fa fa-check-circle"></i>
+      </div>
+    </ng-template>
+  </mat-card>
+  <!--#Result-->
 </div>

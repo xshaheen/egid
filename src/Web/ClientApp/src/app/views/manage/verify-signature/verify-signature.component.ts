@@ -3,6 +3,12 @@ import { SignDocService } from "src/app/services/sign-doc.service";
 import { VerifySignatureResult } from "src/app/api";
 import { ErrorService } from "src/app/services/error.service";
 
+interface Result {
+  valid: boolean;
+  fullName: string;
+  img: string;
+}
+
 @Component({
   templateUrl: "./verify-signature.component.html",
   styleUrls: ["./verify-signature.component.scss"],
@@ -10,7 +16,8 @@ import { ErrorService } from "src/app/services/error.service";
 export class VerifySignatureComponent {
   signatureFile: File = null;
   docFile: File = null;
-  result: VerifySignatureResult = null;
+  result: Result;
+  done = false;
 
   constructor(
     private readonly signService: SignDocService,
@@ -40,7 +47,20 @@ export class VerifySignatureComponent {
       .VerifySignature(this.signatureFile, this.docFile)
       .subscribe(
         (result) => {
-          this.result = result;
+          const r: Result = {
+            fullName:
+              result.fullName.firstName +
+              " " +
+              result.fullName.secondName +
+              " " +
+              result.fullName.thirdName +
+              " " +
+              result.fullName.lastName,
+            img: result.photo,
+            valid: result.valid,
+          };
+
+          this.result = r;
         },
         (err) => this.errorHandler.handleError(err)
       );
