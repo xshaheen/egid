@@ -1,1 +1,37 @@
-<p>Update Health Info</p>
+<div class="row">
+  <form>
+    <mat-card>
+      <mat-card-header>
+        اترك ارقام للاتصال بها في حالة الطوارئ
+      </mat-card-header>
+
+      <mat-form-field class="field">
+        <mat-label>الرقم الاول</mat-label>
+        <input cdkFocusInitial matInput placeholder="+20 0101234567" />
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>الرقم الثاني</mat-label>
+        <input matInput placeholder="+20 0101234567" />
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>الرقم الاخير</mat-label>
+        <input matInput placeholder="+20 0101234567" />
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>اترك ملاحظات لحالة الطوارئ</mat-label>
+        <textarea
+          matInput
+          rows="6"
+          placeholder="مثال: الامراض المزمنة..."
+        ></textarea>
+      </mat-form-field>
+
+      <div class="btn-div">
+        <button color="primary" mat-raised-button>تغير</button>
+      </div>
+    </mat-card>
+  </form>
+</div>

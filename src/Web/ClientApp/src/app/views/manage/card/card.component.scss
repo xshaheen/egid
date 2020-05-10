@@ -1,0 +1,29 @@
+@import "~src/styles/var";
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+
+  mat-card {
+    margin-top: 20px;
+    width: 30%;
+    justify-content: center;
+
+    @media screen and (max-width: $xl) {
+      width: 90%;
+    }
+
+    mat-form-field {
+      display: block;
+      width: 95%;
+      direction: rtl;
+      text-align: right;
+    }
+
+    .btn-div {
+      text-align: center;
+    }
+  }
+}
