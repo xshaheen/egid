@@ -19,6 +19,18 @@ export class AuthService {
     return this.appTokenService.any();
   }
 
+  public get userRole(): string {
+    return this.appTokenService.decode("role");
+  }
+
+  public get userName(): string {
+    return this.appTokenService.decode("name");
+  }
+
+  public get userImg(): string {
+    return this.appTokenService.decode("img");
+  }
+
   signIn(model: LoginCommand): Observable<void> {
     return this.authClient.signIn(model).pipe(
       map((token) => {

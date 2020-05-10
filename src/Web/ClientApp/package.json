@@ -25,6 +25,7 @@
     "@zxing/ngx-scanner": "^3.0.0",
     "angularx-qrcode": "^2.3.0",
     "base64-arraybuffer": "^0.2.0",
+    "jwt-decode": "^2.2.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.3"
