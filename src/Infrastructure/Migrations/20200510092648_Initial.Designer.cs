@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EGID.Infrastructure.Migrations
 {
     [DbContext(typeof(EgidDbContext))]
-    [Migration("20200508075943_Initial")]
+    [Migration("20200510092648_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -238,6 +238,10 @@ namespace EGID.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(5000);
 
                     b.Property<string>("Phone1")
                         .HasColumnType("nvarchar(24)")

@@ -15,6 +15,8 @@ namespace EGID.Domain.Entities
         public string Phone2 { get; set; }
         public string Phone3 { get; set; }
 
+        public string Notes { get; set; }
+
         public string CitizenId { get; set; }
         public virtual CitizenDetail Citizen { get; set; }
 

@@ -15,6 +15,7 @@ namespace EGID.Web.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult<HealthInfoVm>> GetOne(string citizenId)
         {
             var result = await Mediator.Send(new GetHealthInfoQuery {HealthInfoId = citizenId});

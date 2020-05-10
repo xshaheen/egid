@@ -54,7 +54,7 @@ namespace EGID.Web.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<string>> Post([FromBody] CreateCitizenCommand command)
+        public async Task<ActionResult<CreateCitizenResult>> Post([FromBody] CreateCitizenCommand command)
         {
             command.Photo = Request.Files().FirstOrDefault();
 

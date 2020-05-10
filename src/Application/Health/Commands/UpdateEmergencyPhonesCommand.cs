@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common;
 using EGID.Application.Common.Exceptions;
@@ -14,6 +13,8 @@ namespace EGID.Application.Health.Commands
     public class UpdateEmergencyPhonesCommand : IRequest
     {
         public string HealthInfoId { get; set; }
+
+        public string Notes { get; set; }
 
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
@@ -51,13 +52,8 @@ namespace EGID.Application.Health.Commands
         public class UpdateHealthInfoHandler : IRequestHandler<UpdateEmergencyPhonesCommand>
         {
             private readonly IEgidDbContext _context;
-            private readonly ICurrentUserService _currentUser;
 
-            public UpdateHealthInfoHandler(IEgidDbContext context, ICurrentUserService currentUser)
-            {
-                _context = context;
-                _currentUser = currentUser;
-            }
+            public UpdateHealthInfoHandler(IEgidDbContext context) => _context = context;
 
             public async Task<Unit> Handle(UpdateEmergencyPhonesCommand request, CancellationToken cancellationToken)
             {
@@ -69,6 +65,7 @@ namespace EGID.Application.Health.Commands
                 healthInfo.Phone1 = request.Phone1;
                 healthInfo.Phone2 = request.Phone2;
                 healthInfo.Phone3 = request.Phone3;
+                healthInfo.Notes = request.Notes;
 
                 return Unit.Value;
             }

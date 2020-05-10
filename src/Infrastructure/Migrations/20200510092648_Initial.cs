@@ -127,6 +127,7 @@ namespace EGID.Infrastructure.Migrations
                     Phone1 = table.Column<string>(maxLength: 24, nullable: true),
                     Phone2 = table.Column<string>(maxLength: 24, nullable: true),
                     Phone3 = table.Column<string>(maxLength: 24, nullable: true),
+                    Notes = table.Column<string>(maxLength: 5000, nullable: true),
                     CitizenId = table.Column<string>(maxLength: 128, nullable: false)
                 },
                 constraints: table =>

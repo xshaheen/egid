@@ -39,6 +39,7 @@ namespace EGID.Application.Health.Queries
                         Phone1 = h.Phone1,
                         Phone2 = h.Phone2,
                         Phone3 = h.Phone3,
+                        Notes = h.Notes,
                         HealthRecords = h.HealthRecords.Select(healthRecord => new HealthRecordVm()
                         {
                             Medications = healthRecord.Medications,

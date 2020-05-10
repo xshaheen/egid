@@ -1,4 +1,5 @@
 ﻿/* tslint:disable */
+
 import {
   mergeMap as _observableMergeMap,
   catchError as _observableCatch,
@@ -714,7 +715,7 @@ export class CitizensClient {
     return _observableOf<CitizenDetailsVm[]>(<any>null);
   }
 
-  post(command: CreateCitizenCommand): Observable<string> {
+  post(command: CreateCitizenCommand): Observable<CreateCitizenResult> {
     let url_ = this.baseUrl + "/api/citizens";
     url_ = url_.replace(/[?&]$/, "");
 
@@ -743,14 +744,21 @@ export class CitizensClient {
             try {
               return this.processPost(<any>response_);
             } catch (e) {
-              return <Observable<string>>(<any>_observableThrow(e));
+              return <Observable<CreateCitizenResult>>(
+                (<any>_observableThrow(e))
+              );
             }
-          } else return <Observable<string>>(<any>_observableThrow(response_));
+          } else
+            return <Observable<CreateCitizenResult>>(
+              (<any>_observableThrow(response_))
+            );
         })
       );
   }
 
-  protected processPost(response: HttpResponseBase): Observable<string> {
+  protected processPost(
+    response: HttpResponseBase
+  ): Observable<CreateCitizenResult> {
     const status = response.status;
     const responseBlob =
       response instanceof HttpResponse
@@ -773,7 +781,7 @@ export class CitizensClient {
             _responseText === ""
               ? null
               : JSON.parse(_responseText, this.jsonParseReviver);
-          result200 = resultData200 !== undefined ? resultData200 : <any>null;
+          result200 = CreateCitizenResult.fromJS(resultData200);
           return _observableOf(result200);
         })
       );
@@ -1308,6 +1316,24 @@ export class EmployeesClient {
           return _observableOf<void>(<any>null);
         })
       );
+    } else if (status === 400) {
+      return blobToText(responseBlob).pipe(
+        _observableMergeMap((_responseText) => {
+          let result400: any = null;
+          let resultData400 =
+            _responseText === ""
+              ? null
+              : JSON.parse(_responseText, this.jsonParseReviver);
+          result400 = ProblemDetails.fromJS(resultData400);
+          return throwException(
+            "A server side error occurred.",
+            status,
+            _responseText,
+            _headers,
+            result400
+          );
+        })
+      );
     } else {
       return blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
@@ -1430,19 +1456,25 @@ export class HealthInfoClient {
           );
         })
       );
-    } else if (status !== 200 && status !== 204) {
+    } else {
       return blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
+          let resultdefault: any = null;
+          let resultDatadefault =
+            _responseText === ""
+              ? null
+              : JSON.parse(_responseText, this.jsonParseReviver);
+          resultdefault = ProblemDetails.fromJS(resultDatadefault);
           return throwException(
-            "An unexpected server error occurred.",
+            "A server side error occurred.",
             status,
             _responseText,
-            _headers
+            _headers,
+            resultdefault
           );
         })
       );
     }
-    return _observableOf<HealthInfoVm>(<any>null);
   }
 
   post(command: AddHealthRecordCommand): Observable<void> {
@@ -2570,6 +2602,50 @@ export interface IGetCitizenDetailsQuery {
   id?: string | null;
 }
 
+export class CreateCitizenResult implements ICreateCitizenResult {
+  citizenId?: string | null;
+  healthInfoId?: string | null;
+
+  constructor(data?: ICreateCitizenResult) {
+    if (data) {
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+
+  init(_data?: any) {
+    if (_data) {
+      this.citizenId =
+        _data["citizenId"] !== undefined ? _data["citizenId"] : <any>null;
+      this.healthInfoId =
+        _data["healthInfoId"] !== undefined ? _data["healthInfoId"] : <any>null;
+    }
+  }
+
+  static fromJS(data: any): CreateCitizenResult {
+    data = typeof data === "object" ? data : {};
+    let result = new CreateCitizenResult();
+    result.init(data);
+    return result;
+  }
+
+  toJSON(data?: any) {
+    data = typeof data === "object" ? data : {};
+    data["citizenId"] =
+      this.citizenId !== undefined ? this.citizenId : <any>null;
+    data["healthInfoId"] =
+      this.healthInfoId !== undefined ? this.healthInfoId : <any>null;
+    return data;
+  }
+}
+
+export interface ICreateCitizenResult {
+  citizenId?: string | null;
+  healthInfoId?: string | null;
+}
+
 export class CreateCitizenCommand implements ICreateCitizenCommand {
   fatherId?: string | null;
   motherId?: string | null;
@@ -2959,6 +3035,7 @@ export class HealthInfoVm implements IHealthInfoVm {
   citizenName?: FullName | null;
   citizenPhoto?: string | null;
   bloodType?: BloodType;
+  notes?: string | null;
   phone1?: string | null;
   phone2?: string | null;
   phone3?: string | null;
@@ -2983,6 +3060,7 @@ export class HealthInfoVm implements IHealthInfoVm {
         _data["citizenPhoto"] !== undefined ? _data["citizenPhoto"] : <any>null;
       this.bloodType =
         _data["bloodType"] !== undefined ? _data["bloodType"] : <any>null;
+      this.notes = _data["notes"] !== undefined ? _data["notes"] : <any>null;
       this.phone1 = _data["phone1"] !== undefined ? _data["phone1"] : <any>null;
       this.phone2 = _data["phone2"] !== undefined ? _data["phone2"] : <any>null;
       this.phone3 = _data["phone3"] !== undefined ? _data["phone3"] : <any>null;
@@ -3011,6 +3089,7 @@ export class HealthInfoVm implements IHealthInfoVm {
       this.citizenPhoto !== undefined ? this.citizenPhoto : <any>null;
     data["bloodType"] =
       this.bloodType !== undefined ? this.bloodType : <any>null;
+    data["notes"] = this.notes !== undefined ? this.notes : <any>null;
     data["phone1"] = this.phone1 !== undefined ? this.phone1 : <any>null;
     data["phone2"] = this.phone2 !== undefined ? this.phone2 : <any>null;
     data["phone3"] = this.phone3 !== undefined ? this.phone3 : <any>null;
@@ -3028,6 +3107,7 @@ export interface IHealthInfoVm {
   citizenName?: FullName | null;
   citizenPhoto?: string | null;
   bloodType?: BloodType;
+  notes?: string | null;
   phone1?: string | null;
   phone2?: string | null;
   phone3?: string | null;
@@ -3164,6 +3244,7 @@ export interface IAddHealthRecordCommand {
 export class UpdateEmergencyPhonesCommand
   implements IUpdateEmergencyPhonesCommand {
   healthInfoId?: string | null;
+  notes?: string | null;
   phone1?: string | null;
   phone2?: string | null;
   phone3?: string | null;
@@ -3181,6 +3262,7 @@ export class UpdateEmergencyPhonesCommand
     if (_data) {
       this.healthInfoId =
         _data["healthInfoId"] !== undefined ? _data["healthInfoId"] : <any>null;
+      this.notes = _data["notes"] !== undefined ? _data["notes"] : <any>null;
       this.phone1 = _data["phone1"] !== undefined ? _data["phone1"] : <any>null;
       this.phone2 = _data["phone2"] !== undefined ? _data["phone2"] : <any>null;
       this.phone3 = _data["phone3"] !== undefined ? _data["phone3"] : <any>null;
@@ -3198,6 +3280,7 @@ export class UpdateEmergencyPhonesCommand
     data = typeof data === "object" ? data : {};
     data["healthInfoId"] =
       this.healthInfoId !== undefined ? this.healthInfoId : <any>null;
+    data["notes"] = this.notes !== undefined ? this.notes : <any>null;
     data["phone1"] = this.phone1 !== undefined ? this.phone1 : <any>null;
     data["phone2"] = this.phone2 !== undefined ? this.phone2 : <any>null;
     data["phone3"] = this.phone3 !== undefined ? this.phone3 : <any>null;
@@ -3207,6 +3290,7 @@ export class UpdateEmergencyPhonesCommand
 
 export interface IUpdateEmergencyPhonesCommand {
   healthInfoId?: string | null;
+  notes?: string | null;
   phone1?: string | null;
   phone2?: string | null;
   phone3?: string | null;

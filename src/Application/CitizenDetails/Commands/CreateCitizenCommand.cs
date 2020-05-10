@@ -13,7 +13,7 @@ using MediatR;
 
 namespace EGID.Application.CitizenDetails.Commands
 {
-    public class CreateCitizenCommand : IRequest<string>
+    public class CreateCitizenCommand : IRequest<CreateCitizenResult>
     {
         public string FatherId { get; set; }
         public string MotherId { get; set; }
@@ -121,7 +121,7 @@ namespace EGID.Application.CitizenDetails.Commands
 
         #region Handler
 
-        public class CreateCitizenCommandHandler : IRequestHandler<CreateCitizenCommand, string>
+        public class CreateCitizenCommandHandler : IRequestHandler<CreateCitizenCommand, CreateCitizenResult>
         {
             private readonly IEgidDbContext _context;
             private readonly IFilesDirectoryService _directories;
@@ -137,7 +137,7 @@ namespace EGID.Application.CitizenDetails.Commands
                 _keys = keys;
             }
 
-            public async Task<string> Handle(CreateCitizenCommand request, CancellationToken cancellationToken)
+            public async Task<CreateCitizenResult> Handle(CreateCitizenCommand request, CancellationToken cancellationToken)
             {
                 await request.Photo.SaveAsync(_directories.CitizenPhotosDirectory);
 
@@ -168,7 +168,7 @@ namespace EGID.Application.CitizenDetails.Commands
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return citizen.HealthInfo.Id;
+                return new CreateCitizenResult{CitizenId = citizen.Id, HealthInfoId = citizen.HealthInfo.Id};
             }
         }
 

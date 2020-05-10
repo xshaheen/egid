@@ -237,6 +237,10 @@ namespace EGID.Infrastructure.Migrations
                         .HasColumnType("nvarchar(128)")
                         .HasMaxLength(128);
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(5000);
+
                     b.Property<string>("Phone1")
                         .HasColumnType("nvarchar(24)")
                         .HasMaxLength(24);

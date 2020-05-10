@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -31,6 +32,7 @@ namespace EGID.Infrastructure.Auth
         private readonly ICurrentUserService _currentUser;
         private readonly IJwtTokenService _jwtTokenService;
         private readonly IHashService _hashService;
+        private readonly IFilesDirectoryService _directoryService;
 
         #region Constructor
 
@@ -42,7 +44,7 @@ namespace EGID.Infrastructure.Auth
             IPasswordValidator<Card> passwordValidator,
             IDateTime dateTime,
             ICurrentUserService currentUser, IHashService hashService,
-            IJwtTokenService jwtTokenService)
+            IJwtTokenService jwtTokenService, IFilesDirectoryService directoryService)
         {
             _context = context;
             _userManager = userManager;
@@ -52,6 +54,7 @@ namespace EGID.Infrastructure.Auth
             _currentUser = currentUser;
             _hashService = hashService;
             _jwtTokenService = jwtTokenService;
+            _directoryService = directoryService;
             _roleManager = roleManager;
         }
 
@@ -88,17 +91,11 @@ namespace EGID.Infrastructure.Auth
 
         public async Task<(Result result, string token)> LoginAsync(string cardId, string pin1)
         {
-            Card card;
-
             // Is the card exist?
-            try
-            {
-                card = await GetAsync(cardId);
-            }
-            catch (EntityNotFoundException)
-            {
-                return (Result.Failure("محاولة تسجيل دخول غير صحيحة."), null);
-            }
+            var card = await _context.Cards.Include(c => c.Citizen)
+                .FirstOrDefaultAsync(c => c.Id == cardId);
+
+            if (card is null) return (Result.Failure("محاولة تسجيل دخول غير صحيحة."), null);
 
             // Is card active?
             if (!card.Active)
@@ -120,7 +117,11 @@ namespace EGID.Infrastructure.Auth
             if (isCorrectPin)
             {
                 var token = _jwtTokenService.Generate(
-                    new List<Claim>()
+                    new List<Claim>
+                        {
+                            new Claim("img", Path.Combine(_directoryService.CitizenPhotosRelativePath, card.Citizen.PhotoUrl)),
+                            new Claim("firstname", card.Citizen.FullName.FirstName),
+                        }
                         .AddJti()
                         .AddNameIdentifier(card.CitizenId)
                         .AddSub(card.Id)
