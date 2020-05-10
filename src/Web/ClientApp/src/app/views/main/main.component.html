@@ -1,139 +1,201 @@
-<!-- navbar -->
+<!--Navbar-->
 <nav>
-  <div class="container">
-      <div class="logo">EgID</div>
-      <div class="nav-items">
-          <a href="#" >الصحه</a>
-          <a href="#">الاحوال المدنيه</a>
-          <a href="#" class="special">التعليم</a>
-      </div>
-  </div>
+  <mat-toolbar class="navbar" color="primary" aria-label="Top Toolbar">
+    <span *ngIf="!authService.isAuthenticated">
+      <button mat-button (click)="openLoginDialog()">
+        <i class="fa fa-sign-in-alt"></i> تسجيل الدخول
+      </button>
+    </span>
+
+    <span class="links">
+      <button mat-button [routerLink]="['civil-affairs']">
+        <i class="fa fa-cogs"></i> السجل المدني
+      </button>
+      <button mat-button [routerLink]="['health/records']">
+        <i class="fa fa-heartbeat"></i> التاريخ المرضي
+      </button>
+      <button mat-button [routerLink]="['manage']">
+        <i class="fa fa-id-card"></i> بطاقتي
+      </button>
+    </span>
+
+    <span class="logo">
+      <a class="logo-a" [routerLink]="['']">
+        EGID<i class="fas fa-stream"></i>
+      </a>
+    </span>
+  </mat-toolbar>
 </nav>
-<!-- header -->
+<!--#Navbar-->
+
+<!--Header-->
 <header>
-  <div class="left">
-      <span></span>
-      <h2>Egypt In New Edition.</h2>
-      <p>Get your life insurance coverage easier and faster. We blend our expertise and technology to help you find the plan that’s right for you. Ensure you and your loved ones are protected.</p>
-      <button class="btn">View Plans</button>
-  </div>
-  <div class="right">
-      <img src="../../../assets/1807658-1-600x470.jpg">
-  </div>
-</header>
-<!-- space -->
-<div class="space"></div>
-<!-- intro -->
-<div class="container">
-<h1 class="head">الخدمات</h1>
-<div class="intro">
-  <div class="info">
-  <h3>التعليم </h3>
-  <p> تم توفير العديد من الوسائل لخدمات الطلاب  سواء من المرحله الثانويه او دخول الجامعه او استخراج
-      شهادات ....</p>
-  </div>
-  <div class="info">
-  <h3> الاحوال المدنيه</h3>
-  <p> لقد تم تأسيس قاعده الكترونيه لتسهيل الخدمات وسرعه الاداء تجنبا لمشاكل الاوراق والوقت الضائع ويمكنك انجاز كل اورقاك الكترونيا
-      دون مجهود . </p>
-  </div>
-  <div class="info last">
-  <h3> الصحه </h3>
-  <p>نعمل على بناء قاعده صحيه توفر للمواطنين العديد من الخدمات مثل تأسيس سجل مرضى يشمل حاله المواطن
-      الصحيه منذ ميلاده وجميع الخدمات المتاحه له. </p>
-  </div>
-</div>
-</div>
-<div class="space-2"></div>
-<!-- our work -->
-<div class="container">
-<div class="about">
-  <div class="written">
-  <p>Find out more about how we work</p>
-  </div>
-  <div class="pull">
-  <button >How we work</button>
+  <div class="image">
+    <img src="/assets/lamp.jpg" />
   </div>
 
+  <div class="text">
+    <span class="line"></span>
+    <div class="main-p">
+      <h1>مصر برؤية جديدة.</h1>
+      <p>
+        كلنا عارفين فائدة التكنولوجيا والوقت المجهود اللي بتوفره وكل ملي ثانية
+        بتفرق فهدفنا اخذ الخطوة الاولي نحو مجتمع الكتروني. بناء الهوية
+        الالكترونية. التوقيع الرقمي. نظام من السرية، والتوثيق، والنزاهة، وعدم
+        التنصل.
+      </p>
+      <p>
+        يمكنك المشاركة معنا التطوير مفتوح للجميع.
+      </p>
+      <div class="contribute">
+        <a
+          mat-button
+          href="https://github.com/xshaheen/EGID"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa fa-code-branch" style="margin: 2px;"></i>
+          شارك معنا
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+<!--#Header-->
+
+<!--Features-->
+<div class="features">
+  <h1 class="head">المميزات</h1>
+  <div class="intro">
+    <mat-card class="card">
+      <h3><i class="fa fa-id-badge"></i> الهوية الالكترونية</h3>
+      <p>
+        تم توفير العديد من الوسائل لخدمات الطلاب سواء من المرحله الثانويه او
+        دخول الجامعه او استخراج شهادات.
+      </p>
+    </mat-card>
+    <mat-card class="card">
+      <h3><i class="fa fa-signature"></i> التوقيع الرقمي</h3>
+      <p>
+        لقد تم تأسيس قاعده الكترونيه لتسهيل الخدمات وسرعه الاداء تجنبا لمشاكل
+        الاوراق والوقت الضائع ويمكنك انجاز كل اورقاك الكترونيا دون مجهود.
+      </p>
+    </mat-card>
+    <mat-card class="card">
+      <h3><i class="fa fa-heartbeat"></i> التاريخ المرضي</h3>
+      <p>
+        نعمل على بناء قاعده صحيه توفر للمواطنين العديد من الخدمات مثل تأسيس سجل
+        مرضى يشمل حاله المواطن الصحيه منذ ميلاده وجميع الخدمات المتاحه له.
+      </p>
+    </mat-card>
+    <mat-card class="card">
+      <h3><i class="fa fa-cogs"></i> الاحوال المدنيه</h3>
+      <p>
+        لقد تم تأسيس قاعده الكترونيه لتسهيل الخدمات وسرعه الاداء تجنبا لمشاكل
+        الاوراق والوقت الضائع ويمكنك انجاز كل اورقاك الكترونيا دون مجهود.
+      </p>
+    </mat-card>
+  </div>
 </div>
+<!--#Features-->
+
+<!--
+<div class="container">
+  <div class="about">
+    <div class="written">
+      <p>Find out more about how we work</p>
+    </div>
+    <div class="pull">
+      <button>How we work</button>
+    </div>
+  </div>
 </div>
 <div class="space-2"></div>
-<!-- details -->
+
 <div class="container">
-<div class="details">
-  <div class="left">
-      <img src="../../../assets/6e8fe190cf54dc8f878fec282de1c201 (1).jpg" alt="">
-  </div>
-  <div class="right">
+  <div class="details">
+    <div class="left">
+      <img src="/assets/vision.jpg" alt="" />
+    </div>
+    <div class="right">
       <h3>الرؤيه</h3>
       <p>
-      لا خلاف على فائدة التكنولوجيا والوقت المجهود التي يتم توفيره فهدفنا هو تغير البطاقة لبطاقة الكترونية بإضافة شريحة الكترونية
-      للبطاقة, تصميم قاعدة بيانات للمواطن وإعطاؤه الصلاحيات المناسبة لكل مؤسسة ... ومن ثم بضفطه زر وفي ثواني نقدر
-      نخلص الورق اللي بيخلص في أيام ومن الختم في الدور الرابع للإمضاء في الدور الأرضي كل ملفات المواطن تصبح على
-      البطاقة والمؤسسة الحكومية من خلال  قرأتها للكود عن طريق الكمبيوتر في الفورم المناسب كل البيانات ستملأ اتوماتيك من
-      البطاقة
+        لا خلاف على فائدة التكنولوجيا والوقت المجهود التي يتم توفيره فهدفنا هو
+        تغير البطاقة لبطاقة الكترونية بإضافة شريحة الكترونية للبطاقة, تصميم
+        قاعدة بيانات للمواطن وإعطاؤه الصلاحيات المناسبة لكل مؤسسة ... ومن ثم
+        بضفطه زر وفي ثواني نقدر نخلص الورق اللي بيخلص في أيام ومن الختم في الدور
+        الرابع للإمضاء في الدور الأرضي كل ملفات المواطن تصبح على البطاقة
+        والمؤسسة الحكومية من خلال قرأتها للكود عن طريق الكمبيوتر في الفورم
+        المناسب كل البيانات ستملأ اتوماتيك من البطاقة
       </p>
+    </div>
   </div>
-</div>
-<div class="why">
-  <div class="why-description">
-      <h3> لماذا؟</h3>
+  <div class="why">
+    <div class="why-description">
+      <h3>لماذا؟</h3>
       <p>
-      الجواب الأهم هو الوقت! عشان اغلي سلعة يملكها الإنسان وبتملكها الدول هي الوقت ولا يوجد أحد يمكنه شراء المزيد منه.
-      فهي سلعة محدودة ومنتهية لذا وجب استثمارها الاستثمار الامثل بعيدا عن الأعمال الروتينية. من الوقت ا لذي يهدر لاستخراج
-      الورق والمستندات الحكومية للوقت الذي يهدر اثناء مرورك على الموظفين لإمضاء في الدور الرابع لختم في الدور الثاني
-      خلال وقت السفر عشان تخلص ورقة من هنا وورقة من هناك! ومن ثم ضاع اليوم !
-      الجواب الآخر هو الما ل والموا رد.. نتخيل حجم الورق المستندات الحكومية اللي بيتم استخدمها كل سنه اعتقد ممكن نتخيل
-      حجمها أكبر من حجم اهرامات الجيزة! وآلاف أو مئات الآلاف من الموظفين اللي شغالين على هذا العمل الروتيني من كتابة
-      وتدقيق وبحث عن صحة المعلومات وتخزين ونقل وأرشفة ونتخيل حجم الموارد البشرية والمادية التي تهدر في هذه
-      الأعمال. وليه لما ممكن نتخيل دا كله بيتم بضغطة زر كل اوراقك ومستنداك في جيبك كل اوراقك ومستنداتك في البطاقة! مع
-      مقدرة وسرعة الكمبيوتر الجبارة في التخزين والأرشفة وايضا التحليل وتقديم صورة واقعية من الاحصائيات التي تعكس
-      صورة المجتمع ويمكن استخدامها في التنبأ والتخطيط للمستقبل. غير امكانية استثمار هذا النظام فيما بعد لاضافة سجل
-      مرضي ونظام تصويت في الانتخابات وممكن نحلم بأكثر من هذا مما يجعل الحياة أسهل ويستثمر الوقت صح ويوفر الموارد
-     التي تهدر
+        الجواب الأهم هو الوقت! عشان اغلي سلعة يملكها الإنسان وبتملكها الدول هي
+        الوقت ولا يوجد أحد يمكنه شراء المزيد منه. فهي سلعة محدودة ومنتهية لذا
+        وجب استثمارها الاستثمار الامثل بعيدا عن الأعمال الروتينية. من الوقت ا
+        لذي يهدر لاستخراج الورق والمستندات الحكومية للوقت الذي يهدر اثناء مرورك
+        على الموظفين لإمضاء في الدور الرابع لختم في الدور الثاني خلال وقت السفر
+        عشان تخلص ورقة من هنا وورقة من هناك! ومن ثم ضاع اليوم ! الجواب الآخر هو
+        الما ل والموا رد.. نتخيل حجم الورق المستندات الحكومية اللي بيتم استخدمها
+        كل سنه اعتقد ممكن نتخيل حجمها أكبر من حجم اهرامات الجيزة! وآلاف أو مئات
+        الآلاف من الموظفين اللي شغالين على هذا العمل الروتيني من كتابة وتدقيق
+        وبحث عن صحة المعلومات وتخزين ونقل وأرشفة ونتخيل حجم الموارد البشرية
+        والمادية التي تهدر في هذه الأعمال. وليه لما ممكن نتخيل دا كله بيتم بضغطة
+        زر كل اوراقك ومستنداك في جيبك كل اوراقك ومستنداتك في البطاقة! مع مقدرة
+        وسرعة الكمبيوتر الجبارة في التخزين والأرشفة وايضا التحليل وتقديم صورة
+        واقعية من الاحصائيات التي تعكس صورة المجتمع ويمكن استخدامها في التنبأ
+        والتخطيط للمستقبل. غير امكانية استثمار هذا النظام فيما بعد لاضافة سجل
+        مرضي ونظام تصويت في الانتخابات وممكن نحلم بأكثر من هذا مما يجعل الحياة
+        أسهل ويستثمر الوقت صح ويوفر الموارد التي تهدر
       </p>
+    </div>
   </div>
 </div>
-</div>
-<!-- Footer -->
 <footer>
-<div class="container">
-  <div class="footer-content">
+  <div class="container">
+    <div class="footer-content">
       <div class="footer-content animate-bottom">
-          <div class="social-media">
-              <h4>Follow Along</h4>
-              <ul class="social-icons">
-                  <li>
-                      <a href="#"><i class="fab fa-twitter"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fab fa-facebook-square"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fab fa-pinterest"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fab fa-tripadvisor"></i></a>
-                  </li>
-              </ul>
-          </div>
-          <div class="newsletter-container">
-              <h4>For Queries</h4>
-              <form action="" class="newsletter-form">
-                  <input type="text" class="newsletter-input" placeholder="Your Email Address">
-                  <button class="newsletter-btn" type="submit">
-                      <i class="fas fa-envelope"></i>
-                  </button>
-              </form>
-          </div>
-          <div class="copyright">
-              CS_Army/Team &copy;2020.
-          </div>
+        <div class="social-media">
+          <h4>Follow Along</h4>
+          <ul class="social-icons">
+            <li>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-facebook-square"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-pinterest"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </li>
+            <li>
+              <a href="#"><i class="fab fa-tripadvisor"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="newsletter-container">
+          <h4>For Queries</h4>
+          <form action="" class="newsletter-form">
+            <input
+              type="text"
+              class="newsletter-input"
+              placeholder="Your Email Address"
+            />
+            <button class="newsletter-btn" type="submit">
+              <i class="fas fa-envelope"></i>
+            </button>
+          </form>
+        </div>
+        <div class="copyright">
+          CS_Army/Team &copy;2020.
+        </div>
       </div>
+    </div>
   </div>
-</div>
-</footer>
-<!-- Footer Ends -->
+</footer> -->

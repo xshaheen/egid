@@ -11,6 +11,7 @@ import { SignDocComponent } from "./sign-doc/sign-doc.component";
 import { VerifySignatureComponent } from "./verify-signature/verify-signature.component";
 import { UpdateHealthInfoComponent } from "./update-health-info/update-health-info.component";
 import { PasswordDialogModule } from "src/app/components/password-dialog/password-dialog.module";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PasswordDialogModule } from "src/app/components/password-dialog/passwor
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MaterialModule,
     ManageRoutingModule,
     FileModule,

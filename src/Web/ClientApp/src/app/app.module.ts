@@ -15,7 +15,6 @@ import { LoginDialogModule } from "./components/login-dialog/login-dialog.module
 import { ModalDialogModule } from "./components/modal-dialog/modal-dialog.module";
 import { ConfirmDialogModule } from "./components/confirm-dialog/confirm-dialog.module";
 import { AppErrorHandler } from "./core/error.handler";
-import { MaterialModule } from "./material.module";
 
 @NgModule({
   imports: [
@@ -32,7 +31,6 @@ import { MaterialModule } from "./material.module";
     RecordsModule,
     AddModule,
     ManageModule,
-    MaterialModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],

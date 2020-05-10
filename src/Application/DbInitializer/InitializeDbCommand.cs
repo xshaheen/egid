@@ -56,7 +56,7 @@ namespace EGID.Application.DbInitializer
                 var adminCitizen = new CitizenDetail
                 {
                     Id = id,
-                    FullName = new FullName("Mahmoud", "Hamdy", "Shaheen", "Shaheen"),
+                    FullName = new FullName("محمود", "حمدي", "شعبان", "شاهين"),
                     Address = new Address("Street", "City", "State", "Country", "12345"),
                     PhotoUrl = "admin.png",
                     Create = DateTime.Now,
