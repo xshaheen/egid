@@ -19,6 +19,20 @@ export class AuthService {
     return this.appTokenService.any();
   }
 
+  public get cardId(): string {
+    return this.appTokenService.decode("sub");
+  }
+
+  public get citizenId(): string {
+    return this.appTokenService.decode(
+      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    );
+  }
+
+  public get healthId(): string {
+    return this.appTokenService.decode("healthId");
+  }
+
   public get userRole(): string {
     return this.appTokenService.decode("role");
   }
