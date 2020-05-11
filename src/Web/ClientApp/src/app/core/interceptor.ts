@@ -33,6 +33,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
             this.modal.showNormalSnackBar(
               "الجلسة انتهم من فضلك اعد تسجيل الدخول للاستمرار"
             );
+            this.appTokenService.clear();
 
             this.loginService.login();
             return next.handle(request);
