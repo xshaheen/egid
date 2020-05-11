@@ -12,7 +12,10 @@
     margin-bottom: 20px;
   "
 >
-  <eg-qr-reader (codeResult)="onQrSuccess($event)"></eg-qr-reader>
+  <eg-qr-reader
+    style="width: 100%;"
+    (codeResult)="onQrSuccess($event)"
+  ></eg-qr-reader>
 </div>
 
 <div mat-dialog-content>
