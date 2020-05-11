@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using EGID.Application.Common;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
+using FluentValidation;
 using MediatR;
 
 namespace EGID.Application.CivilAffairs.Commands
@@ -11,6 +12,19 @@ namespace EGID.Application.CivilAffairs.Commands
     public class AddEmployeeCommand : IRequest
     {
         [Required] public string CardId { get; set; }
+
+        #region Validator
+
+        public class AddEmployeeValidator : AbstractValidator<AddEmployeeCommand>
+        {
+            public AddEmployeeValidator()
+            {
+                RuleFor(x => x.CardId)
+                    .NotEmpty().WithMessage("الكود غير مرفق مع الطلب.");
+            }
+        }
+
+        #endregion
 
         #region Handler
 

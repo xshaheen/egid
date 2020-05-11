@@ -24,7 +24,8 @@ namespace EGID.Application.Cards.Commands
         {
             public SignHashValidator()
             {
-                RuleFor(s => s.Pin2).NotEmpty().WithMessage("من فضلك لتوقيع الملفات ادخل رمز PIN2 الخاص بك.");
+                RuleFor(s => s.Pin2)
+                    .NotEmpty().WithMessage("من فضلك لتوقيع الملفات ادخل رمز PIN2 الخاص بك.");
 
                 RuleFor(s => s.Base64Sha512DataHash)
                     .NotEmpty().WithMessage("من فضلك اضف بصمة الملفات من نوع base64 sha512 للتوقيع.")

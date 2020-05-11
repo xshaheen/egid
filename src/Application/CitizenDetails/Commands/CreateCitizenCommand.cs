@@ -99,17 +99,17 @@ namespace EGID.Application.CitizenDetails.Commands
 
                 RuleFor(x => x.HealthEmergencyPhone1)
                     .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone)
+                    .Matches(Regexes.InternationalPhone).Unless(x => x.HealthEmergencyPhone1 is null)
                     .WithMessage("رقم الهاتف غير صحيح.");
 
                 RuleFor(x => x.HealthEmergencyPhone2)
                     .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone)
+                    .Matches(Regexes.InternationalPhone).Unless(x => x.HealthEmergencyPhone2 is null)
                     .WithMessage("رقم الهاتف غير صحيح.");
 
                 RuleFor(x => x.HealthEmergencyPhone3)
                     .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone)
+                    .Matches(Regexes.InternationalPhone).Unless(x => x.HealthEmergencyPhone3 is null)
                     .WithMessage("رقم الهاتف غير صحيح.");
 
                 RuleFor(x => x.BloodType)

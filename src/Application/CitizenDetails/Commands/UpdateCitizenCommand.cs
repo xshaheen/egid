@@ -35,6 +35,9 @@ namespace EGID.Application.CitizenDetails.Commands
         {
             public UpdateCitizenValidator()
             {
+                RuleFor(x => x.Id)
+                    .NotEmpty().WithMessage("الكود غير مرفق مع الطلب.");
+
                 RuleFor(x => x.MotherId)
                     .MaximumLength(128).WithMessage("خطأ هذا العنصر غير مطابق النمط الصحيح");
 

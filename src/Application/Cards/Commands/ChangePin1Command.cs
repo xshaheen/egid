@@ -22,7 +22,7 @@ namespace EGID.Application.Cards.Commands
         public ChangePin1Validator()
         {
             RuleFor(c => c.CardId)
-                .NotEmpty().WithMessage("من فضلك اضف كود المواطن للطلب.");
+                .NotEmpty().WithMessage("الكود غير مرفق مع الطلب.");
 
             RuleFor(c => c.Puk)
                 .NotEmpty().WithMessage("من فضلك ادخل رمز PuK الحالي.")

@@ -19,7 +19,8 @@ namespace EGID.Application.Health.Queries
         {
             public GetEmergencyInfoValidator()
             {
-                RuleFor(e => e.HealthInfoId).NotEmpty();
+                RuleFor(e => e.HealthInfoId)
+                    .NotEmpty().WithMessage("الكود غير مرفق مع الطلب.");
             }
         }
 

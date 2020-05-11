@@ -7,6 +7,7 @@ using EGID.Web.Services;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -28,8 +29,8 @@ namespace EGID.Web
 
             services.AddTransient<IFilesDirectoryService, FilesDirectoryService>();
             
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
-            // services.AddScoped<ICurrentUserService, FakeCurrentUserService>();
+            // services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<ICurrentUserService, FakeCurrentUserService>();
 
             services.AddHttpContextAccessor();
 
@@ -47,6 +48,12 @@ namespace EGID.Web
                     opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 }).AddFluentValidation(config =>
                     config.RegisterValidatorsFromAssemblyContaining<IEgidDbContext>());
+
+            // Customise default API behaviour
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             services.AddSpaStaticFiles(config => { config.RootPath = "ClientApp/dist"; });
 

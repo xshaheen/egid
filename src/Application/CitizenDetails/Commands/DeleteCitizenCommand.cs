@@ -21,7 +21,8 @@ namespace EGID.Application.CitizenDetails.Commands
         {
             public DeleteCitizenValidator()
             {
-                RuleFor(x => x.Id).NotEmpty();
+                RuleFor(x => x.Id)
+                    .NotEmpty().WithMessage("الكود غير مرفق مع الطلب.");
             }
         }
 

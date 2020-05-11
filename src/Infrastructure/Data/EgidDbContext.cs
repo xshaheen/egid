@@ -76,13 +76,13 @@ namespace EGID.Infrastructure.Data
             builder.Entity<IdentityUserToken<string>>().ToTable("EGCardToken");
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-                "Server=(localdb)\\mssqllocaldb;Database=egid_db;Trusted_Connection=True;MultipleActiveResultSets=true"
-            );
-
-            base.OnConfiguring(optionsBuilder);
-        }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder.UseSqlServer(
+        //         "Server=(localdb)\\mssqllocaldb;Database=egid_db;Trusted_Connection=True;MultipleActiveResultSets=true"
+        //     );
+        //
+        //     base.OnConfiguring(optionsBuilder);
+        // }
     }
 }
