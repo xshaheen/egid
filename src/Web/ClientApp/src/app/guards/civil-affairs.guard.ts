@@ -16,12 +16,16 @@ export class CivilAffairsGuard implements CanActivate {
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const role = this.authService.userRole.toLowerCase();
-    if (role === "civilaffairsempolyee" || role === "administrator") {
+    const role = this.authService.userRole;
+    if (
+      this.authService.userRole &&
+      (role.toLowerCase() === "civilaffairsempolyee" ||
+        role.toLowerCase() === "administrator")
+    ) {
       return true;
     }
 
-    this.router.navigateByUrl("/forbidden");
+    this.router.navigateByUrl("forbidden");
     return false;
   }
 }

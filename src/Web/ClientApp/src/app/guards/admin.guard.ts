@@ -16,11 +16,14 @@ export class AdminGuard implements CanActivate {
   ) {}
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.userRole.toLowerCase() === "administrator") {
+    if (
+      this.authService.userRole &&
+      this.authService.userRole.toLowerCase() === "administrator"
+    ) {
       return true;
     }
 
-    this.router.navigateByUrl("/forbidden");
+    this.router.navigateByUrl("forbidden");
     return false;
   }
 }
