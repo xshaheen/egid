@@ -1,5 +1,5 @@
 <div class="row">
-  <form>
+  <form #updateForm="ngForm" (ngSubmit)="Submit(updateForm)">
     <mat-card>
       <mat-card-header>
         اترك ارقام للاتصال بها في حالة الطوارئ
@@ -7,17 +7,33 @@
 
       <mat-form-field class="field">
         <mat-label>الرقم الاول</mat-label>
-        <input cdkFocusInitial matInput placeholder="+20 0101234567" />
+        <input
+          cdkFocusInitial
+          matInput
+          placeholder="+20 0101234567"
+          name="phone1"
+          [(ngModel)]="command.phone1"
+        />
       </mat-form-field>
 
       <mat-form-field class="field">
         <mat-label>الرقم الثاني</mat-label>
-        <input matInput placeholder="+20 0101234567" />
+        <input
+          matInput
+          placeholder="+20 0101234567"
+          name="phone2"
+          [(ngModel)]="command.phone2"
+        />
       </mat-form-field>
 
       <mat-form-field class="field">
         <mat-label>الرقم الاخير</mat-label>
-        <input matInput placeholder="+20 0101234567" />
+        <input
+          matInput
+          placeholder="+20 0101234567"
+          name="phone3"
+          [(ngModel)]="command.phone3"
+        />
       </mat-form-field>
 
       <mat-form-field class="field">
@@ -26,11 +42,20 @@
           matInput
           rows="6"
           placeholder="مثال: الامراض المزمنة..."
+          name="notes"
+          [(ngModel)]="command.notes"
         ></textarea>
       </mat-form-field>
 
       <div class="btn-div">
-        <button color="primary" mat-raised-button>تغير</button>
+        <button
+          color="primary"
+          [disabled]="updateForm.pristine"
+          mat-raised-button
+          type="submit"
+        >
+          تغير
+        </button>
       </div>
     </mat-card>
   </form>
