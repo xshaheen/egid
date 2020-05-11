@@ -1,6 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
+using EGID.Domain.Entities;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +37,8 @@ namespace EGID.Application.Health.Queries
             {
                 var healthInfo = await _context.HealthInformation
                     .FirstOrDefaultAsync(c => c.Id == request.HealthInfoId, cancellationToken);
+
+                if (healthInfo == null) throw new  EntityNotFoundException(nameof(HealthInfo), request.HealthInfoId);
 
                 return new EmergencyInfo
                 {

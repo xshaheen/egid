@@ -74,6 +74,12 @@ namespace EGID.Application.DbInitializer
                     Religion = Religion.Muslim,
                     Gender = Gender.Male,
                     SocialStatus = SocialStatus.Single,
+                    HealthInfo = new HealthInfo
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        BloodType = BloodType.A,
+                        Phone1 = "+20101234567"
+                    }
                 };
 
                 await _context.CitizenDetails.AddAsync(adminCitizen);
