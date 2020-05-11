@@ -1,3 +1,5 @@
+src/Web/ClientApp/dist
+
 # User-specific files
 *.rsuser
 *.suo
