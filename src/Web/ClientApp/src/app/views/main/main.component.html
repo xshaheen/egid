@@ -1,6 +1,23 @@
 <!--Navbar-->
 <nav>
   <mat-toolbar class="navbar" color="primary" aria-label="Top Toolbar">
+    <span *ngIf="isHandset">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <i class="fa fa-ellipsis-v"></i>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/civil-affairs']">
+          <i class="fa fa-cogs"></i> السجل المدني
+        </button>
+        <button mat-menu-item [routerLink]="['/health/records']">
+          <i class="fa fa-heartbeat"></i> التاريخ المرضي
+        </button>
+        <button mat-menu-item [routerLink]="['/manage']">
+          <i class="fa fa-id-card"></i> بطاقتي
+        </button>
+      </mat-menu>
+    </span>
+
     <span>
       <button
         mat-button
@@ -16,17 +33,19 @@
       </ng-template>
     </span>
 
-    <span class="links">
-      <button mat-button [routerLink]="['civil-affairs']">
+    <span *ngIf="!isHandset" class="links">
+      <button mat-button [routerLink]="['/civil-affairs']">
         <i class="fa fa-cogs"></i> السجل المدني
       </button>
-      <button mat-button [routerLink]="['health/records']">
+      <button mat-button [routerLink]="['/health/records']">
         <i class="fa fa-heartbeat"></i> التاريخ المرضي
       </button>
-      <button mat-button [routerLink]="['manage']">
+      <button mat-button [routerLink]="['/manage']">
         <i class="fa fa-id-card"></i> بطاقتي
       </button>
     </span>
+
+    <div *ngIf="isHandset" class="spacer"></div>
 
     <span class="logo">
       <a class="logo-a" [routerLink]="['']">
@@ -58,6 +77,7 @@
       </p>
       <div class="contribute">
         <a
+          class="a-btn"
           mat-button
           href="https://github.com/xshaheen/EGID"
           target="_blank"
@@ -79,15 +99,17 @@
     <mat-card class="card">
       <h3><i class="fa fa-id-badge"></i> الهوية الالكترونية</h3>
       <p>
-        تم توفير العديد من الوسائل لخدمات الطلاب سواء من المرحله الثانويه او
-        دخول الجامعه او استخراج شهادات.
+        سيتم التعرف علي المواطن الكترونيا عن طريق البطاقة الذكية التي تحمل كود
+        مميز يمكن قراءته بواسطة الكاميرا ورمز PIN1 لحماية البطاقة من الاستخدام
+        من شخص غريب اذا تم فقدها.
       </p>
     </mat-card>
     <mat-card class="card">
       <h3><i class="fa fa-signature"></i> التوقيع الرقمي</h3>
       <p>
-        لقد تم تأسيس قاعده الكترونيه لتسهيل الخدمات وسرعه الاداء تجنبا لمشاكل
-        الاوراق والوقت الضائع ويمكنك انجاز كل اورقاك الكترونيا دون مجهود.
+        يمكن للمواطن باستخدام البطاقة الذكية ورمز PIN2 توقيع ملفات بدون استخدام
+        اي اوراق فقط الكترونيا بشكل اسرع وآمن وغير قابل للتزوير ويمن ايضا للطرف
+        الاخر التحقق بكل سلاسة وسرعة بان الطرف الاول قام بالتوقيع.
       </p>
     </mat-card>
     <mat-card class="card">
@@ -101,34 +123,48 @@
       <h3><i class="fa fa-cogs"></i> الاحوال المدنيه</h3>
       <p>
         لقد تم تأسيس قاعده الكترونيه لتسهيل الخدمات وسرعه الاداء تجنبا لمشاكل
-        الاوراق والوقت الضائع ويمكنك انجاز كل اورقاك الكترونيا دون مجهود.
+        الاوراق والوقت الضائع حتي يمكن انجاز كل اورقاك الكترونيا.
       </p>
     </mat-card>
   </div>
 </div>
 <!--#Features-->
 
-<!--
-<div class="container">
-  <div class="about">
-    <div class="written">
-      <p>Find out more about how we work</p>
-    </div>
-    <div class="pull">
-      <button>How we work</button>
+<div class="space"></div>
+
+<!--How it work-->
+<div class="how-it-work">
+  <div class="written">
+    <p>كيف تعمل البطاقة ولماذا هي امنة؟</p>
+    <div style="text-align: center;">
+      <a
+        class="a-btn"
+        mat-button
+        href="https://github.com/xshaheen/EGID/blob/master/docs/architecture.md"
+        target="_blank"
+        rel="noopener"
+      >
+        <i class="fab fa-laravel" style="margin: 5px; font-size: 20px;"></i>
+        بنية المشروع
+      </a>
     </div>
   </div>
+  <div class="image">
+    <img src="/assets/arch.svg" />
+  </div>
 </div>
-<div class="space-2"></div>
+<!--#How it work-->
 
-<div class="container">
-  <div class="details">
+<div class="space"></div>
+<!--Vision-->
+<div class="vision-container">
+  <div class="intro">
     <div class="left">
       <img src="/assets/vision.jpg" alt="" />
     </div>
     <div class="right">
       <h3>الرؤيه</h3>
-      <p>
+      <mat-card>
         لا خلاف على فائدة التكنولوجيا والوقت المجهود التي يتم توفيره فهدفنا هو
         تغير البطاقة لبطاقة الكترونية بإضافة شريحة الكترونية للبطاقة, تصميم
         قاعدة بيانات للمواطن وإعطاؤه الصلاحيات المناسبة لكل مؤسسة ... ومن ثم
@@ -136,75 +172,49 @@
         الرابع للإمضاء في الدور الأرضي كل ملفات المواطن تصبح على البطاقة
         والمؤسسة الحكومية من خلال قرأتها للكود عن طريق الكمبيوتر في الفورم
         المناسب كل البيانات ستملأ اتوماتيك من البطاقة
-      </p>
+      </mat-card>
     </div>
   </div>
   <div class="why">
-    <div class="why-description">
-      <h3>لماذا؟</h3>
-      <p>
-        الجواب الأهم هو الوقت! عشان اغلي سلعة يملكها الإنسان وبتملكها الدول هي
-        الوقت ولا يوجد أحد يمكنه شراء المزيد منه. فهي سلعة محدودة ومنتهية لذا
-        وجب استثمارها الاستثمار الامثل بعيدا عن الأعمال الروتينية. من الوقت ا
-        لذي يهدر لاستخراج الورق والمستندات الحكومية للوقت الذي يهدر اثناء مرورك
-        على الموظفين لإمضاء في الدور الرابع لختم في الدور الثاني خلال وقت السفر
-        عشان تخلص ورقة من هنا وورقة من هناك! ومن ثم ضاع اليوم ! الجواب الآخر هو
-        الما ل والموا رد.. نتخيل حجم الورق المستندات الحكومية اللي بيتم استخدمها
-        كل سنه اعتقد ممكن نتخيل حجمها أكبر من حجم اهرامات الجيزة! وآلاف أو مئات
-        الآلاف من الموظفين اللي شغالين على هذا العمل الروتيني من كتابة وتدقيق
-        وبحث عن صحة المعلومات وتخزين ونقل وأرشفة ونتخيل حجم الموارد البشرية
-        والمادية التي تهدر في هذه الأعمال. وليه لما ممكن نتخيل دا كله بيتم بضغطة
-        زر كل اوراقك ومستنداك في جيبك كل اوراقك ومستنداتك في البطاقة! مع مقدرة
-        وسرعة الكمبيوتر الجبارة في التخزين والأرشفة وايضا التحليل وتقديم صورة
-        واقعية من الاحصائيات التي تعكس صورة المجتمع ويمكن استخدامها في التنبأ
-        والتخطيط للمستقبل. غير امكانية استثمار هذا النظام فيما بعد لاضافة سجل
-        مرضي ونظام تصويت في الانتخابات وممكن نحلم بأكثر من هذا مما يجعل الحياة
-        أسهل ويستثمر الوقت صح ويوفر الموارد التي تهدر
-      </p>
-    </div>
+    <h3>لماذا؟</h3>
+    <mat-card>
+      الجواب الأهم هو الوقت! عشان اغلي سلعة يملكها الإنسان وبتملكها الدول هي
+      الوقت ولا يوجد أحد يمكنه شراء المزيد منه. فهي سلعة محدودة ومنتهية لذا وجب
+      استثمارها الاستثمار الامثل بعيدا عن الأعمال الروتينية. من الوقت ا لذي يهدر
+      لاستخراج الورق والمستندات الحكومية للوقت الذي يهدر اثناء مرورك على
+      الموظفين لإمضاء في الدور الرابع لختم في الدور الثاني خلال وقت السفر عشان
+      تخلص ورقة من هنا وورقة من هناك! ومن ثم ضاع اليوم ! الجواب الآخر هو الما ل
+      والموا رد.. نتخيل حجم الورق المستندات الحكومية اللي بيتم استخدمها كل سنه
+      اعتقد ممكن نتخيل حجمها أكبر من حجم اهرامات الجيزة! وآلاف أو مئات الآلاف من
+      الموظفين اللي شغالين على هذا العمل الروتيني من كتابة وتدقيق وبحث عن صحة
+      المعلومات وتخزين ونقل وأرشفة ونتخيل حجم الموارد البشرية والمادية التي تهدر
+      في هذه الأعمال. وليه لما ممكن نتخيل دا كله بيتم بضغطة زر كل اوراقك
+      ومستنداك في جيبك كل اوراقك ومستنداتك في البطاقة! مع مقدرة وسرعة الكمبيوتر
+      الجبارة في التخزين والأرشفة وايضا التحليل وتقديم صورة واقعية من الاحصائيات
+      التي تعكس صورة المجتمع ويمكن استخدامها في التنبأ والتخطيط للمستقبل. غير
+      امكانية استثمار هذا النظام فيما بعد لاضافة سجل مرضي ونظام تصويت في
+      الانتخابات وممكن نحلم بأكثر من هذا مما يجعل الحياة أسهل ويستثمر الوقت صح
+      ويوفر الموارد التي تهدر
+    </mat-card>
   </div>
 </div>
+<!--#Vision-->
+
+<!--Footer-->
 <footer>
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-content animate-bottom">
-        <div class="social-media">
-          <h4>Follow Along</h4>
-          <ul class="social-icons">
-            <li>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fab fa-facebook-square"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fab fa-pinterest"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="fab fa-tripadvisor"></i></a>
-            </li>
-          </ul>
-        </div>
-        <div class="newsletter-container">
-          <h4>For Queries</h4>
-          <form action="" class="newsletter-form">
-            <input
-              type="text"
-              class="newsletter-input"
-              placeholder="Your Email Address"
-            />
-            <button class="newsletter-btn" type="submit">
-              <i class="fas fa-envelope"></i>
-            </button>
-          </form>
-        </div>
-        <div class="copyright">
-          CS_Army/Team &copy;2020.
-        </div>
-      </div>
+  <div class="social-media">
+    <h4>Follow Along</h4>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-facebook-square"></i></a>
+      <a href="https://github.com/xshaheen/EGID" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
     </div>
   </div>
-</footer> -->
+
+  <div class="copyright">
+    &copy; CS Army Team 2020.
+  </div>
+</footer>
+<!--#Footer-->

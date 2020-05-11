@@ -55,12 +55,12 @@
       </mat-toolbar>
       <mat-nav-list>
         <h2 matSubheader>لوحة التحكم</h2>
-        <a mat-list-item [routerLink]="['/']">
-          <i class="fa fa-chart-pie sidenav-icon"></i> الصفحة الرئيسة
-        </a>
-        <h2 matSubheader>التسجيل</h2>
         <a mat-list-item [routerLink]="['/civil-affairs/register']">
           <i class="fa fa-users sidenav-icon"></i> تسجيل مواطن
+        </a>
+        <h2 matSubheader>الادارة الرئيسية</h2>
+        <a mat-list-item [routerLink]="['/admin']">
+          <i class="fa fa-chart-pie sidenav-icon"></i> الادارة الرئيسية
         </a>
       </mat-nav-list>
       <div class="spacer"></div>

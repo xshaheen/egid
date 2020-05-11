@@ -32,6 +32,10 @@ $h-main-color: #2d2640;
     }
   }
 
+  .spacer {
+    flex: 1;
+  }
+
   .logo {
     padding-left: 10px;
 
@@ -61,14 +65,16 @@ header {
   background-color: rgb(50, 42, 71);
   background: linear-gradient(
     -45deg,
+    rgb(64, 55, 87),
     rgb(50, 42, 71),
     rgb(33, 28, 47),
-    rgb(25, 16, 44),
-    rgb(27, 14, 56),
+    rgb(50, 33, 87),
+    rgb(25, 13, 51),
+    rgb(26, 11, 59),
     rgb(20, 6, 54)
   );
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  animation: gradientBG 10s ease infinite;
 
   @keyframes gradientBG {
     0% {
@@ -123,22 +129,6 @@ header {
 
     .contribute {
       text-align: center;
-      a {
-        font-weight: 700;
-        color: #fff;
-        border: 2px solid #fff;
-        background-color: transparent;
-        padding: 10px 80px;
-        margin-top: 40px;
-
-        cursor: pointer;
-        outline: none;
-
-        &:hover {
-          background-color: #eee;
-          color: $h-main-color;
-        }
-      }
     }
 
     @media screen and (max-width: $FH) {
@@ -211,6 +201,23 @@ header {
   }
 }
 
+.a-btn {
+  font-weight: 700;
+  color: #fff;
+  border: 2px solid #fff;
+  background-color: transparent;
+  padding: 10px 80px;
+  margin-top: 40px;
+
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    background-color: #eee;
+    color: $h-main-color;
+  }
+}
+
 .features {
   width: 100%;
   max-width: $xxl;
@@ -230,7 +237,7 @@ header {
     align-items: stretch;
 
     .card {
-      border-bottom: 4px solid $h-main-color;
+      border-bottom: 4px solid rgb(93, 80, 126);
       max-width: 22%;
       display: inline-block;
       margin-bottom: 20px;
@@ -263,157 +270,150 @@ header {
 
 .space {
   width: 100%;
-  height: 300px;
-}
-/* space-s */
-.space-2 {
-  width: 100%;
-  height: 200px;
-}
-/* about */
+  height: 150px;
 
-.container {
-  width: 100%;
+  @media screen and (max-width: $sm) {
+    height: 50px;
+  }
+}
+
+.how-it-work {
   max-width: 950px;
   margin: 0 auto;
-}
+  width: 95%;
 
-.about {
   display: flex;
-  width: 100%;
+  background: $h-main-color;
+  color: #fff;
+
   padding: 35px;
-  background: hsl(256, 26%, 20%);
-  color: #fff;
-}
-.about .written {
-  width: 50%;
-}
-.about p {
-  font-size: 50px;
-  font-family: serif;
-}
-.about .pull {
-  width: 50%;
-  padding: 30px;
-}
-.about .pull button {
-  width: 170px;
-  padding: 10px 35px;
-  background-color: transparent;
-  color: #fff;
-  border: 2px solid #ffffff;
-  cursor: pointer;
-  outline: none;
-  float: right;
-  font-family: serif;
-}
-/* details */
-.details {
-  width: 100%;
-  display: flex;
-  margin-bottom: 60px;
-}
-.details .right {
-  width: 50%;
-  padding: 20px;
-  text-align: center;
-}
-.details .right h3 {
-  font-size: 30px;
-  padding-bottom: 20px;
-}
-.details .right p {
-  font-size: 20px;
-}
-.details .left {
-  width: 50%;
-  text-align: center;
-}
-.details .left img {
-  width: 50%;
-}
-// why
-.why-description {
-  padding: 10px;
-  text-align: center;
-  margin-bottom: 40px;
+
+  .image {
+    flex: 4;
+    img {
+      max-width: 100%;
+    }
+  }
+
+  .written {
+    flex: 6;
+
+    .a-btn {
+      margin-top: 80px;
+    }
+
+    p {
+      font-size: 30px;
+    }
+  }
+
+  @media screen and (max-width: $md) {
+    .written {
+      flex: 4;
+
+      p {
+        font-size: 20px;
+      }
+      .a-btn {
+        margin-top: 20px;
+        padding: 10px 40px;
+      }
+    }
+  }
 }
 
-/* Start Footer */
+.vision-container {
+  max-width: 950px;
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+
+  .intro {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .right {
+      flex: 7;
+      text-align: center;
+
+      h3 {
+        color: $h-main-color;
+        font-size: 30px;
+        padding-bottom: 10px;
+      }
+    }
+
+    .left {
+      flex: 5;
+      text-align: center;
+      img {
+        max-width: 60%;
+      }
+    }
+
+    @media screen and (max-width: $sm) {
+      .left {
+        display: none;
+      }
+    }
+  }
+
+  .why {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 99%;
+    text-align: center;
+
+    h3 {
+      color: $h-main-color;
+      font-size: 30px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
 footer {
-  padding: 7.9rem 0;
   background-color: #121212;
-  color: #ffffff;
-  text-align: center;
-  position: relative;
-}
-.back-to-top {
-  width: 7rem;
-  height: 7rem;
-  background-color: #121212;
-  position: absolute;
-  top: -3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 50%;
-}
-.back-to-top i {
-  display: block;
-  color: #ffffff;
-  font-size: 2rem;
-  padding: 2rem;
-}
-.footer-content h4 {
-  font-size: 1.9rem;
-  text-transform: uppercase;
-  font-weight: 100;
-  letter-spacing: 3px;
-  margin-bottom: 3rem;
-}
-.social-icons {
-  list-style: none;
-  margin-bottom: 5.4rem;
-  display: flex;
-  justify-content: center;
-}
-.social-icons i {
-  font-size: 2rem;
-  color: #ffffff;
-  padding: 0.8rem 2rem;
-  opacity: 0.5;
-  transition: color 0.5s;
-}
-.social-icons i:hover,
-.social-icons i:focus {
-  color: var(--secondary-font-color);
-}
-.newsletter-form {
-  width: 100%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-.newsletter-input {
-  width: 100%;
-  max-width: 25rem;
-  padding: 1rem;
-  border-radius: 0.4rem;
-}
-.newsletter-btn {
-  background-color: transparent;
-  border: none;
-  color: var(--main-font-color-dark);
-  cursor: pointer;
-  font-size: 1.6rem;
-  padding: 1px 0.6rem;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-left: 10.5rem;
-}
-.copyright {
   color: #fff;
-  padding: 20px;
-  font-size: 20px;
+  text-align: center;
+  padding: 20px 0;
+
+  .social-media {
+    h4 {
+      font-size: 1.2rem;
+      margin: 2rem 0;
+      text-transform: uppercase;
+    }
+
+    .social-icons {
+      list-style: none;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+
+      a {
+        margin: 0.5rem;
+        i {
+          font-size: 2rem;
+          color: #fff;
+          opacity: 0.5;
+          transition: color 0.5s;
+
+          &:hover,
+          &:focus {
+            color: rgb(157, 44, 177);
+          }
+        }
+      }
+    }
+  }
+
+  .copyright {
+    direction: ltr;
+    color: #eee;
+    font-size: 0.8rem;
+  }
 }
-/* End Footer */
