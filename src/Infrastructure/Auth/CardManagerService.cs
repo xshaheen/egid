@@ -170,6 +170,7 @@ namespace EGID.Infrastructure.Auth
         }
 
         public async Task<(Result result, string cardId)> RegisterAdminAsync(
+            string id,
             string ownerId,
             string puk,
             string email,
@@ -180,7 +181,7 @@ namespace EGID.Infrastructure.Auth
 
             var card = new Card
             {
-                Id = Guid.NewGuid().ToString(),
+                Id = id,
                 CardIssuer = ownerId,
                 UserName = ownerId,
                 CitizenId = ownerId,

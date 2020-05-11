@@ -42,8 +42,12 @@ namespace EGID.Application.Common.Interfaces
         /// <summary>
         ///     Add Admin Card.
         /// </summary>
-        Task<(Result result, string cardId)> RegisterAdminAsync(string ownerId, string puk,
-            string email, string phone);
+        Task<(Result result, string cardId)> RegisterAdminAsync(
+            string id,
+            string ownerId,
+            string puk,
+            string email,
+            string phone);
 
         /// <summary>
         ///     Change Pin1 and returns success result or a failed

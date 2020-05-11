@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
 using EGID.Application;
 using EGID.Application.Common.Interfaces;
-using EGID.Application.Common.Models.Files;
 using EGID.Infrastructure;
 using EGID.Web.Infrastructure;
 using EGID.Web.Services;
@@ -28,7 +27,9 @@ namespace EGID.Web
             services.AddInfrastructure(Configuration);
 
             services.AddTransient<IFilesDirectoryService, FilesDirectoryService>();
+            
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            // services.AddScoped<ICurrentUserService, FakeCurrentUserService>();
 
             services.AddHttpContextAccessor();
 
