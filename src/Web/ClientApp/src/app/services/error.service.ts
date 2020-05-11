@@ -18,7 +18,11 @@ export class ErrorService {
         case 400: {
           // BAD REQUEST
           console.log("#ERROR 400#", error);
-          this.modal.showErrorSnackBar(error.message);
+          this.modal.showErrorSnackBar(
+            error.message
+              ? error.message
+              : "طلب غير سليم من فضلك تاكد من البيانات"
+          );
           return;
         }
         case 500: {

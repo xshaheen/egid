@@ -8,6 +8,7 @@ import { ForbiddenComponent } from "./views/forbidden/forbidden.component";
 const routes: Routes = [
   {
     path: "",
+    pathMatch: "full",
     loadChildren: () =>
       import("./views/main/main.module").then((m) => m.MainModule),
   },

@@ -3645,7 +3645,13 @@ function throwException(
   headers: { [key: string]: any },
   result?: any
 ): Observable<any> {
-  if (result !== null && result !== undefined) return _observableThrow(result);
+  if (
+    result !== null &&
+    result !== undefined &&
+    result.details !== null &&
+    result.details !== undefined
+  )
+    return _observableThrow(result);
   else
     return _observableThrow(
       new ApiException(message, status, response, headers, null)

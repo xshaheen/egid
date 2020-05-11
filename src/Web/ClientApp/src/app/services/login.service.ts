@@ -29,7 +29,7 @@ export class LoginService {
 
     // What to close and try to login
     dialogRef.afterClosed().subscribe((result: LoginDialogResult) => {
-      if (result.isCanceled) {
+      if (!result || result.isCanceled) {
         this.router.navigateByUrl("/");
       } else {
         this.authService
