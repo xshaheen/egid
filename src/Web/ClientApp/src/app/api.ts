@@ -1,5 +1,4 @@
 ﻿/* tslint:disable */
-
 import {
   mergeMap as _observableMergeMap,
   catchError as _observableCatch,
@@ -1374,10 +1373,10 @@ export class HealthInfoClient {
     this.baseUrl = baseUrl ? baseUrl : "";
   }
 
-  getOne(citizenId: string | null | undefined): Observable<HealthInfoVm> {
+  getOne(healthInfoId: string | null | undefined): Observable<HealthInfoVm> {
     let url_ = this.baseUrl + "/api/healthinfo?";
-    if (citizenId !== undefined && citizenId !== null)
-      url_ += "citizenId=" + encodeURIComponent("" + citizenId) + "&";
+    if (healthInfoId !== undefined && healthInfoId !== null)
+      url_ += "healthInfoId=" + encodeURIComponent("" + healthInfoId) + "&";
     url_ = url_.replace(/[?&]$/, "");
 
     let options_: any = {
@@ -1531,6 +1530,113 @@ export class HealthInfoClient {
       return blobToText(responseBlob).pipe(
         _observableMergeMap((_responseText) => {
           return _observableOf<void>(<any>null);
+        })
+      );
+    } else if (status === 404) {
+      return blobToText(responseBlob).pipe(
+        _observableMergeMap((_responseText) => {
+          let result404: any = null;
+          let resultData404 =
+            _responseText === ""
+              ? null
+              : JSON.parse(_responseText, this.jsonParseReviver);
+          result404 = ProblemDetails.fromJS(resultData404);
+          return throwException(
+            "A server side error occurred.",
+            status,
+            _responseText,
+            _headers,
+            result404
+          );
+        })
+      );
+    } else {
+      return blobToText(responseBlob).pipe(
+        _observableMergeMap((_responseText) => {
+          let resultdefault: any = null;
+          let resultDatadefault =
+            _responseText === ""
+              ? null
+              : JSON.parse(_responseText, this.jsonParseReviver);
+          resultdefault = ProblemDetails.fromJS(resultDatadefault);
+          return throwException(
+            "A server side error occurred.",
+            status,
+            _responseText,
+            _headers,
+            resultdefault
+          );
+        })
+      );
+    }
+  }
+
+  emergencyInfo(
+    healthInfoId: string | null | undefined
+  ): Observable<EmergencyInfo> {
+    let url_ = this.baseUrl + "/api/healthinfo/emergencyinfo?";
+    if (healthInfoId !== undefined && healthInfoId !== null)
+      url_ += "healthInfoId=" + encodeURIComponent("" + healthInfoId) + "&";
+    url_ = url_.replace(/[?&]$/, "");
+
+    let options_: any = {
+      observe: "response",
+      responseType: "blob",
+      headers: new HttpHeaders({
+        Accept: "application/json",
+      }),
+    };
+
+    return this.http
+      .request("get", url_, options_)
+      .pipe(
+        _observableMergeMap((response_: any) => {
+          return this.processEmergencyInfo(response_);
+        })
+      )
+      .pipe(
+        _observableCatch((response_: any) => {
+          if (response_ instanceof HttpResponseBase) {
+            try {
+              return this.processEmergencyInfo(<any>response_);
+            } catch (e) {
+              return <Observable<EmergencyInfo>>(<any>_observableThrow(e));
+            }
+          } else
+            return <Observable<EmergencyInfo>>(
+              (<any>_observableThrow(response_))
+            );
+        })
+      );
+  }
+
+  protected processEmergencyInfo(
+    response: HttpResponseBase
+  ): Observable<EmergencyInfo> {
+    const status = response.status;
+    const responseBlob =
+      response instanceof HttpResponse
+        ? response.body
+        : (<any>response).error instanceof Blob
+        ? (<any>response).error
+        : undefined;
+
+    let _headers: any = {};
+    if (response.headers) {
+      for (let key of response.headers.keys()) {
+        _headers[key] = response.headers.get(key);
+      }
+    }
+    if (status === 200) {
+      return blobToText(responseBlob).pipe(
+        _observableMergeMap((_responseText) => {
+          let result200: any = null;
+          let resultData200 =
+            _responseText === ""
+              ? null
+              : JSON.parse(_responseText, this.jsonParseReviver);
+          result200 = EmergencyInfo.fromJS(resultData200);
+          return _observableOf(result200);
         })
       );
     } else if (status === 404) {
@@ -3177,6 +3283,60 @@ export interface IHealthRecordVm {
   create?: Date;
   createBy?: string | null;
   attachments?: string[] | null;
+}
+
+export class EmergencyInfo implements IEmergencyInfo {
+  bloodType?: BloodType;
+  notes?: string | null;
+  phone1?: string | null;
+  phone2?: string | null;
+  phone3?: string | null;
+
+  constructor(data?: IEmergencyInfo) {
+    if (data) {
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+
+  init(_data?: any) {
+    if (_data) {
+      this.bloodType =
+        _data["bloodType"] !== undefined ? _data["bloodType"] : <any>null;
+      this.notes = _data["notes"] !== undefined ? _data["notes"] : <any>null;
+      this.phone1 = _data["phone1"] !== undefined ? _data["phone1"] : <any>null;
+      this.phone2 = _data["phone2"] !== undefined ? _data["phone2"] : <any>null;
+      this.phone3 = _data["phone3"] !== undefined ? _data["phone3"] : <any>null;
+    }
+  }
+
+  static fromJS(data: any): EmergencyInfo {
+    data = typeof data === "object" ? data : {};
+    let result = new EmergencyInfo();
+    result.init(data);
+    return result;
+  }
+
+  toJSON(data?: any) {
+    data = typeof data === "object" ? data : {};
+    data["bloodType"] =
+      this.bloodType !== undefined ? this.bloodType : <any>null;
+    data["notes"] = this.notes !== undefined ? this.notes : <any>null;
+    data["phone1"] = this.phone1 !== undefined ? this.phone1 : <any>null;
+    data["phone2"] = this.phone2 !== undefined ? this.phone2 : <any>null;
+    data["phone3"] = this.phone3 !== undefined ? this.phone3 : <any>null;
+    return data;
+  }
+}
+
+export interface IEmergencyInfo {
+  bloodType?: BloodType;
+  notes?: string | null;
+  phone1?: string | null;
+  phone2?: string | null;
+  phone3?: string | null;
 }
 
 export class AddHealthRecordCommand implements IAddHealthRecordCommand {

@@ -585,7 +585,7 @@
         "operationId": "HealthInfo_GetOne",
         "parameters": [
           {
-            "name": "citizenId",
+            "name": "healthInfoId",
             "in": "query",
             "schema": {
               "type": "string",
@@ -647,6 +647,57 @@
         "responses": {
           "204": {
             "description": ""
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/healthinfo/emergencyinfo": {
+      "get": {
+        "tags": [
+          "HealthInfo"
+        ],
+        "operationId": "HealthInfo_EmergencyInfo",
+        "parameters": [
+          {
+            "name": "healthInfoId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmergencyInfo"
+                }
+              }
+            }
           },
           "404": {
             "description": "",
@@ -1494,6 +1545,31 @@
             "items": {
               "type": "string"
             }
+          }
+        }
+      },
+      "EmergencyInfo": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "bloodType": {
+            "$ref": "#/components/schemas/BloodType"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone1": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone2": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone3": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
