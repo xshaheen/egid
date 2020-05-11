@@ -43,7 +43,7 @@ namespace EGID.Application.DbInitializer
                 await InitializeRoles();
                 await InitializeAdmin();
 
-                await SeedData();
+                if (_context.CitizenDetails.Count() < 20) await SeedData();
                 // seed 1 have no health info so no conflict with attachments id
                 while (_context.CitizenDetails.Count() < 20) await SeedData1();
 
