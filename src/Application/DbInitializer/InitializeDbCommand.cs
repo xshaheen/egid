@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using EGID.Application.Cards.Commands;
 using EGID.Application.Common;
 using EGID.Application.Common.Interfaces;
 using EGID.Domain.Entities;
@@ -35,6 +38,8 @@ namespace EGID.Application.DbInitializer
             {
                 await InitializeRoles();
                 await InitializeAdmin();
+
+                while (_context.CitizenDetails.Count() < 20) await SeedData();
 
                 return Unit.Value;
             }
@@ -83,6 +88,145 @@ namespace EGID.Application.DbInitializer
                 result = await _cardManager.AddToRoleAsync(cardId, Roles.Admin);
 
                 if (!result.Succeeded) throw new Exception("failed to add admin to the admin role");
+            }
+
+            private async Task SeedData()
+            {
+                var id1 = Guid.NewGuid().ToString();
+                var health1 = Guid.NewGuid().ToString();
+
+                var citizen1 = new CitizenDetail
+                {
+                    Id = id1,
+                    FullName = new FullName("محمد", "محمود", "حسين", "سلامة"),
+                    Address = new Address(),
+                    Gender = Gender.Male,
+                    Religion = Religion.Muslim,
+                    SocialStatus = SocialStatus.Married,
+                    DateOfBirth = DateTime.Now,
+                    PhotoUrl = "test.jfif",
+                    HealthInfo = new HealthInfo()
+                    {
+                        Id = health1,
+                        BloodType = BloodType.None,
+                        Phone1 = "010123123456",
+                        Phone2 = "010133123456",
+                        Phone3 = "010113123456",
+                    },
+                    Create = DateTime.Now,
+                    CreateBy = "lorem ipsum",
+                };
+
+                await _context.CitizenDetails.AddAsync(citizen1);
+
+                await _cardManager.RegisterAsync(new CreateCardCommand
+                {
+                    Puk = "#123456",
+                    Pin1 = "#123456",
+                    Pin2 = "#123456",
+                    OwnerId = id1
+                });
+
+                var record1 = new HealthRecord
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    HealthInfoId = health1,
+                    Diagnosis = "كسر في عظام الساق نتيجة حادث موتوسيكل",
+                    Medications = "الادوية مرفقة مرفعة كصورة من الروشته",
+                    Attachments = new List<HealthRecordAttachment>
+                    {
+                        new HealthRecordAttachment
+                        {
+                            Id = "radiology.jpg"
+                        },
+                        new HealthRecordAttachment
+                        {
+                            Id = "roshta.jpg"
+                        }
+                    }
+                };
+
+                var record2 = new HealthRecord
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    HealthInfoId = health1,
+                    Diagnosis = "كسر في عظام الساق نتيجة حادث موتوسيكل",
+                    Medications = "الادوية مرفقة مرفعة كصورة من الروشته",
+                    Attachments = new List<HealthRecordAttachment>
+                    {
+                        new HealthRecordAttachment
+                        {
+                            Id = "radiology.jpg"
+                        },
+                        new HealthRecordAttachment
+                        {
+                            Id = "roshta.jpg"
+                        }
+                    }
+                };
+
+                var record3 = new HealthRecord
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    HealthInfoId = health1,
+                    Diagnosis = "كسر في عظام الساق نتيجة حادث موتوسيكل",
+                    Medications = "الادوية مرفقة مرفعة كصورة من الروشته",
+                    Attachments = new List<HealthRecordAttachment>
+                    {
+                        new HealthRecordAttachment
+                        {
+                            Id = "radiology.jpg"
+                        },
+                        new HealthRecordAttachment
+                        {
+                            Id = "roshta.jpg"
+                        }
+                    }
+                };
+
+                var record4 = new HealthRecord
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    HealthInfoId = health1,
+                    Diagnosis = "كسر في عظام الساق نتيجة حادث موتوسيكل",
+                    Medications = "الادوية مرفقة مرفعة كصورة من الروشته",
+                    Attachments = new List<HealthRecordAttachment>
+                    {
+                        new HealthRecordAttachment
+                        {
+                            Id = "radiology.jpg"
+                        },
+                        new HealthRecordAttachment
+                        {
+                            Id = "roshta.jpg"
+                        }
+                    }
+                };
+
+                var record5 = new HealthRecord
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    HealthInfoId = health1,
+                    Diagnosis = "كسر في عظام الساق نتيجة حادث موتوسيكل",
+                    Medications = "الادوية مرفقة مرفعة كصورة من الروشته",
+                    Attachments = new List<HealthRecordAttachment>
+                    {
+                        new HealthRecordAttachment
+                        {
+                            Id = "radiology.jpg"
+                        },
+                        new HealthRecordAttachment
+                        {
+                            Id = "roshta.jpg"
+                        }
+                    }
+                };
+
+                await _context.HealthRecords.AddAsync(record1);
+                await _context.HealthRecords.AddAsync(record2);
+                await _context.HealthRecords.AddAsync(record3);
+                await _context.HealthRecords.AddAsync(record4);
+                await _context.HealthRecords.AddAsync(record5);
             }
         }
     }
