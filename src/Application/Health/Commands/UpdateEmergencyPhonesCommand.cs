@@ -26,7 +26,7 @@ namespace EGID.Application.Health.Commands
         {
             public UpdateEmergencyPhonesValidator()
             {
-                RuleFor(x => x.HealthInfoId).NotEmpty().Length(128);
+                RuleFor(x => x.HealthInfoId).NotEmpty();
 
                 RuleFor(x => x.Phone1)
                     .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")

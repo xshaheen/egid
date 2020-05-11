@@ -16,12 +16,25 @@ namespace EGID.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesDefaultResponseType]
-        public async Task<ActionResult<HealthInfoVm>> GetOne(string citizenId)
+        public async Task<ActionResult<HealthInfoVm>> GetOne(string healthInfoId)
         {
-            var result = await Mediator.Send(new GetHealthInfoQuery {HealthInfoId = citizenId});
+            var result = await Mediator.Send(new GetHealthInfoQuery {HealthInfoId = healthInfoId});
 
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [HttpGet("[action]")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<EmergencyInfo>> EmergencyInfo(string healthInfoId)
+        {
+            var result = await Mediator.Send(new GetEmergencyInfoQuery {HealthInfoId = healthInfoId});
+
+            return Ok(result);
+        }
+
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -26,8 +26,7 @@ namespace EGID.Application.Cards.Commands
             public CreateCardValidator()
             {
                 RuleFor(x => x.OwnerId)
-                    .NotNull().WithMessage("من فضلك اضف كود المواطن للطلب.")
-                    .Length(128).WithMessage("كود البطاقة غير صحيح.");
+                    .NotEmpty().WithMessage("من فضلك اضف كود المواطن للطلب.");
 
                 RuleFor(x => x.Email).EmailAddress()
                     .WithMessage("البريد الاليكتروني غير صحيح.");

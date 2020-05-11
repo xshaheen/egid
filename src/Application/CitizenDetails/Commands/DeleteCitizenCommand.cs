@@ -21,7 +21,7 @@ namespace EGID.Application.CitizenDetails.Commands
         {
             public DeleteCitizenValidator()
             {
-                RuleFor(x => x.Id).NotEmpty().Length(128);
+                RuleFor(x => x.Id).NotEmpty();
             }
         }
 

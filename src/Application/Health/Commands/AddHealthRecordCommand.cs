@@ -30,7 +30,7 @@ namespace EGID.Application.Health.Commands
             public AddHealthRecordValidator()
             {
                 RuleFor(x => x.HealthInfoId)
-                    .NotEmpty().Length(128);
+                    .NotEmpty();
 
                 RuleFor(x => x.Diagnosis)
                     .NotEmpty().WithMessage("يرجي ملأ خانة التشخيص.")

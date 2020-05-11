@@ -93,6 +93,7 @@ namespace EGID.Infrastructure.Auth
         {
             // Is the card exist?
             var card = await _context.Cards.Include(c => c.Citizen)
+                .ThenInclude(c => c.HealthInfo)
                 .FirstOrDefaultAsync(c => c.Id == cardId);
 
             if (card is null) return (Result.Failure("محاولة تسجيل دخول غير صحيحة."), null);
@@ -121,6 +122,7 @@ namespace EGID.Infrastructure.Auth
                         {
                             new Claim("img", Path.Combine(_directoryService.CitizenPhotosRelativePath, card.Citizen.PhotoUrl)),
                             new Claim("firstname", card.Citizen.FullName.FirstName),
+                            new Claim("healthId", card.Citizen.HealthInfo.Id)
                         }
                         .AddJti()
                         .AddNameIdentifier(card.CitizenId)

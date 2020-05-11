@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using EGID.Application.Common.Interfaces;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,18 @@ namespace EGID.Application.Health.Queries
     public class GetHealthInfoQuery : IRequest<HealthInfoVm>
     {
         public string HealthInfoId { get; set; }
+
+        #region Validator
+
+        public class GetHealthInfoQueryValidator : AbstractValidator<GetHealthInfoQuery>
+        {
+            public GetHealthInfoQueryValidator()
+            {
+                RuleFor(e => e.HealthInfoId).NotEmpty();
+            }
+        }
+
+        #endregion
 
         #region Handler
 
