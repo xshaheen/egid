@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using EGID.Application.Common;
 using EGID.Application.Common.Exceptions;
 using EGID.Application.Common.Interfaces;
 using EGID.Domain.Entities;
@@ -30,19 +29,13 @@ namespace EGID.Application.Health.Commands
                     .NotEmpty().WithMessage("الكود غير مرفق مع الطلب.");
 
                 RuleFor(x => x.Phone1)
-                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone).Unless(x => x.Phone1 is null)
-                    .WithMessage("رقم الهاتف غير صحيح.");
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما");
 
                 RuleFor(x => x.Phone2)
-                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone).Unless(x => x.Phone2 is null)
-                    .WithMessage("رقم الهاتف غير صحيح.");
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما");
 
                 RuleFor(x => x.Phone3)
-                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone).Unless(x => x.Phone3 is null)
-                    .WithMessage("رقم الهاتف غير صحيح.");
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما");
             }
         }
 
@@ -67,6 +60,8 @@ namespace EGID.Application.Health.Commands
                 healthInfo.Phone2 = request.Phone2;
                 healthInfo.Phone3 = request.Phone3;
                 healthInfo.Notes = request.Notes;
+
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return Unit.Value;
             }

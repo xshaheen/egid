@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using EGID.Application.Common;
 using EGID.Application.Common.Interfaces;
 using EGID.Application.Common.Models.Files;
 using EGID.Domain.Entities;
@@ -98,19 +97,13 @@ namespace EGID.Application.CitizenDetails.Commands
                     .NotNull().WithMessage("الصورة غير صحيحية");
 
                 RuleFor(x => x.HealthEmergencyPhone1)
-                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone).Unless(x => x.HealthEmergencyPhone1 is null)
-                    .WithMessage("رقم الهاتف غير صحيح.");
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما");
 
                 RuleFor(x => x.HealthEmergencyPhone2)
-                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone).Unless(x => x.HealthEmergencyPhone2 is null)
-                    .WithMessage("رقم الهاتف غير صحيح.");
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما");
 
                 RuleFor(x => x.HealthEmergencyPhone3)
-                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما")
-                    .Matches(Regexes.InternationalPhone).Unless(x => x.HealthEmergencyPhone3 is null)
-                    .WithMessage("رقم الهاتف غير صحيح.");
+                    .MaximumLength(24).WithMessage("رقم الهاتف لايمكن ان يتجاوز 24 رقما");
 
                 RuleFor(x => x.BloodType)
                     .NotEqual(BloodType.None).WithMessage("يرجي اختيار فصيلة الدم.");

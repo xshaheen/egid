@@ -29,8 +29,8 @@ namespace EGID.Web
 
             services.AddTransient<IFilesDirectoryService, FilesDirectoryService>();
             
-            // services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<ICurrentUserService, FakeCurrentUserService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            // services.AddScoped<ICurrentUserService, FakeCurrentUserService>();
 
             services.AddHttpContextAccessor();
 

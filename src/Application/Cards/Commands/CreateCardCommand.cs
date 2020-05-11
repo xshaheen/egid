@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using EGID.Application.Common;
 using EGID.Application.Common.Interfaces;
 using FluentValidation;
 using MediatR;
@@ -32,9 +31,7 @@ namespace EGID.Application.Cards.Commands
                     .WithMessage("البريد الاليكتروني غير صحيح.");
 
                 RuleFor(x => x.PhoneNumber).MaximumLength(24)
-                    .WithMessage("رقم الموبايل لا يمكن ان يكون اكثر من 24 رقم.")
-                    .Matches(Regexes.InternationalPhone).Unless(x => x.PhoneNumber is null)
-                    .WithMessage("رقم الهاتف غير صحيح من فضلك تحقق من رقم الهاتف واعد المحاولة.");
+                    .WithMessage("رقم الموبايل لا يمكن ان يكون اكثر من 24 رقم.");
 
                 RuleFor(x => x.Puk)
                     .NotEmpty().WithMessage("من فضلك اضف Puk الخاص بالمواطن.")
