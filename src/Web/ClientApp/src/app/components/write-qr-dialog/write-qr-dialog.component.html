@@ -1,0 +1,19 @@
+<h1 mat-dialog-title style="text-align: center;">
+  <i class="fas fa-chevron-left"></i>
+  {{ data.title }}
+</h1>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  "
+>
+  <eg-qr-writer [content]="data.str"></eg-qr-writer>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button (click)="cancel()" color="primary">غلق</button>
+</div>
