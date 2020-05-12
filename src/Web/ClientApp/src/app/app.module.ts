@@ -5,8 +5,6 @@ import { AppComponent } from "./app.component";
 import { MainModule } from "./views/main/main.module";
 import { AdminModule } from "./views/admin/admin.module";
 import { CivilAffairsModule } from "./views/civil-affairs/civil-affairs.module";
-import { RecordsModule } from "./views/health/records/records.module";
-import { AddModule } from "./views/health/add/add.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ManageModule } from "./views/manage/manage.module";
@@ -16,6 +14,9 @@ import { ModalDialogModule } from "./components/modal-dialog/modal-dialog.module
 import { ConfirmDialogModule } from "./components/confirm-dialog/confirm-dialog.module";
 import { AppErrorHandler } from "./core/error.handler";
 import { ForbiddenModule } from "./views/forbidden/forbidden.module";
+import { ReadQrDialogModule } from "./components/read-qr-dialog/read-qr-dialog-dialog.module";
+import { WriteQrDialogModule } from "./components/write-qr-dialog/write-qr-dialog-dialog.module";
+import { HealthModule } from "./views/health/health.module";
 
 @NgModule({
   imports: [
@@ -26,11 +27,12 @@ import { ForbiddenModule } from "./views/forbidden/forbidden.module";
     LoginDialogModule,
     ModalDialogModule,
     ConfirmDialogModule,
+    ReadQrDialogModule,
+    WriteQrDialogModule,
     MainModule,
     AdminModule,
+    HealthModule,
     CivilAffairsModule,
-    RecordsModule,
-    AddModule,
     ManageModule,
     ForbiddenModule,
   ],

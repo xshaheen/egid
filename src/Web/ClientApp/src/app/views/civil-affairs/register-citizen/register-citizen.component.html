@@ -1,3 +1,116 @@
-<p>register citizen/baby</p>
+<div class="row">
+  <mat-card>
+    <h2>بيانات المواطن</h2>
 
-<p>Will be two tabs</p>
+    <!--Name-->
+    <div class="name-gp">
+      <mat-form-field class="name-field">
+        <mat-label>الاسم الاول</mat-label>
+        <input matInput placeholder="ادخل الاسم الاول" />
+      </mat-form-field>
+
+      <mat-form-field class="name-field">
+        <mat-label>الاسم الثاني</mat-label>
+        <input matInput placeholder="ادخل الاسم الاول" />
+      </mat-form-field>
+
+      <mat-form-field class="name-field">
+        <mat-label>الاسم الثالث</mat-label>
+        <input matInput placeholder="ادخل الاسم الاول" />
+      </mat-form-field>
+
+      <mat-form-field class="name-field">
+        <mat-label>الاسم الاخير</mat-label>
+        <input matInput placeholder="ادخل الاسم الاول" />
+      </mat-form-field>
+    </div>
+    <!--#Name-->
+
+    <!--Address-->
+    <div class="name-gp">
+      <mat-form-field class="name-field">
+        <mat-label>الشارع</mat-label>
+        <input matInput placeholder="عنوان الشارع" />
+      </mat-form-field>
+
+      <mat-form-field class="name-field">
+        <mat-label>المدينة/المركز</mat-label>
+        <input matInput placeholder="المدينة او المركز المقيم به المواطن" />
+      </mat-form-field>
+
+      <mat-form-field class="name-field">
+        <mat-label>المحافظة</mat-label>
+        <input matInput placeholder="المحافظة المقيم بها المواطن" />
+      </mat-form-field>
+
+      <mat-form-field class="name-field">
+        <mat-label>الدولة</mat-label>
+        <input matInput placeholder="الدولة المقيم بها المواطن" />
+      </mat-form-field>
+    </div>
+    <!--#Address-->
+
+    <label id="example-radio-group-label">Pick your favorite season</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="favoriteSeason"
+    >
+      <mat-radio-button
+        class="example-radio-button"
+        *ngFor="let season of seasons"
+        [value]="season"
+      >
+        {{ season }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field>
+      <mat-label>Favorite food</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{ food.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>تاريخ الميلاد</mat-label>
+      <input matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <eg-one-file></eg-one-file>
+
+    <!--PINs-->
+    <div class="pins-gp">
+      <h2>بيانات البطاقة</h2>
+
+      <mat-form-field class="field">
+        <mat-label>PUK</mat-label>
+        <input matInput type="password" />
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>PIN1</mat-label>
+        <input matInput type="password" />
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>PIN2</mat-label>
+        <input matInput type="password" />
+      </mat-form-field>
+    </div>
+    <!--#PINs-->
+  </mat-card>
+</div>
+
+<!--
+  gender?: Gender;
+  religion?: Religion;
+  socialStatus?: SocialStatus;
+  photo?: BinaryFile | null;
+  bloodType?: BloodType;
+ -->
+
+<button mat-button (click)="openWriteQrDialog()">Qr code</button>

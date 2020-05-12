@@ -17,6 +17,11 @@ const routes: Routes = [
     component: ForbiddenComponent,
   },
   {
+    path: "health",
+    loadChildren: () =>
+      import("./views/health/health.module").then((m) => m.HealthModule),
+  },
+  {
     path: "admin",
     canActivate: [AuthGuard, AdminGuard],
     loadChildren: () =>
@@ -31,25 +36,11 @@ const routes: Routes = [
       ),
   },
   {
-    path: "manage",
     canActivate: [AuthGuard],
+    path: "manage",
     loadChildren: () =>
       import("./views/manage/manage.module").then((m) => m.ManageModule),
   },
-  {
-    path: "health/records",
-    loadChildren: () =>
-      import("./views/health/records/records.module").then(
-        (m) => m.RecordsModule
-      ),
-  },
-  {
-    canActivate: [AuthGuard],
-    path: "health/add",
-    loadChildren: () =>
-      import("./views/health/add/add.module").then((m) => m.AddModule),
-  },
-  { path: "**", redirectTo: "" },
 ];
 
 @NgModule({

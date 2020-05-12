@@ -1,0 +1,37 @@
+@import "~src/styles/var";
+
+.row {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+
+  mat-card {
+    .name-gp {
+      .name-field {
+        display: inline-block;
+        margin: 0 5px;
+        direction: rtl;
+        text-align: right;
+      }
+    }
+
+    .field {
+      min-width: 400px;
+      display: block;
+      width: 100%;
+      direction: rtl;
+      text-align: right;
+    }
+
+    .btn-div {
+      text-align: left;
+    }
+  }
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
