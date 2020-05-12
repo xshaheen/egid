@@ -1,81 +1,132 @@
 <div class="container">
+  <!--PIN1-->
   <mat-card>
-    <form class="pin1-form">
+    <form
+      class="pin1-form"
+      #pin1Form="ngForm"
+      (ngSubmit)="submitPin1(pin1Form)"
+    >
       <mat-card-header>
         <h4>تغير رمز PIN1</h4>
       </mat-card-header>
-      <mat-form-field class="field">
-        <mat-label>رمز PIN1 الحالي</mat-label>
-        <input matInput type="password" />
-      </mat-form-field>
 
       <mat-form-field class="field">
         <mat-label>رمز PIN1 الجديد</mat-label>
-        <input matInput type="password" />
+        <input
+          matInput
+          type="password"
+          name="newPin1"
+          [(ngModel)]="changePin1Command.newPin1"
+        />
       </mat-form-field>
 
       <mat-form-field class="field">
-        <mat-label>كرر رمز PIN1 الجديد</mat-label>
-        <input matInput type="password" />
+        <mat-label>رمز PUK الحالي</mat-label>
+        <input
+          matInput
+          type="password"
+          name="puk"
+          [(ngModel)]="changePin1Command.puk"
+        />
       </mat-form-field>
 
       <div class="btn-div">
-        <button color="primary" mat-raised-button>تغير</button>
+        <button
+          color="primary"
+          mat-raised-button
+          type="submit"
+          [disabled]="pin1Form.pristine"
+        >
+          تغير
+        </button>
       </div>
     </form>
   </mat-card>
+  <!--#PIN1-->
 
+  <!--PIN2-->
   <mat-card>
-    <form class="pin2-form">
+    <form
+      class="pin2-form"
+      #pin2Form="ngForm"
+      (ngSubmit)="submitPin2(pin2Form)"
+    >
       <mat-card-header>
         <h4>تغير رمز PIN2</h4>
       </mat-card-header>
 
       <mat-form-field class="field">
-        <mat-label>رمز PIN2 الحالي</mat-label>
-        <input matInput type="password" />
-      </mat-form-field>
-
-      <mat-form-field class="field">
         <mat-label>رمز PIN2 الجديد</mat-label>
-        <input matInput type="password" />
+        <input
+          matInput
+          type="password"
+          name="newPin2"
+          [(ngModel)]="changePin2Command.newPin2"
+        />
       </mat-form-field>
 
       <mat-form-field class="field">
-        <mat-label>كرر رمز PIN2 الجديد</mat-label>
-        <input matInput type="password" />
+        <mat-label>رمز PUK الحالي</mat-label>
+        <input
+          matInput
+          type="password"
+          name="puk"
+          [(ngModel)]="changePin2Command.puk"
+        />
       </mat-form-field>
 
       <div class="btn-div">
-        <button color="primary" mat-raised-button>تغير</button>
+        <button
+          color="primary"
+          mat-raised-button
+          type="submit"
+          [disabled]="pin2Form.pristine"
+        >
+          تغير
+        </button>
       </div>
     </form>
   </mat-card>
+  <!--#PIN2-->
 
+  <!--PUK-->
   <mat-card>
-    <form class="puk-form">
+    <form class="puk-form" #pukForm="ngForm" (ngSubmit)="submitPuk(pukForm)">
       <mat-card-header>
         <h4>تغير رمز PUK</h4>
       </mat-card-header>
 
       <mat-form-field class="field">
-        <mat-label>رمز PUK الحالي</mat-label>
-        <input matInput type="password" />
-      </mat-form-field>
-
-      <mat-form-field class="field">
         <mat-label>رمز PUK الجديد</mat-label>
-        <input matInput type="password" />
+        <input
+          matInput
+          type="password"
+          name="currentPuk"
+          [(ngModel)]="changePukCommand.currentPuk"
+        />
       </mat-form-field>
 
       <mat-form-field class="field">
         <mat-label>كرر رمز PUK الجديد</mat-label>
-        <input matInput type="password" />
+        <input
+          matInput
+          type="password"
+          name="newPuk"
+          [(ngModel)]="changePukCommand.newPuk"
+        />
       </mat-form-field>
 
       <div class="btn-div">
-        <button color="primary" mat-raised-button>تغير</button>
+        <button
+          color="primary"
+          mat-raised-button
+          type="submit"
+          [disabled]="pukForm.pristine"
+        >
+          تغير
+        </button>
       </div>
     </form>
   </mat-card>
+  <!--#PUK-->
 </div>
