@@ -6,7 +6,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./one-file.component.scss"],
 })
 export class OneFileComponent {
-  @Output() fileDropped = new EventEmitter<File>();
+  @Output() oneFile = new EventEmitter<File>();
 
   @Input() disabled = false;
   @Input() required = false;
@@ -19,7 +19,7 @@ export class OneFileComponent {
       return;
     }
     const f = files.item(0) as File;
-    this.fileDropped.emit(f);
+    this.oneFile.emit(f);
     this.fileName = f.name;
   }
 }
