@@ -10,12 +10,19 @@ We all know the benefit of technology, the power of it, and we in very fast worl
 
 - On top of this we can build an an efficient and secure electronic ecosystem that saves time and money. Lets get things done faster, easier and cheaper!
 
--- _You can find more information about the project architecture and how it work [here](docs/architecture.md)._
+-- You can find more information about the project architecture and how it work [here](docs/architecture.md).
+
+TODO:
+
+- Complete client side
+- Unit testing and improve stability
+- Citizen Health History
+- Certification Authority (CA)
+- Timestamp Signature
+- Government Stamp
 
 We can imagine more to build on top of this for example.
 
-- national health insurance
-- citizen medical records
 - e-voting
 - and more...
 
@@ -33,3 +40,11 @@ We can imagine more to build on top of this for example.
   - TypeScript
   - Angular 9
   - Material UI
+
+We are live on https://egid.xshaheen.com/
+
+To test use this admin QR code:
+
+<div style="text-align: center;">
+  <img src="./docs/Assets/admin_card.png" style="width:150px" alt="Admin Qr code">
+<div>
