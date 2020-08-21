@@ -41,10 +41,13 @@ We can imagine more to build on top of this for example.
   - Angular 9
   - Material UI
 
-We are live on https://egid.xshaheen.com/
+## Sceens
 
-To test use this admin QR code:
+---
 
-<div style="text-align: center;">
-  <img src="./docs/Assets/admin_card.png" style="width:150px" alt="Admin Qr code">
-<div>
+**[View Project Prezentation](https://1drv.ms/p/s!ApximwcBqYrij2nXdsenOUshlihs?e=Aek1Bl)**
+
+---
+
+![Login Screen](docs/Assets/egid-project-login%20screen.png)
+![Home page](docs/Assets/egid-project-home.png)
